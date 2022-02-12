@@ -52,6 +52,14 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    created_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    modified_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
     //-- Who created it
     user_id: {
       type: DataTypes.INTEGER,

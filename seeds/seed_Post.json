@@ -8,6 +8,8 @@
         "status" : true,
         "category" : "welcome",
         "topics" : "welcome, intro, getting started",
-        "resource_id" : 1
+        "resource_id" : 1,
+        "created_date": "2022-02-10 13:08:03",
+        "modified_date" : "2022-02-10 13:08:03"
     }
 ]
