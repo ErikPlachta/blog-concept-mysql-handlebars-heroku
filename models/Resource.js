@@ -32,16 +32,10 @@ Resource.init(
       type: DataTypes.STRING,
       validate: {
         isUrl: true,
-        // protocols: ['https'],
-        // require_valid_protocol: true,
-        // require_protocol: true
       }
     },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    topics: {
+    //-- Defined automatically based on where it's created
+    type: {
       type: DataTypes.STRING,
       allowNull: false,
     },

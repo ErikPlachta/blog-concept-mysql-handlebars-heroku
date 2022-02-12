@@ -37,18 +37,22 @@ Post.init(
       allowNull: false,
       unique: true
     },
+    //-- if false stays in database but just doesn't show up
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
+    //-- What's it aobut?
     category: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    //-- assigned tags
     topics: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    //-- Who created it
     user_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -56,14 +60,15 @@ Post.init(
         key: 'id'
       }
     },
-    // resource_id: {
-    //   allowNull: true,
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: 'resource',
-    //     key: 'id'
-    //   }
-    // },
+    //-- Any attached resources?
+    resource_id: {
+      allowNull: true,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'resource',
+        key: 'id'
+      }
+    },
   },
   
   {

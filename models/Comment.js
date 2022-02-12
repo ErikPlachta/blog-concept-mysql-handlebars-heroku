@@ -24,30 +24,9 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true
     },
-    title: {
+    content: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    status: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
-    },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    topics: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     //-- Who made comment
     user_id: {

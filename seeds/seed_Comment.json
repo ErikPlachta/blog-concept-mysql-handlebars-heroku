@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "title" : "Welcome",
+        "content" : "Welcome to the KBA Builder.",
+        "resource_id" : 1
+    }
+]
