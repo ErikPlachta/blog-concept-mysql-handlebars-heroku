@@ -3,7 +3,7 @@
         "id": 1,
         "user_id": 1,
         "title" : "Welcome",
-        "description" : "Welcome to my Tech Blog concept app!",
+        "content" : "Welcome to my Tech Blog concept app!",
         "type" : "root",
         "status" : true,
         "category" : "welcome",
