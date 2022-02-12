@@ -1,10 +1,12 @@
 # A Tech Blog Concept App
- 
- > Built this app to demonstrate how a modular design built on the MVC Framework
+
+## 02/12/2022 #EP | Actively under Development
+
+A Tech Blog concept app hosted on the cloud. Fully built out MVC with JawsDB database, Node - Express.js API server, using Sequelize as an ORM, and Handlebars to build content dynamically.
+
+ > I've built this app to demonstrate how a modular design built on the MVC framework can accomplish a lot with little.
 
 ## Concept
-
-
 
 ## About
 
