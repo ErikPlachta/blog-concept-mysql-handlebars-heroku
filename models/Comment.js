@@ -24,8 +24,13 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true
     },
-    content: {
+    title: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    content: {
+      // type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     //-- Who made comment
