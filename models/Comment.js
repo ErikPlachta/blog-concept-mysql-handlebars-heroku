@@ -45,14 +45,14 @@ Comment.init(
       }
     },
     //-- Related Resources
-    resource_id: {
-      allowNull: true,
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'resource',
-        key: 'id'
-      }
-    },
+    // resource_id: {
+    //   allowNull: true,
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: 'resource',
+    //     key: 'id'
+    //   }
+    // },
   },
   
   {

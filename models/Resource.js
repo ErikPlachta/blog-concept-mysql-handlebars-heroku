@@ -55,14 +55,14 @@ Resource.init(
         key: 'id'
       }
     },
-    //-- KBA associated to this
-    resource_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'kba',
-        key: 'id'
-      }
-    },
+    // //-- KBA associated to this
+    // resource_id: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: 'kba',
+    //     key: 'id'
+    //   }
+    // },
   },
   {
     sequelize,

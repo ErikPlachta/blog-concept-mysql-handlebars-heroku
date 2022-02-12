@@ -42,11 +42,12 @@ async function seedTables() {
   const sequelize = require('./connection_sequelize');
 
   //-- Grab database Table models
-  const { User, Post, Resource } = require('../models');
+  const { User, Post, Comment, Resource } = require('../models');
 
   //-- Grab seed data to build a seed database
   const seed_Users = require('./seed_User.json');
   const seed_Posts = require('./seed_Post.json');
+  const seed_Comments = require('./seed_Comment.json');
   const seed_Resources = require('./seed_Resource.json');
 
   //-- wait for connection to database
@@ -70,8 +71,18 @@ async function seedTables() {
     });
   }
 
-  console.log(`\n//-- Created KBAs\n`)
+  console.log(`\n//-- Created Posts\n`)
   console.log(`//-----------------------------------------------------------\n`)
+
+    // //-- grab all KBAs and build Table based on Model
+    for (const comment of seed_Comments) {
+      const newComment = await Comment.create({
+      ...comment,
+      });
+    }
+  
+    console.log(`\n//-- Created Posts\n`)
+    console.log(`//-----------------------------------------------------------\n`)
 
   //  //-- grab all Resources and build Table based on Model
    for (const resource of seed_Resources) {
