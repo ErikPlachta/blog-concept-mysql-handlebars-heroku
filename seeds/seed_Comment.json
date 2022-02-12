@@ -2,8 +2,8 @@
     {
         "id": 1,
         "user_id": 1,
-        "title" : "Welcome",
-        "content" : "Welcome to the KBA Builder.",
+        "title" : "Welcome to my Tech-Blog Concept App",
+        "content" : "Hello, and welcome to my Tech Blog.<br><br>If you're seeing htis post that means you've logged in succesfully!<br><br><b>Want to learn more about this app?</b><a href='https://github.com/ErikPlachta/blog-app-cloudhosted-mvc-modular'>You can Check out my GitHub.</A><br><br><b>Want to get in touch?</b>You can reach me on Twitter or LinkedIn.",
         "resource_id" : 1
     }
 ]

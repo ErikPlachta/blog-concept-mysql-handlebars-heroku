@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 3001;
 //-- session env
 const sess = {
   // TODO:: REMOVE THIS ASAP!
-  secret: 'Super secret secret',
+  secret: process.env.SECRET_TECH_BLOG,
   cookie: {},
   resave: false,
   saveUninitialized: true,
