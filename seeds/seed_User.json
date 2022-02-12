@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "username": "erik@posnation.com",
+        "email" : "erik@posnation.com",
+        "password": "my-temp-password1!!-02102022"
+    },
+    {
+        "id": 2,
+        "username": "kyle@posnation.com",
+        "email" : "kyle@posnation.com",
+        "password": "my-temp-kyle-password1!!-02102022"
+    }
+]

@@ -1,0 +1,13 @@
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "title" : "Welcome",
+        "description" : "Welcome to the KBA Builder.",
+        "type" : "root",
+        "status" : true,
+        "category" : "welcome",
+        "topics" : "welcome, intro, getting started",
+        "resource_id" : null
+    }
+]
