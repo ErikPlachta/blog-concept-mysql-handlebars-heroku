@@ -19,6 +19,10 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ['id','username','created_date'],
         },
+        {
+          model: Resource,
+          attributes: ['title','url'],
+        }
       ],
     });
 
