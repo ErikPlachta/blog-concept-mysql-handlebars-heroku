@@ -70,6 +70,8 @@ body {
   min-height: 100vh;
   justify-content: flex-start;
   background-color: var(--quatrinary);
+  /* font: inherit; */
+  vertical-align: baseline;
 }
 
 a         { color: var(--light); text-decoration: none;}
@@ -159,6 +161,9 @@ nav a:hover {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+
+  /* Making sure loads beyond view space */
+  min-height: calc(100vh - 48px)
 }
 
 .btn-no-style {
@@ -200,9 +205,9 @@ img {
 }
 
 .post-details {
-  text-align: center;
+  /* text-align: center; */
   padding: 10px 20px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 /*----------------------------------------------------------------------------*/
@@ -219,6 +224,19 @@ img {
   background-color: var(--bg_Section);
   color: var(--text-area_text);
 }
+
+.card a {
+  width: 100%;
+}
+
+.card-banner img {
+  display: inline-block;
+  height: 20px;
+  margin-right: 4px;
+  vertical-align: middle;
+  width: 20px;
+}
+
 
 .login-card {
   margin: 0 0 20px 0;
@@ -247,6 +265,11 @@ img {
   font-size: 1.4rem;
   text-align: center;
   font-weight: bold;
+}
+
+.card-footer{
+  flex: 100%;
+  margin: 1rem;
 }
 
 /* LAYOUT */
