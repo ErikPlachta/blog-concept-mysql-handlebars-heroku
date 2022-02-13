@@ -19,6 +19,7 @@
     BODY
   */
   --bg_body: var(--primary);
+  --bg_Section: var(--secondary);
   
 
   /* 
@@ -34,21 +35,18 @@
   /*
     BORDERS
   */
-  --border-radius: 0.3rem;
+  --border-radius: 3rem;
 
   /*
     SHADOWS / BOX SHADOWS
   */
   --boxShadow: 0 -.5rem .5rem rgba(0,0,0,.25); /* offset-x | offset-y | blur-radius | color */
   --boxShadow_Hover_top_black: 0 -1rem 1rem rgba(0,0,0,.5); /* offset-x | offset-y | blur-radius | color */
-  --boxShadow_bottom_accent_Primary: 0 .05rem .5rem var(--color_Primary); /* offset-x | offset-y | blur-radius | color */
+  --boxShadow_bottom_accent_Primary: 0 .05rem .5rem var(--primary), 0 6px 20px 0 var(--secondary); /* offset-x | offset-y | blur-radius | color */
   --boxShadow_Hover_top_heavy_bottom_light: 0rem -.4rem 1rem rgba(0,0,0,.5); /* offset-x | offset-y | blur-radius | color */
   
   --shadow_025_black:  rgba(0,0,0,.25);
   --shadow_1px_25a: 2px solid var(--shadow_025_black);
-
-
-
 }
 
 /*----------------------------------------------------------------------------*/
@@ -61,7 +59,10 @@ html {
 }
 
 body {
-  font-family: Arial;
+  font-family: Roboto, Arial, sans-serif;  
+  /* Prevents cursor from changing from arrow unless explicit */
+  cursor: default;
+
   margin: 0;
   padding: 0;
   display: flex;
@@ -71,18 +72,49 @@ body {
   background-color: var(--quatrinary);
 }
 
-a {
-  color: var(--light);
-  text-decoration: none;
+a         { color: var(--light); text-decoration: none;}
+a:link    { text-decoration: none; }
+a:visited { text-decoration: none; color: inherit;}
+a:hover   { text-decoration: none; }
+a:active  { text-decoration: none; }
+
+h1,h2,h3,h4,h5 {
+  /* removing all default padding around headers */
+  margin: 0;
+  padding: 0;
 }
 
-a:visited {
-  color: inherit;
+h1 {
+  font-weight: 300;
+  font-size: 3rem;
 }
+h2 {
+  padding-top: 5rem;
+  font-weight: 450;
+  font-size: 2.5rem;
+}
+h3 {
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+/*----------------------------------------------------------------------------*/
+/* 
+  LAYOUT CONTENT
+*/
 
 header {
-  padding: 40px;
-  text-align: center;
+  padding: 1rem 0;
   background: var(--primary);
   color: var(--light);
 }
@@ -95,7 +127,7 @@ main {
 
 aside {
   flex: 1;
-  background-color: var(--tertiary);
+  background-color: var(--primary);
   padding: 1rem;
   text-align: center;
   color: var(--light);
@@ -116,11 +148,12 @@ nav a {
 nav a:hover {
   color: var(--secondary);
   background-color: var(--light);
+  text-decoration: none;
 }
 
 .landing {
   flex: 4;
-  background-color: #fff;
+  background-color: var(--bg_body);
   padding: 0;
   display: flex;
   flex-flow: row wrap;
@@ -137,6 +170,7 @@ nav a:hover {
   font-size: 100%;
   transition: color 0.1s;
   margin-left: 16px;
+  color: var(--light);
 }
 
 img {
@@ -145,10 +179,13 @@ img {
 }
 
 .post {
-  width: 50%;
-  background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 25px;
+  width: 90%;
+  background-color: var(--text-area_bg);
+  color: var(--text-area_text);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  box-shadow: var(--boxShadow_bottom_accent_Primary);
+  margin: 1rem;
+  border-radius: var(--border-radius);
 }
 
 .post-title {
@@ -168,14 +205,19 @@ img {
   font-weight: bold;
 }
 
-/* CARDS */
+/*----------------------------------------------------------------------------*/
+/* 
+  CARDS 
+*/
+
 .card {
-  margin: 20px;
+  margin: 2rem;
+  padding: 1rem 1rem;
   flex: 0 1 100%;
-  border: 7px double var(--dark);
+  border: 2px solid var(--quatrinary);
   border-radius: 10px;
-  background-color: var(--light);
-  color: var(--dark);
+  background-color: var(--bg_Section);
+  color: var(--text-area_text);
 }
 
 .login-card {
@@ -187,16 +229,16 @@ img {
   border-radius: var(--border-radius);
   border-style: double;
   border-width: thick;
-  background-color: #577a7c;
-  color: var(--light);
+  background-color: var(--bg_Section);
+  color: var(--text-area_text);
 }
 
 .card header {
-  color: var(--light);
+  color: var(--text-area_text);
   font-weight: bold;
   text-transform: uppercase;
   margin: 0;
-  background-color: var(--tertiary);
+  background-color: var(--bg_Section);
   padding: 0.625rem;
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
