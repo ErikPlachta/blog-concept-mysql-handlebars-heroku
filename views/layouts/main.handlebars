@@ -23,11 +23,13 @@
     <!-- Otherwise, show a link to login -->
     <a href="/login">Login</a>
     {{/if}}
-    <a href="https://github.com/ErikPlachta/blog-app-cloudhosted-mvc-modular">GitHub</a>
+    <a href="https://github.com/ErikPlachta/blog-app-cloudhosted-mvc-modular" target="_blank">GitHub</a>
   </nav>
   <main>
+    {{!-- left bar --}}
     <aside>
-      <h2>Left Bar</h2>
+      <h3>Popular Posts</h3>
+      <div class="popular-posts">{{popular-posts}}</div>
     </aside>
     <div class="landing">
       {{{body}}}

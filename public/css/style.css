@@ -1,17 +1,69 @@
 :root {
-  --primary: #3d5852;
-  --secondary: #86938f;
-  --tertiary: #5e877f;
-  --quatrinary: #6c6b67;
-  --light: #e3e4e3;
+
+
+  /* 
+    COLOR PALLET
+  */
+  --primary: rgb(3, 3, 3);
+  --secondary: rgb(26, 26, 27);
+  --tertiary: rgb(39, 39, 41);
+  --light: rgb(215, 218, 220);
+  --quatrinary: rgb(128, 130, 131);
+  --accent: rgb(0, 121, 211);
+  
+
   --dark: #182c23;
   --error: rgb(228, 46, 1);
+  
+  /* 
+    BODY
+  */
+  --bg_body: var(--primary);
+  
+
+  /* 
+    LINKS AND ACTIVE CONTENT LIKE CHECK BOXES
+  */
+  --active: rgb(39, 39, 41);
+  --active-hover: rgb(39, 39, 41);
+  
+
+  --text-area_bg: var(--secondary);
+  --text-area_text: var(--light);
+  
+  /*
+    BORDERS
+  */
   --border-radius: 0.3rem;
+
+  /*
+    SHADOWS / BOX SHADOWS
+  */
+  --boxShadow: 0 -.5rem .5rem rgba(0,0,0,.25); /* offset-x | offset-y | blur-radius | color */
+  --boxShadow_Hover_top_black: 0 -1rem 1rem rgba(0,0,0,.5); /* offset-x | offset-y | blur-radius | color */
+  --boxShadow_bottom_accent_Primary: 0 .05rem .5rem var(--color_Primary); /* offset-x | offset-y | blur-radius | color */
+  --boxShadow_Hover_top_heavy_bottom_light: 0rem -.4rem 1rem rgba(0,0,0,.5); /* offset-x | offset-y | blur-radius | color */
+  
+  --shadow_025_black:  rgba(0,0,0,.25);
+  --shadow_1px_25a: 2px solid var(--shadow_025_black);
+
+
+
+}
+
+/*----------------------------------------------------------------------------*/
+/* 
+  OVERALL CONTENT
+*/
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: Arial;
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -20,7 +72,7 @@ body {
 }
 
 a {
-  color: var(--dark);
+  color: var(--light);
   text-decoration: none;
 }
 
@@ -63,7 +115,7 @@ nav a {
 
 nav a:hover {
   color: var(--secondary);
-  background-color: var(--dark);
+  background-color: var(--light);
 }
 
 .landing {
