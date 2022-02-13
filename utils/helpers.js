@@ -1,3 +1,4 @@
+var moment = require('moment'); //-- Using to add more dynamic date-time in view
 
 const format_date = date => {
   return `
@@ -9,9 +10,32 @@ const format_date = date => {
 };
 
 
-const format_time = (date, format) => {
-  var mmnt = moment(date);
-  return mmnt.format(format);
+const hours_passed = ( date ) => {
+  
+  //-- Get curent time
+  var now = moment(new Date()); 
+  //-- Get the diff between now and created date
+  var duration = moment.duration(now.diff(date));
+  //-- Return value in hours
+  var results = duration.asHours();
+  
+  if(results < 1){
+    minutes = (Math.trunc(results)) + " minutes ago";
+    return minutes;
+  }
+  
+  if(results < 24){
+    hours = (Math.trunc(results)) + " hours ago";
+    return hours;
+  }
+
+  if(results > 24){
+    days = Math.trunc(results / 24) + " d";
+    return days;
+  }
+  
+
+  
 };
 
 
@@ -24,7 +48,7 @@ const shrinkContent = content => {
 
 module.exports = {
   format_date,
-  format_time,
+  hours_passed,
   shrinkContent
 }
   

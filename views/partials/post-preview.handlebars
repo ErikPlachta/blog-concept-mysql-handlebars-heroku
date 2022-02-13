@@ -1,13 +1,13 @@
 <section class="card">
   <a href="/post/{{id}}">
-    <span class="card-banner">
+    <span title="{{user.username}}" class="card-banner">
       <img src="{{resource.url}}" alt="{{resource.title}}"> 
       • Posted by u/{{user.username}} {{format_date created_date}}
     </span>
     <header>
       <h4>{{title}} by {{user.username}}</h4>
     </header>
-    {{format_time lossDate "MM-DD-YYYY"}}
+    Modified {{hours_passed modified_date}}
     <span>{{{shrinkContent content}}}</span>
     
     {{!-- <img src="{{resource.url}}" alt="{{resource.title}}"> --}}
