@@ -35,7 +35,9 @@
   /*
     BORDERS
   */
-  --border-radius: 3rem;
+  --border: 2px solid var(--tertiary);
+  --border-hover: 2px solid var(--quatrinary);
+  --border-radius: .25rem;
 
   /*
     SHADOWS / BOX SHADOWS
@@ -219,10 +221,14 @@ img {
   margin: 2rem;
   padding: 1rem 1rem;
   flex: 0 1 100%;
-  border: 2px solid var(--quatrinary);
-  border-radius: 10px;
+  border: var(--border);
+  border-radius: var(--border-radius);
   background-color: var(--bg_Section);
   color: var(--text-area_text);
+}
+
+.card:hover {
+  border: var(--border-hover);
 }
 
 .card a {
@@ -261,10 +267,35 @@ img {
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
 
+/* TODO:: 02/13/2022 #EP || Find out if this is used or delete it */
 .card-body {
   font-size: 1.4rem;
   text-align: center;
   font-weight: bold;
+}
+
+.card-content {
+  padding: 0 1rem;
+  position:relative;
+}
+
+.card-content-fade {
+  position: absolute;
+  bottom: 0px;
+
+  display: block;
+
+  width: 100%;
+  height: 50px;
+
+  background-image: linear-gradient(to bottom, 
+      rgba(255, 255, 255, 0), 
+      rgba(255, 255, 255, 0.9)
+  100%);
+}
+
+
+.card-content::after {
 }
 
 .card-footer{

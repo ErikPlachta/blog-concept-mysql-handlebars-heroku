@@ -2,20 +2,22 @@
   <a href="/post/{{id}}">
     <span title="{{user.username}}" class="card-banner">
       <img src="{{resource.url}}" alt="{{resource.title}}"> 
-      • Posted by u/{{user.username}} {{format_date created_date}}
+      • Posted by u/{{user.username}} {{hours_passed created_date}}
     </span>
     <header>
       <h4>{{title}} by {{user.username}}</h4>
     </header>
-    Modified {{hours_passed modified_date}}
-    <span>{{{shrinkContent content}}}</span>
+    
+    <div class="card-content">
+      {{{shrinkContent content}}}
+    </div>
     
     {{!-- <img src="{{resource.url}}" alt="{{resource.title}}"> --}}
 
-    <span class="card-footer">
+    <div class="card-footer">
       <span>Post ID: {{id}}</span>
       <span>Last Modified: {{format_date modified_date}}</span>
-    </span>
+    </div>
     
   </a>
 </section>

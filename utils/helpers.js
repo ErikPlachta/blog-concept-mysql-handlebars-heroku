@@ -34,8 +34,7 @@ const hours_passed = ( date ) => {
     return days;
   }
   
-
-  
+  return null;
 };
 
 
