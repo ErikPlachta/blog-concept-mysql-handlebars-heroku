@@ -3,7 +3,7 @@
     <h3>{{post.id}}. {{post.title}} by {{post.user.username}}</h3>
     <p>{{{post.content}}}</P>
     <span>
-      <img src="{{post.resource.url}}" alt="{{post.resource.title}}">
+      {{!-- <img src="{{post.resource.url}}" alt="{{post.resource.title}}"> --}}
     </span>
     <br>
     <span>Posted on: {{format_date post.created_date}}</span>

@@ -1,8 +1,9 @@
 [
     {
         "id": 1,
-        "username": "ErikPlachta",
+        "profile_resource_id" : 1,
         "name": "Erik Plachta",
+        "username": "ErikPlachta",
         "email" : "erik@noemail.com",
         "password": "my-password",
         "created_date": "2022-02-10 13:08:03",

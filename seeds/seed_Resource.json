@@ -2,6 +2,18 @@
     {
         "id": 1,
         "user_id": 1,
+        "profile_resource_id":1,
+        "post_id" : null,
+        "title" : "Erik Plachta",
+        "url" : "https://s.gravatar.com/avatar/cde2e5381aa5e6d8d0220c46edee8f88?s=160",
+        "type" : "profile",
+        "created_date": "2022-02-10 13:08:03",
+        "modified_date" : "2022-02-10 13:08:03"
+    },
+    {
+        "id": 2,
+        "user_id": 1,
+        "profile_resource_id":null,
         "post_id" : 1,
         "title" : "Erik Plachta",
         "url" : "https://s.gravatar.com/avatar/cde2e5381aa5e6d8d0220c46edee8f88?s=160",

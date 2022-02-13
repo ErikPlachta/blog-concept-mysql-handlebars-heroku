@@ -1,3 +1,11 @@
+{{!-- Create ne post, here --}}
+{{#if loggedIn}}
+    <div class="post-new-comment">
+        
+    </div>
+{{/if}}
+
+{{!-- build post previews --}}
 {{#each posts as |post|}}
-{{> post-preview}}
+    {{> post-preview}}
 {{/each}}
