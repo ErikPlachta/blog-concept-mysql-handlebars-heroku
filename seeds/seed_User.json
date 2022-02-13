@@ -2,7 +2,11 @@
     {
         "id": 1,
         "username": "ErikPlachta",
+        "name": "Erik Plachta",
         "email" : "erik@noemail.com",
-        "password": "my-password"
+        "password": "my-password",
+        "created_date": "2022-02-10 13:08:03",
+        "modified_date" : "2022-02-10 13:08:03",
+        "login_date" : "2022-02-10 13:08:03"
     }
 ]

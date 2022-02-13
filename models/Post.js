@@ -28,8 +28,8 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: {
-      type: DataTypes.STRING,
+    content: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
     type: {
@@ -50,6 +50,14 @@ Post.init(
     //-- assigned tags
     topics: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    created_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    modified_date: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
     //-- Who created it

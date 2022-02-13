@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 const router = require('express').Router();
-const { User, Resource, Post } = require('../models');
+const { User, Resource, Post, Comment } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
 
@@ -13,77 +13,37 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     //TODO:: 02/10/2022 #EP | Build for KBAs
-    const postData = await User.findAll({ 
+    const postData = await Post.findAll({ 
       include: [
         {
-          // model: Post,
-          attributes: ['title', 'description'],
+          model: User,
+          attributes: ['id','username','created_date'],
         },
       ],
     });
 
     //TODO:: 02/10/2022 #EP | Build for Posts
-    const posts = postData.map((kba) =>
+    const posts = postData.map((post) =>
       post.get({ plain: true })
     );
 
+    
     res.render('homepage', {
       posts,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    
+    res
+      .status(500)
+      .json({
+        response: {
+          status: 500,
+          error: String(err)
+        }
+      });
   }
 });
-
-// // GET one category
-// // Use the custom middleware before allowing the user to access the KBA
-// //TODO:: 02/10/2022 #EP | Build for KBAs
-// router.get('/gallery/:id', withAuth, async (req, res) => {
-//   try {
-//     //TODO:: 02/10/2022 #EP | Build for KBAs
-//     const dbGalleryData = await Gallery.findByPk(req.params.id, {
-//       include: [
-//         {
-//           //TODO:: 02/10/2022 #EP | Build for KBAs
-//           model: Painting,
-//           attributes: [
-//             'id',
-//             'title',
-//             'artist',
-//             'exhibition_date',
-//             'filename',
-//             'description',
-//           ],
-//         },
-//       ],
-//     });
-
-//     //TODO:: 02/10/2022 #EP | Build for KBAs
-//     const gallery = dbGalleryData.get({ plain: true });
-//     res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
-
-// // GET one KBA
-// // Use the custom middleware before allowing the user to access the painting
-// //TODO:: 02/10/2022 #EP | Build for KBAs
-// router.get('/painting/:id', withAuth, async (req, res) => {
-//   try {
-//     const dbPaintingData = await Painting.findByPk(req.params.id);
-
-//     const painting = dbPaintingData.get({ plain: true });
-
-//     res.render('painting', { painting, loggedIn: req.session.loggedIn });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
 
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
@@ -93,5 +53,39 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+
+
+router.get('/post/:id', withAuth, async (req, res) => {
+  
+  try {
+    const dbPostData = await Post.findByPk( req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['id','username','created_date'],
+        },
+        {
+          model: Resource,
+          attributes: ['post_id','title','url'],
+        }
+      ],
+    });
+
+    const post = dbPostData.get({ plain: true });
+    console.log(post)
+    res.render('post', { post, loggedIn: req.session.loggedIn });
+  } 
+  catch (err) {
+    res
+      .status(500)
+      .json({
+        response: {
+          status: 500,
+          error: String(err)
+        }
+      })
+  }
+});
+
 
 module.exports = router;

@@ -33,6 +33,14 @@ Comment.init(
       type: DataTypes.TEXT,
       allowNull: false
     },
+    created_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    modified_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
     //-- Who made comment
     user_id: {
       type: DataTypes.INTEGER,

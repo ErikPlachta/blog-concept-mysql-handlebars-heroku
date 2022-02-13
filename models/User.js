@@ -35,6 +35,13 @@ User.init(
       primaryKey: true,
       autoIncrement: true
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2]
+      }
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -56,7 +63,19 @@ User.init(
       validate: {
         len: [4]
       }
-    }
+    },
+    created_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    modified_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    login_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
   },
   {
     // events called by Sequalize based on hook chosen. HASHES PW TO BE SAVED INSTEAD OF OG
