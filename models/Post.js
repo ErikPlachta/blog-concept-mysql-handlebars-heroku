@@ -34,8 +34,7 @@ Post.init(
     },
     type: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     //-- if false stays in database but just doesn't show up
     status: {

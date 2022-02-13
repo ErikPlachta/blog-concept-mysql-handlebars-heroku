@@ -73,9 +73,10 @@ body {
   justify-content: flex-start;
   background-color: var(--quatrinary);
   /* font: inherit; */
-  vertical-align: baseline;
+  /* vertical-align: baseline; */
 }
 
+/* general hyperlink styling */
 a         { color: var(--light); text-decoration: none;}
 a:link    { text-decoration: none; }
 a:visited { text-decoration: none; color: inherit;}
@@ -155,18 +156,7 @@ nav a:hover {
   text-decoration: none;
 }
 
-.landing {
-  flex: 4;
-  background-color: var(--bg_body);
-  padding: 0;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
 
-  /* Making sure loads beyond view space */
-  min-height: calc(100vh - 48px)
-}
 
 .btn-no-style {
   background: none;
@@ -183,6 +173,19 @@ nav a:hover {
 img {
   max-width: 100%;
   height: auto;
+}
+
+.landing {
+  flex: 4;
+  background-color: var(--bg_body);
+  padding: 0;
+  /* display: flex; */ /* Removed flex so cards fit better */
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+
+  /* Making sure loads beyond view space */
+  min-height: calc(100vh - 48px)
 }
 
 .post {
@@ -218,7 +221,7 @@ img {
 */
 
 .card {
-  margin: 2rem;
+  margin: .5rem 2rem;
   padding: 1rem 1rem;
   flex: 0 1 100%;
   border: var(--border);
@@ -260,7 +263,7 @@ img {
 .card header {
   color: var(--text-area_text);
   font-weight: bold;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin: 0;
   background-color: var(--bg_Section);
   padding: 0.625rem;
