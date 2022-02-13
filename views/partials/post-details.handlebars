@@ -2,10 +2,14 @@
   <!-- The contents of this card links to the gallery page using the gallery ID -->
   <a href="/post/{{id}}">
     <!-- The card contains the post name as the card header -->
-    <header>{{id}} - {{title}}</header>
+    <header>{{id}} - {{title}} - {{user.username}}</header>
     {{content}}
-    <hr>
+    
     {{resource}}
+    <br>
+    {{created_date}}
+    <br>
+    {{modified_date}}
     
   </a>
 </section>
