@@ -216,12 +216,44 @@ img {
 }
 
 /*----------------------------------------------------------------------------*/
+
+.post-new-comment {
+  margin: .5rem 2rem;
+  padding: 1rem 1rem;
+  flex: 0 1 100%;
+  
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--bg_Section);
+  color: var(--text-area_text);
+
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+  width: auto;
+  overflow: hidden;
+}
 .post-new-comment img {
   display: inline-block;
   height: 40px;
   width: 40px;
   margin-right: 4px;
   vertical-align: middle;
+  border-radius: 1rem;
+}
+
+.create-post-text {
+  /* width: auto; */
+  background: var(--active);
+  vertical-align: middle;
+  border-radius: var(--border-radius);
+  flex: 2;
+  color: var(--text-area_text);
+}
+
+.create-post-text:active {
+  background: var(--active-hover);
+  color: var(--text-area_text);
 }
 
 /*----------------------------------------------------------------------------*/
