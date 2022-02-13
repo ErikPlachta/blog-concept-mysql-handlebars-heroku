@@ -2,6 +2,7 @@
     {
         "id": 1,
         "user_id": 1,
+        "post_id" : 1,
         "title" : "Erik Plachta",
         "url" : "https://s.gravatar.com/avatar/cde2e5381aa5e6d8d0220c46edee8f88?s=160",
         "type" : "profile",

@@ -54,4 +54,38 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+
+router.get('/post/:id', withAuth, async (req, res) => {
+  
+  try {
+    const dbPostData = await Post.findByPk( req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['id','username','created_date'],
+        },
+        {
+          model: Resource,
+          attributes: ['post_id','title','url'],
+        }
+      ],
+    });
+
+    const post = dbPostData.get({ plain: true });
+    console.log(post)
+    res.render('post', { post, loggedIn: req.session.loggedIn });
+  } 
+  catch (err) {
+    res
+      .status(500)
+      .json({
+        response: {
+          status: 500,
+          error: String(err)
+        }
+      })
+  }
+});
+
+
 module.exports = router;
