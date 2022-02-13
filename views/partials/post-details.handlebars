@@ -1,9 +1,11 @@
 <section class="card">
-  
-    <header>{{title}}</header>
-    {{description}}
+  <!-- The contents of this card links to the gallery page using the gallery ID -->
+  <a href="/post/{{id}}">
+    <!-- The card contains the post name as the card header -->
+    <header>{{id}} - {{title}}</header>
+    {{content}}
+    <hr>
     {{resource}}
-
-  
+    
   </a>
 </section>
