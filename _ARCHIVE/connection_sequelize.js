@@ -1,5 +1,5 @@
-// import the Sequelize constructor from the library
-const Sequelize = require('sequelize');
+//-- IMPORTS
+const Sequelize = require('sequelize'); // for drop add tables in employee_db
 require('dotenv').config(); //-- for local variable caching
 
 /*
@@ -21,8 +21,10 @@ else {
       host: 'localhost',
       dialect: 'mysql',
       port: 3306
-    }
+    },
+    console.log(`//-- Connection MYSQL database with npm package Sequelize success!`)
   );
 }
 
+//-- exporting created sequelize obj
 module.exports = sequelize;
