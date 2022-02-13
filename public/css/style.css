@@ -25,8 +25,8 @@
   /* 
     LINKS AND ACTIVE CONTENT LIKE CHECK BOXES
   */
-  --active: rgb(39, 39, 41);
-  --active-hover: rgb(39, 39, 41);
+  --active: var(--tertiary);
+  --active-hover: var(--secondary);
   
 
   --text-area_bg: var(--secondary);
@@ -58,9 +58,13 @@
 
 html {
   scroll-behavior: smooth;
+  box-sizing: border-box;
+
 }
 
 body {
+  box-sizing: border-box;
+
   font-family: Roboto, Arial, sans-serif;  
   /* Prevents cursor from changing from arrow unless explicit */
   cursor: default;
@@ -233,6 +237,12 @@ img {
   width: auto;
   overflow: hidden;
 }
+
+
+.post-new-comment:hover .create-post-text  {
+  border: var(--border-hover);
+}
+
 .post-new-comment img {
   display: inline-block;
   height: 40px;
@@ -243,17 +253,21 @@ img {
 }
 
 .create-post-text {
-  /* width: auto; */
+  margin: 0 .5rem;
+  padding: 0rem 1rem;
+  flex: 2;
+  color: var(--text-area_text);
   background: var(--active);
   vertical-align: middle;
   border-radius: var(--border-radius);
-  flex: 2;
-  color: var(--text-area_text);
+  border: var(--border);
+  vertical-align: middle;
 }
 
-.create-post-text:active {
+.create-post-text:focus, input:focus {
   background: var(--active-hover);
   color: var(--text-area_text);
+  
 }
 
 /*----------------------------------------------------------------------------*/
