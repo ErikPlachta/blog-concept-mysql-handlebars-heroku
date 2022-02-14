@@ -275,9 +275,13 @@ aside {
   color: var(--text-area_text);
 }
 
+.card-feed h5{
+  padding: .5rem 0;
+}
+
 .card-feed-banner {
   text-align: left;
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
   margin: 2rem 0;
 }
 
