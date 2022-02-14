@@ -123,7 +123,7 @@ h5 {
 */
 
 header {
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   background: var(--primary);
   color: var(--light);
 }
@@ -132,14 +132,6 @@ main {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
-}
-
-aside {
-  flex: 1;
-  background-color: var(--primary);
-  padding: 1rem;
-  text-align: center;
-  color: var(--light);
 }
 
 nav {
@@ -179,18 +171,6 @@ img {
   height: auto;
 }
 
-.landing {
-  flex: 4;
-  background-color: var(--bg_body);
-  padding: 0;
-  /* display: flex; */ /* Removed flex so cards fit better */
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-
-  /* Making sure loads beyond view space */
-  min-height: calc(100vh - 48px)
-}
 
 .post {
   width: 90%;
@@ -222,7 +202,7 @@ img {
 /*----------------------------------------------------------------------------*/
 
 .post-new-comment {
-  margin: .5rem 2rem;
+  margin: 1rem 3rem 1rem 2rem;
   padding: 1rem 1rem;
   flex: 0 1 100%;
   
@@ -254,7 +234,7 @@ img {
 
 .create-post-text {
   margin: 0 .5rem;
-  padding: 0rem 1rem;
+  padding: .25rem 1rem;
   flex: 2;
   color: var(--text-area_text);
   background: var(--active);
@@ -275,8 +255,54 @@ img {
   CARDS 
 */
 
+aside {
+  flex: 1;
+  background-color: var(--primary);
+  padding: 1rem 0 1rem 1rem;
+  margin: 0;
+  text-align: center;
+  color: var(--light);
+}
+
+
+.card-feed {
+  margin: 1rem 0;
+  /* padding: 1rem 1rem; */
+  flex: 0 1 100%;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--bg_Section);
+  color: var(--text-area_text);
+}
+
+.card-feed h5{
+  padding: .5rem 0;
+}
+
+.card-feed-banner {
+  text-align: left;
+  /* padding: 2rem 0; */
+  margin: 2rem 0;
+}
+
+
+.landing {
+  flex: 4;
+  background-color: var(--bg_body);
+  padding: 0;
+  margin: 0;
+  /* display: flex; */ /* Removed flex so cards fit better */
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+
+  /* Making sure loads beyond view space */
+  min-height: calc(100vh - 48px)
+}
+
+
 .card {
-  margin: .5rem 2rem;
+  margin: .5rem 2rem .5rem 1rem;
   padding: 1rem 1rem;
   flex: 0 1 100%;
   border: var(--border);
@@ -285,7 +311,7 @@ img {
   color: var(--text-area_text);
 }
 
-.card:hover {
+.card:hover, .card-feed:hover {
   border: var(--border-hover);
 }
 
@@ -293,7 +319,8 @@ img {
   width: 100%;
 }
 
-.card-banner img {
+.card-banner img,
+.card-feed-banner img {
   display: inline-block;
   height: 20px;
   margin-right: 4px;
