@@ -40,8 +40,8 @@ const hours_passed = ( date ) => {
 
 
 const shrinkContent = content => {
-  if (content.length > 50)
-    return content.substring(0,50) + '...';
+  if (content.length > 250)
+    return content.substring(0,250) + '...';
   return content;
 }
 
