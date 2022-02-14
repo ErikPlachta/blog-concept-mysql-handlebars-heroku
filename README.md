@@ -8,6 +8,10 @@ A Tech Blog concept app hosted on the cloud. Fully built out MVC with JawsDB dat
 
 ## Concept
 
+**02/132/2022 #EP | Image of current progress so far.**
+![image](https://user-images.githubusercontent.com/17508965/153789135-f2585896-78b2-468b-b4ec-7f3f19f1e651.png)
+
+
 ## About
 
 **TODO:: 02/12/2022 #EP | Fill out.**
