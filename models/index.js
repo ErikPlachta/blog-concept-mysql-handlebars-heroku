@@ -62,9 +62,8 @@ Resource.belongsTo(Post, {
 });
 
 /*
-  If a 
+  If a user creates a resource
 */
-
 User.hasMany(Resource, {
   foreignKey: 'user_id'
 });
@@ -73,6 +72,17 @@ Resource.belongsTo(User, {
   foreignKey: 'user_id',
 });
 
+/*
+  If a user creates a profile-resource-image
+*/
+
+User.hasOne(Resource, {
+  foreignKey: 'profile_resource_id',
+});
+
+Resource.belongsTo(User, {
+  foreignKey: 'profile_resource_id',
+});
 
 /* 
 { TODO:: 02/10/2022 #EP | Add cascading

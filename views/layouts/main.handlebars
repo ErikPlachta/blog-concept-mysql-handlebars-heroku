@@ -14,20 +14,22 @@
     <h1>Tech Blog - Concept App</h1>
   </header>
   <nav>
-    <a href="/">Home</a>
+    <button><a href="/">Home</a></button>
     <!-- If the user is logged in, show a logout button -->
     {{#if loggedIn}}
     <button id="dashboard" class="btn-no-style">Dashboard</button>
     <button id="logout" class="btn-no-style">Logout</button>
     {{else}}
     <!-- Otherwise, show a link to login -->
-    <a href="/login">Login</a>
+    <button><a href="/login">Login</a></button>
     {{/if}}
-    <a href="https://github.com/ErikPlachta/blog-app-cloudhosted-mvc-modular">GitHub</a>
+    <a href="https://github.com/ErikPlachta/blog-app-cloudhosted-mvc-modular" target="_blank">GitHub</a>
   </nav>
   <main>
+    {{!-- left bar --}}
     <aside>
-      <h2>Left Bar</h2>
+      <h3>Popular Posts</h3>
+      <div class="popular-posts">{{popular-posts}}</div>
     </aside>
     <div class="landing">
       {{{body}}}

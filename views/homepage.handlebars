@@ -1,3 +1,17 @@
+{{!-- Create ne post, here --}}
+{{#if loggedIn}}
+    <div class="post-new-comment">
+        {{!-- 
+            TODO:: 02/13/2022 #EP || Get IMG from database based on Resource
+                with value profile_resource_id matching user ID 
+        --}}
+        <img src="{{resource.url}}" alt="{{resource.title}}"> 
+        <textarea class="create-post-text" placeholder="Create Post"></textarea>
+    </div>
+{{else}}
+{{/if}}
+
+{{!-- build post previews --}}
 {{#each posts as |post|}}
-{{> post-details}}
+    {{> post-preview}}
 {{/each}}
