@@ -276,7 +276,8 @@ aside {
 }
 
 .card-feed h5{
-  padding: .5rem 0;
+  padding: .5rem;
+  font-size: .9rem;
 }
 
 .card-feed-banner {
