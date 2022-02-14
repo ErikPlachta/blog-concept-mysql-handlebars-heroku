@@ -123,7 +123,7 @@ h5 {
 */
 
 header {
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   background: var(--primary);
   color: var(--light);
 }
@@ -132,14 +132,6 @@ main {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
-}
-
-aside {
-  flex: 1;
-  background-color: var(--primary);
-  padding: 1rem;
-  text-align: center;
-  color: var(--light);
 }
 
 nav {
@@ -275,6 +267,30 @@ img {
   CARDS 
 */
 
+aside {
+  flex: 1;
+  background-color: var(--primary);
+  padding: 1rem;
+  margin: 0;
+  text-align: center;
+  color: var(--light);
+}
+
+
+.card-feed {
+  margin: .5rem 0;
+  /* padding: 1rem 1rem; */
+  flex: 0 1 100%;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--bg_Section);
+  color: var(--text-area_text);
+}
+
+.card-feed-banner {
+
+}
+
 .card {
   margin: .5rem 2rem;
   padding: 1rem 1rem;
@@ -285,7 +301,7 @@ img {
   color: var(--text-area_text);
 }
 
-.card:hover {
+.card:hover, .card-feed:hover {
   border: var(--border-hover);
 }
 
@@ -293,7 +309,8 @@ img {
   width: 100%;
 }
 
-.card-banner img {
+.card-banner img,
+.card-feed-banner img {
   display: inline-block;
   height: 20px;
   margin-right: 4px;

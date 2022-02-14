@@ -28,8 +28,12 @@
   <main>
     {{!-- left bar --}}
     <aside>
-      <h3>Popular Posts</h3>
-      <div class="popular-posts">{{popular-posts}}</div>
+      <h3>Activity Feed</h3>
+      <div class="popular-posts">
+        {{#each posts as |post|}}
+          {{> post-stats}}
+        {{/each}}
+      </div>
     </aside>
     <div class="landing">
       {{{body}}}
