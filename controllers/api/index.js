@@ -13,10 +13,10 @@ const resourceRoutes = require('./resource-routes');
 router.use('/resources', resourceRoutes);
 
 const postRoutes = require('./post-routes');
-router.use('/kbas', postRoutes);
+router.use('/posts', postRoutes);
 
 const commentRoutes = require('./post-routes');
-router.use('/kbas', commentRoutes);
+router.use('/comments', commentRoutes);
 
 
 //-- if gets here when rounting, throw 404

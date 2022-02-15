@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { Post, User } = require('../../models');
 
 
 
@@ -8,11 +8,15 @@ router.get('/', async (req, res) => {
   
   try {
     if (req.session.loggedIn) {
+      
+      const dbPosts = await Post.findAll({});
+      
       res
         .status(200)
         .json(
           {
-            message: 'Connection to ./api/posts/ successful. NOTE: Authentication and script to be setup.' 
+            message: 'Connection to ./api/posts/ successful.' ,
+            results: dbPosts,
           }
         );
     } else {
@@ -23,8 +27,42 @@ router.get('/', async (req, res) => {
   }
   catch (err) {
     console.log(err);
+    res.status(500).json({
+      error: String(err)
+    });
+  }
+});
+
+
+// CREATE new post
+router.post('/', async (req, res) => {
+  try {
+    const postData = await Post.create({
+      title: req.body.title,
+      content: req.body.content,
+      type: req.body.type,
+      status: req.body.status,
+      category: req.body.category,
+      topics: req.body.topics,
+      resource_id: req.body.resource_id,
+      created_date: Date.now(),
+      modified_date: Date.now()
+    });
+
+   
+    res
+      .status(200)
+      .json({
+        
+        results: String(postData)
+      });
+    
+  } 
+  catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;
