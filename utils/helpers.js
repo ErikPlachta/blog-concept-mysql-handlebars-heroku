@@ -10,7 +10,7 @@ const format_date = date => {
 };
 
 
-const hours_passed = ( date ) => {
+const get_TimePassed = ( date ) => {
   
   //-- Get curent time
   var now = moment(new Date()); 
@@ -47,7 +47,7 @@ const shrinkContent = content => {
 
 module.exports = {
   format_date,
-  hours_passed,
+  get_TimePassed,
   shrinkContent
 }
   
