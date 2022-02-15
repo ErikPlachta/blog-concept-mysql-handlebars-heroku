@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment } = require('../../models');
+const { Comment, Post } = require('../../models');
 
 
 
@@ -18,6 +18,51 @@ router.get('/', async (req, res) => {
           }
         );
     } else {
+      res
+        .status(500)
+        .json({ message: 'Authentication error.' });
+    }
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
+// Get Resoruces from DB IF logged in by :id
+router.get('/:id', async (req, res) => {
+  
+  try {
+    if (req.session.loggedIn) {
+      const commentDB = await Comment.findOne({
+        where: {
+          id: req.params.id,
+        }
+      });
+
+      if(!commentDB){
+        res
+          .status(500)
+          .json({
+            message: `Comment ${req.params.id} does not exist. Please try again!`,
+            results: commentDB
+          });
+
+        return;
+      }
+
+      res
+        .status(200)
+        .json(
+          {
+            message: 'Connection to ./api/comments/:id successful.',
+            results: commentDB,
+          }
+        );
+    }
+    
+    else {
       res
         .status(500)
         .json({ message: 'Authentication error.' });
@@ -90,7 +135,7 @@ router.delete('/:id', async (req, res) => {
 
     if (req.session.loggedIn) {
 
-      const dbResourceData = await Resource.findOne({
+      const commentDB = await Comment.findOne({
         where: {
           id: req.params.id
         }
@@ -98,7 +143,7 @@ router.delete('/:id', async (req, res) => {
 
       
       //-- If not in database, exists
-      if (!dbResourceData) {
+      if (!commentDB) {
         res
           .status(400)
           .json({ message: 'Invalid Request. Please try again!' });
@@ -108,7 +153,7 @@ router.delete('/:id', async (req, res) => {
       
       
       //-- Delete Resource
-      const resourceDeletedResponse = await Resource.destroy({
+      const commentDeletedResponse = await Comment.destroy({
         where: {
           id: req.params.id,
         },
@@ -121,7 +166,7 @@ router.delete('/:id', async (req, res) => {
           {
             response: {
               status: 200,
-              results: String(resourceDeletedResponse)
+              results: String(commentDeletedResponse)
             }
           }
         );
