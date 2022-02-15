@@ -15,7 +15,7 @@ router.use('/resources', resourceRoutes);
 const postRoutes = require('./post-routes');
 router.use('/posts', postRoutes);
 
-const commentRoutes = require('./post-routes');
+const commentRoutes = require('./comments-routes');
 router.use('/comments', commentRoutes);
 
 
