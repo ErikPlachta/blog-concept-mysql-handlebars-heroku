@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
       .status(200)
       .json({
         
-        results: String(postData)
+        results: postData
       });
     
   } 
