@@ -12,7 +12,9 @@ router.post('/login', async (req, res) => {
         email: req.body.email,
       },
     });
+
     // console.log(`/-- Attempting login for ${req.body.email} `);
+    //-- username doesn't exist
     if (!dbUserData) {
       res
         .status(400)
@@ -22,6 +24,7 @@ router.post('/login', async (req, res) => {
 
     const validPassword = await dbUserData.checkPassword(req.body.password);
 
+    //-- username exists but bad password
     if (!validPassword) {
       res
         .status(400)
@@ -82,28 +85,63 @@ router.post('/', async (req, res) => {
 });
 
 
+// DELETE existing user
 router.delete('/', async (req, res) => {
   try {
-    
-    const deleteUserResults = await User.destroy({
-      where: {
-        email: req.body.email
-        // password: req.body.password
-        }
-    });
-    
-    
-    res
-      .status(200)
-      .json(
-        {
-          response: {
-            status: 200,
-            results: String(deleteUserResults)
-          }
-        }
-      );
 
+    if (req.session.loggedIn) {
+
+      //-- Check if email in Database
+      const dbUserData = await User.findOne({
+        where: {
+          email: req.body.email,
+        },
+      });
+      
+      //-- If not in database, exists
+      if (!dbUserData) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email or password. Please try again!' });
+        return;
+      }
+
+      //-- Run delete request based on email address
+      
+      //TODO:: 02/15/2022 #EP || ADD if current user logged in
+      const deleteUserResults = await User.destroy({
+        where: {
+          email: req.body.email
+          // password: req.body.password
+          }
+      });
+      
+      //-- respond
+      res
+        .status(200)
+        .json(
+          {
+            response: {
+              status: 200,
+              results: String(deleteUserResults)
+            }
+          }
+        );
+      return;
+    }
+    
+    //-- If some sort of error other than catch error
+    res
+    .status(200)
+    .json(
+      {
+        response: {
+          status: 200,
+          results: "Invalid request. See admin."
+        }
+      }
+    );
+    return;
   }
   catch(err) {
     // console.log(err);
