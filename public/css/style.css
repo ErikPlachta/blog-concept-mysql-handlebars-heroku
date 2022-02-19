@@ -371,25 +371,19 @@ aside {
   flex: 40%;
   text-align: center;
   
-  
-  
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* justify-content: flex-start; */
-  flex-wrap: wrap;
-  /* height: 100vh; */
-  
   margin: 2rem;
   border: var(--border);
   border-radius: var(--border-radius);
   background-color: var(--bg_Section);
   color: var(--text-area_text);
 
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center; */
+  justify-content: center;
+  overflow:hidden;
+
+  margin: 1rem;
 }
 
 .login-card header {
@@ -421,8 +415,6 @@ aside {
   /* margin: auto; */
   
 }
-
-
 
 /* labels on input */
 form label,

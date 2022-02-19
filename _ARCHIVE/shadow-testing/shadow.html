@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadow testing</title>
+  <link rel="stylesheet" type="text/css" href="shadow.css">
+  
+</head>
+
+<body>
+<head>
+    <h1>Modal on Load Example</h1>
+    <p>This is an exmaple of how to make a modal appear on page load.</p>
+  </head>
+  
+  <div>
+    <h2>Manually Controlling the Modal</h2>
+    <!-- Button to open modal manually -->
+    <button id="btn-openModal">Open Modal</button>
+  </div>
+  
+  <!-- The Modal -->
+  <div id="div-onload-modal" class="modal">
+    <!-- The modal content here -->
+    <div class="modal-content">
+      
+    <section class="modal-header">
+        <h2>Title</h2>
+        <span class="close">&times;</span>
+      </section>
+
+      <section class="modal-body">
+        <p>Message and/or call to action..</p>
+      </section>
+      
+      <section class="modal-footer"></section>
+    </div>
+  </div>
+  <script src="shadow.js"></script>
+</body>
+</html>
