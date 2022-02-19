@@ -31,8 +31,16 @@
     {{!-- left bar --}}
     <aside>
       <h3>Activity Feed</h3>
+      <hr>
+      <h4>Posts</h4>
       <div class="popular-posts">
         {{#each posts as |post|}}
+          {{> post-stats}}
+        {{/each}}
+      </div>
+      <div class="popular-comments">
+        <h4>Comments</h4>
+        {{#each comments as |comment|}}
           {{> post-stats}}
         {{/each}}
       </div>
