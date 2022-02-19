@@ -135,15 +135,23 @@ main {
 }
 
 nav {
+  
   display: flex;
+  justify-content: center;
   background-color: var(--secondary);
+  color: var(--light);
 }
 
 nav a {
-  color: var(--light);
-  padding: 14px 20px;
+  flex: auto;
+  padding: 1rem 2rem;
   text-decoration: none;
+  color: var(--light);
   text-align: center;
+  /* transition-delay: .3s;
+  transition: color .3s;  */
+  transition:ease-in-out .2s;
+  
 }
 
 nav a:hover {
@@ -152,25 +160,13 @@ nav a:hover {
   text-decoration: none;
 }
 
-
-
-.btn-no-style {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 100%;
-  transition: color 0.1s;
-  margin-left: 16px;
-  color: var(--light);
-}
-
 img {
   max-width: 100%;
   height: auto;
 }
 
+/*----------------------------------------------------------------------------*/
+/* POSTS */
 
 .post {
   width: 90%;
@@ -254,7 +250,6 @@ img {
 /* 
   Left Side
 */
-
 
 aside {
   flex: 1;

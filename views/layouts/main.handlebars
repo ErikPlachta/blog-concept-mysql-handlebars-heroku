@@ -14,17 +14,12 @@
     <h1>Tech Blog - Concept App</h1>
   </header>
   <nav>
-    <a><a href="/">Home</a></button>
-    <!-- If the user is logged in, show a logout button -->
-    {{#if loggedIn}}
-      <a id="dashboard" class="btn-no-style">Dashboard</a>
-      <a id="logout" class="btn-no-style">Logout</a>
-    {{else}}
-    <!-- Otherwise, show a link to login -->
-      <a href="/login">Login</a>
-    {{/if}}
+    <a href="/">Home</a>
+    <a href="https://github.com/ErikPlachta/blog-app-cloudhosted-mvc-modular" target="_blank">About</a>
+    {{#if loggedIn}}<a id="profile"><img src="{{url}}" alt="{{title}}">  Profile</a>{{/if}}
+    {{#if loggedIn}}<a id="logout">Logout</a>
+    {{else}}<a href="/login">Login</a>{{/if}}
     
-    <a href="https://github.com/ErikPlachta/blog-app-cloudhosted-mvc-modular" target="_blank">GitHub</a>
   </nav>
   <main>
 
