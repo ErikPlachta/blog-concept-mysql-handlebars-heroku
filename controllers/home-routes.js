@@ -126,6 +126,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
 
     res.render('post', { 
       post,
+      comments,
       loggedIn: req.session.loggedIn 
     });
   } 

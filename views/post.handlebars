@@ -9,3 +9,10 @@
     <span>Posted on: {{format_date post.created_date}}</span>
   </div>
 </section>
+
+<section class="comments">
+  <h3>Comments</h3>
+   {{#each comments as |comment|}}
+      {{> comment-details}}
+    {{/each}}
+</section>
