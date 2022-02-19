@@ -8,12 +8,16 @@ const withAuth = require('../utils/auth');
 //------------------------------------------------------------------------------
 //-- ROUTES
 
-// //-- GET all KBAs for homepage
-// //TODO:: 02/10/2022 #EP | Build for KBAs
+// //-- GET all POSTS for homepage
 router.get('/', async (req, res) => {
   try {
-    //TODO:: 02/10/2022 #EP | Build for KBAs
+    
+    // GET POSTS
     const postData = await Post.findAll({ 
+      // limit: 10,
+      order: [
+        ['created_date', 'DESC']
+      ],
       include: [
         {
           model: User,
@@ -26,15 +30,38 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    //TODO:: 02/10/2022 #EP | Build for Posts
+    // Build it to prepare for html
     const posts = postData.map((post) =>
       post.get({ plain: true })
     );
 
+    const commentData = await Comment.findAll({ 
+      // limit: 10,
+      order: [
+        ['created_date', 'DESC']
+      ],
+      // include: [
+      //   {
+      //     model: User,
+      //     attributes: ['id','username','created_date'],
+      //   },
+      //   {
+      //     model: Resource,
+      //     attributes: ['title','url'],
+      //   }
+      // ],
+    });
+
+    //TODO:: 02/10/2022 #EP | Build for Posts
+    const comments = commentData.map((post) =>
+      post.get({ plain: true })
+    );
     
     res.render('homepage', {
+      comments,
       posts,
       loggedIn: req.session.loggedIn,
+      // username: req.sessionID.username
     });
   } 
   

@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
         .status(200)
         .json(
           {
+            loggedIn: req.session.loggedIn,
             message: 'Connection to ./api/posts/ successful.' ,
             results: dbPosts,
           }
