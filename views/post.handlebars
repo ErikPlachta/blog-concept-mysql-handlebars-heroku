@@ -4,21 +4,25 @@
   }
 </style>
 
-<section class="post">
-  <div class="post-details">
-    <h3>{{post.id}}. {{post.title}} by {{post.user.username}}</h3>
-    <p>{{{post.content}}}</P>
-    <span>
-      {{!-- <img src="{{post.resource.url}}" alt="{{post.resource.title}}"> --}}
-    </span>
-    <br>
-    <span>Posted on: {{format_date post.created_date}}</span>
-  </div>
-</section>
+<div class="landing">
+  <section class="card">
+    <div class="post-details">
+      <h3>{{post.id}}. {{post.title}} by {{post.user.username}}</h3>
+      
+      <p>{{{post.content}}}</p>
+      {{!-- <span>
+        <img src="{{post.resource.url}}" alt="{{post.resource.title}}">
+      </span> --}}
+      <div class="card-footer">
+        Posted {{get_TimePassed post.created_date}} ago, on {{format_date post.created_date}}
+      </div>
+    </div>
+  </section>
 
-<section class="comments">
-  <h3>Comments</h3>
-   {{#each comments as |comment|}}
-      {{> comment-details}}
-    {{/each}}
-</section>
+  <section class="comments">
+    <h3>Comments</h3>
+    {{#each comments as |comment|}}
+        {{> comment-details}}
+      {{/each}}
+  </section>
+</div>

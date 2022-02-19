@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
         },
         {
           model: Resource,
-          attributes: ['title','url'],
+          attributes: ['user_id','title','url'],
         }
       ],
     });
@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
       comments,
       posts,
       loggedIn: req.session.loggedIn,
-      // username: req.sessionID.username
+      username: req.sessionID.username
     });
   } 
   
