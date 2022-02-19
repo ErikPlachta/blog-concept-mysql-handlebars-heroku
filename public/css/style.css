@@ -338,19 +338,122 @@ aside {
   width: 20px;
 }
 
+/*----------------------------------------------------------------------------*/
+/* LOGINS */
+
+.login-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 
 .login-card {
-  margin: 0 0 20px 0;
-  flex: 0 0 50%;
-  max-width: 50%;
-  padding: 5px;
-  border: 3px solid var(--dark);
+  flex: 40%;
+  text-align: center;
+  
+  
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* justify-content: flex-start; */
+  flex-wrap: wrap;
+  /* height: 100vh; */
+  
+  margin: 2rem;
+  border: var(--border);
   border-radius: var(--border-radius);
-  border-style: double;
-  border-width: thick;
   background-color: var(--bg_Section);
   color: var(--text-area_text);
+
+  /* display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center; */
 }
+
+.login-card header {
+  padding: 1rem;
+  text-align: center;
+}
+
+.login-card:hover{
+  border: var(--border-hover);
+}
+
+
+.login-card .form-input {
+  margin: auto 1rem;
+  flex: 100%;
+  width: inherit;
+  max-width: 80%;
+  overflow: hidden;
+  align-self: center;
+  
+}
+
+
+form {
+  margin: auto;
+  width: 100%;
+}
+
+.form-group {
+  margin: 1rem auto;
+  display: flex;
+  /* justify-content: ; */
+  flex-direction: row;
+  width: 90%;
+  /* margin: auto; */
+  
+}
+
+
+
+/* labels on input */
+form label,
+form .form-label {
+  display: inline-block;
+  font-size: 1.2rem;
+  margin: 0.625rem 0 0.25rem 0.3rem; 
+}
+
+/* input itself */
+form .form-input {
+  align-content: center;
+  /* width: 70%; */
+  padding: 0.75rem;
+  color: #1a1a1a;
+  background-color: #ffffff;
+  margin: 0.625rem 0;
+  font-size: 1.2rem;
+  border: 1px solid #484848;
+  border-radius: 0.3rem;
+}
+
+form .form-input.form-input-squared {
+  border-radius: 0;
+}
+
+.btn.btn-primary {
+  padding: 1rem;
+  margin: 1rem auto 0;
+  
+  width: 100%;
+  background-color: #2d3e50;
+  color: #d9e9e8;
+
+  flex: 100%;
+}
+
+.btn.btn-primary:hover {
+  background-color: #57779a;
+}
+
+/*----------------------------------------------------------------------------*/
+/* CARDS */
 
 .card header {
   color: var(--text-area_text);

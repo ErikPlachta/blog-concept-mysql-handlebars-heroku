@@ -1,13 +1,14 @@
 <style>
   aside { 
-    
+    display: none
   }
 </style>
-<div class="row justify-space-between-md">
+<section class="login-section">
 
   {{!--- LOGIN ---}}
   <div class="login-card">
-    <h2 class="page-title">Login</h2>
+    <header><h3>Login</h3></header>
+    
     <form class="form login-form">
       <div class="form-group">
         <label for="email-login">Email:</label>
@@ -22,27 +23,29 @@
       </div>
     </form>
   </div>
+
   {{!-- SIGNUP --}}
   <div class="login-card">
-    <h2 class="page-title">Signup</h2>
+    <header><h3>signup</h3></header>
+    
     <form class="form signup-form">
-      <div class="form-group">
+      <span class="form-group">
         <label for="username-signup">Username:</label>
         <input class="form-input" type="text" id="username-signup" />
-      </div>
-      <div class="form-group">
+      </span>
+      <span class="form-group">
         <label for="email-signup">Email:</label>
         <input class="form-input" type="text" id="email-signup" />
-      </div>
-      <div class="form-group">
+      </span>
+      <span class="form-group">
         <label for="password-signup">Password:</label>
         <input class="form-input" type="password" id="password-signup" />
-      </div>
-      <div class="form-group">
+      </span>
+      <span class="form-group">
         <button class="btn btn-primary" type="submit">signup</button>
-      </div>
+      </span>
     </form>
   </div>
-</div>
+</section>
 
 <script src="./js/login.js"></script>
