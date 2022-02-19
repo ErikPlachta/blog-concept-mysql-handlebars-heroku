@@ -252,8 +252,9 @@ img {
 
 /*----------------------------------------------------------------------------*/
 /* 
-  CARDS 
+  Left Side
 */
+
 
 aside {
   flex: 1;
@@ -263,7 +264,15 @@ aside {
   text-align: center;
   color: var(--light);
 }
+.activity-feed, 
+.post-stats{
+  display: none;
+}
 
+/*----------------------------------------------------------------------------*/
+/* 
+  Post Feed
+*/
 
 .card-feed {
   margin: 1rem 0;
