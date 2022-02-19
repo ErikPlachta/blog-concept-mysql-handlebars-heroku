@@ -90,22 +90,44 @@ router.get('/login', (req, res) => {
 router.get('/post/:id', withAuth, async (req, res) => {
   
   try {
+
+    //-- Get the specific post
+
     const dbPostData = await Post.findByPk( req.params.id, {
       include: [
+        { model: User, attributes: ['id','username','created_date'],},
+        { model: Resource, attributes: ['post_id','title','url'], }
+      ],
+    });
+    const post = dbPostData.get({ plain: true });
+    
+    
+    //-- get comments related
+    const dbCommentData = await Comment.findAll({
+      where: {
+        post_id: req.params.id,
+      },
+      include: [
         {
-          model: User,
-          attributes: ['id','username','created_date'],
+          model: Post,
+          attributes: ['id'],
         },
-        {
-          model: Resource,
-          attributes: ['post_id','title','url'],
-        }
+        // {
+        //   model: Resource,
+        //   attributes: ['post_id','title','url'],
+        // }
       ],
     });
 
-    const post = dbPostData.get({ plain: true });
-    console.log(post)
-    res.render('post', { post, loggedIn: req.session.loggedIn });
+    const comments = dbCommentData.map((post) => post.get({ plain: true }) );
+
+
+
+
+    res.render('post', { 
+      post,
+      loggedIn: req.session.loggedIn 
+    });
   } 
   catch (err) {
     res
