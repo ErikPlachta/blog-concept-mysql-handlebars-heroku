@@ -223,10 +223,10 @@ img {
 
 
 
-.post-new-post,
+
 .post-new-comment {
   margin: 1rem 3rem 1rem 2rem;
-  padding: 1rem 1rem;
+  padding: 1rem;
   flex: 0 1 100%;
   
   border: var(--border);
@@ -242,14 +242,55 @@ img {
 }
 
 .post-new-post {
+  margin: 1rem 3rem 1rem 2rem;
+  /* padding: 1rem 1rem; */
+  padding: .5rem;
+  flex: 0 1 100%;
+  
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--bg_Section);
+  color: var(--text-area_text);
+
+  display: flex;
+  
   flex-direction: column;
+  vertical-align: middle;
+  /* flex-flow: row; */
+  width: auto;
+  overflow: hidden;
 }
 
 .post-new-post span {
   flex: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
 }
 
 
+.post-new-post span #post-title,
+.post-new-post span #post-text {
+  flex: 100%;
+}
+
+#post-title-label,
+#post-title {
+  margin: .5rem 1rem;
+  padding: 1rem;
+}
+
+#post-title {
+  background-color: var(--tertiary);
+  color: white;
+}
+
+#post-text{
+  min-height: 10vh;
+}
 
 .post-new-comment:hover .create-post-text  {
   border: var(--border-hover);

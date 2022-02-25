@@ -7,17 +7,17 @@
 {{#if loggedIn}}
     <section>
         <form class="post-new-post">
+          
           <span class="post">
-            <label for="post-title">Title</label>
+            <label id='post-title-label'for="post-title">Title</label>
             <input class="form-input" type="text" id="post-title" minlength="5" required/>
           </span>
           
-          <span class="">
-            <textarea class="create-post-text" id="post-text" placeholder="What do you want tosay?" minlength="25"></textarea>
-            <label for="post-text">
-              <button class="btn btn-primary" type="submit">Publish</button>
-            </label>
+          <span class="post">
+            <label for="post-text"></label>
+            <textarea class="create-post-text" id="post-text" placeholder="Post body content" minlength="25" required></textarea>
           </span>
+          <button class="btn btn-primary" type="submit">Publish</button>
         </form>
         
     </section>
