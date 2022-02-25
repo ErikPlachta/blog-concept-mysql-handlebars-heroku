@@ -1,19 +1,14 @@
-<section class="card">
-  
-    <!-- The card contains the post name as the card header -->
-    <banner>Posted by u/{{user.username}} on {{format_date created_date}}</banner>
-    <header>
-      <h4>{{title}} by {{user.username}}</h4>
-    </header>
-    
-    {{!-- <span>{{content}}</span> --}}
-    
-    {{!-- <img src="{{resource.url}}" alt="{{resource.title}}"> --}}
-
-    <div>
-      <span>Post ID: {{id}}</span>
-      <span>Last Modified: {{format_date modified_date}}</span>
-    </div>
-    
-  </a>
+<section>
+    <form class="post-new-post">
+      <span class="post">
+        <label id='post-title-label'for="post-title">Post Title</label>
+        <input class="form-input" type="text" id="post-title" minlength="5" required/>
+      </span>
+      
+      <span class="post">
+        {{!-- <label for="post-text"></label> --}}
+        <textarea class="create-post-text" id="post-text" placeholder="Post body content" minlength="10" maxlength="50" required></textarea>
+      </span>
+      <button class="btn btn-primary" id="post-button-homepage" type="submit">Publish</button>
+    </form>
 </section>

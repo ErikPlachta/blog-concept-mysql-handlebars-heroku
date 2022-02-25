@@ -88,6 +88,15 @@ router.get('/login', (req, res) => {
 router.get('/profile', withAuth, (req, res) => {
   
   res.render('profile', {
+    where: {
+      post_id: req.params.id,
+    },
+    include: [
+      {
+        model: Post,
+        attributes: ['id'],
+      },
+    ],
     loggedIn: req.session.loggedIn 
   });
 });
