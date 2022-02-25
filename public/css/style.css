@@ -206,10 +206,7 @@ img {
   letter-spacing: 3px;
   text-shadow: 2px 2px 5px var(--secondary);
   border: 10px groove var(--light);
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-right: 100px;
-  padding-left: 100px;
+  padding: 30px 100px;
 }
 
 .post-details {
@@ -279,7 +276,7 @@ img {
 
 #post-title-label,
 #post-title {
-  margin: .5rem;
+  margin: auto .5rem;
   padding: 1rem;
 }
 
@@ -290,14 +287,21 @@ img {
 #post-title {
   background-color: var(--tertiary);
   color: white;
+  
 }
 
-#post-text{
-  min-height: 10vh;
+#post-text {
+  min-height: 5vh;
   margin: .5rem;
   flex: 100%;
   resize: vertical;
+  transition: ease-in-out .3s;
 }
+
+#post-text:focus{
+  min-height: 40vh;
+}
+
 
 .post-new-comment:hover .create-post-text  {
   border: var(--border-hover);
