@@ -82,10 +82,8 @@ router.get('/login', (req, res) => {
     res.redirect('/');
     return;
   }
-
   res.render('login');
 });
-
 
 router.get('/post/:id', withAuth, async (req, res) => {
   
@@ -120,10 +118,6 @@ router.get('/post/:id', withAuth, async (req, res) => {
     });
 
     const comments = dbCommentData.map((post) => post.get({ plain: true }) );
-
-
-
-
     res.render('post', { 
       post,
       comments,
@@ -141,6 +135,12 @@ router.get('/post/:id', withAuth, async (req, res) => {
       })
   }
 });
+
+
+// Bad URL send home
+router.get("/*", (req, res) => {
+  res.render("homepage")
+})
 
 
 module.exports = router;

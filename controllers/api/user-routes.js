@@ -57,7 +57,9 @@ router.post('/logout', (req, res) => {
 });
 
 // CREATE new user
-router.post('/', withAuth, async (req, res) => {
+router.post('/signup', async (req, res) => {
+  console.log("attempting to creat new")
+  console.table(req.body)
   try {
     const dbUserData = await User.create({
       name: req.body.name,
