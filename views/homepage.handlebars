@@ -5,14 +5,22 @@
 </style>
 
 {{#if loggedIn}}
-    <div class="post-new-comment">
-        {{!-- 
-            TODO:: 02/13/2022 #EP || Get IMG from database based on Resource
-                with value profile_resource_id matching user ID 
-        --}}
-        <img src="{{resource.url}}" alt="{{resource.title}}"> 
-        <textarea class="create-post-text" placeholder="Create Post"></textarea>
-    </div>
+    <section>
+        <form class="post-new-post">
+          <span class="post">
+            <label for="post-title">Title</label>
+            <input class="form-input" type="text" id="post-title" minlength="5" required/>
+          </span>
+          
+          <span class="">
+            <textarea class="create-post-text" id="post-text" placeholder="What do you want tosay?" minlength="25"></textarea>
+            <label for="post-text">
+              <button class="btn btn-primary" type="submit">Publish</button>
+            </label>
+          </span>
+        </form>
+        
+    </section>
 {{else}}
 
 

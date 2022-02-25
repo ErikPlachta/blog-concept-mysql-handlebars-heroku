@@ -219,7 +219,11 @@ img {
 }
 
 /*----------------------------------------------------------------------------*/
+/* POSTS */
 
+
+
+.post-new-post,
 .post-new-comment {
   margin: 1rem 3rem 1rem 2rem;
   padding: 1rem 1rem;
@@ -236,6 +240,15 @@ img {
   width: auto;
   overflow: hidden;
 }
+
+.post-new-post {
+  flex-direction: column;
+}
+
+.post-new-post span {
+  flex: 100%;
+}
+
 
 
 .post-new-comment:hover .create-post-text  {
