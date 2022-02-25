@@ -1,0 +1,24 @@
+<aside>
+      <section class="activity-feed">
+        <h3>Activity Feed</h3>
+        <hr>
+        <h4>Posts</h4>
+        <div class="popular-posts">
+          {{#each posts as |post|}}
+            {{> post-stats}}
+          {{/each}}
+        </div>
+        <div class="popular-comments">
+          <h4>Comments</h4>
+          {{#each comments as |comment|}}
+            {{> comment-stats}}
+          {{/each}}
+        </div>
+      </section>
+      {{!-- posts --}}
+       <section class="post-stats">
+        <h3>Post Stats</h3>
+        <hr>
+        <h4>TBD</h4>
+      </section>
+    </aside>
