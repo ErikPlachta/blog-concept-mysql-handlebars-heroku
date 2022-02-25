@@ -66,9 +66,9 @@ router.post('/', async (req, res) => {
       user: req.body.user,
       email: req.body.email,
       password: req.body.password,
-      created_date: req.body. created_date,
-      modified_date: req.body. modified_date,
-      login_date: req.body. login_date
+      created_date: (Date.now()),
+      modified_date: (Date.now()),
+      login_date: (Date.now()),
     });
 
     req.session.save(() => {
