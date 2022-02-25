@@ -16,7 +16,7 @@
   </header>
   <nav>
     <a href="/">Home</a>
-    {{#if loggedIn}}<a id="profile"><img src="{{url}}" alt="{{title}}">  Profile</a>{{/if}}
+    {{#if loggedIn}}<a href="/profile" id="profile"><img src="{{url}}" alt="{{title}}">  Profile</a>{{/if}}
     {{#if loggedIn}}<a id="logout">Logout</a>
     {{else}}<a href="/login">Login</a>{{/if}}
     
@@ -24,9 +24,8 @@
   <!-- Trigger/Open The Modal -->
 
   <main>
-    {{!-- left bar --}}
+    {{!-- loading left sidebar --}}
     {{> activity-feed}}
-    
     {{!-- Main area --}}
     <div class="landing">
       {{{body}}}
