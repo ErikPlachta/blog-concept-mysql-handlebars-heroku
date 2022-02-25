@@ -132,6 +132,7 @@ header {
   vertical-align: bottom;
   height: 100%;
   text-align: center;
+  overflow: hidden;
 }
 header h1 {
   flex: 50%;
@@ -160,6 +161,7 @@ nav {
   justify-content: center;
   background-color: var(--secondary);
   color: var(--light);
+  overflow: hidden;
 }
 
 nav a {
@@ -171,8 +173,6 @@ nav a {
   /* transition-delay: .3s;
   transition: color .3s;  */
   transition:ease-in-out .2s;
-  
-  
 }
 
 nav a:hover {
