@@ -58,14 +58,14 @@ router.post('/logout', (req, res) => {
 
 // CREATE new user
 router.post('/signup', async (req, res) => {
-  console.log("attempting to creat new")
+  
+  console.log("attempting to creat new user")
+
   console.table(req.body)
   try {
     const dbUserData = await User.create({
       name: req.body.name,
       username: req.body.username,
-      profile_resource_id: req.body.profile_resource_id,
-      user: req.body.user,
       email: req.body.email,
       password: req.body.password,
       created_date: (Date.now()),

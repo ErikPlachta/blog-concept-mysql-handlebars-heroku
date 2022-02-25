@@ -1,8 +1,4 @@
-<style>
-  aside { 
-    display: none
-  }
-</style>
+<style> aside { display: none} </style>
 <section class="login-section">
 
   {{!--- LOGIN ---}}
@@ -30,6 +26,10 @@
     
     <form class="form signup-form">
       <span class="form-group">
+        <label for="name-signup">Name:</label>
+        <input class="form-input" type="text" id="name-signup" />
+      </span>
+      <span class="form-group">
         <label for="username-signup">Username:</label>
         <input class="form-input" type="text" id="username-signup" />
       </span>
@@ -48,5 +48,5 @@
   </div>
 </section>
 
-<script src="./js/login.js"></script>
-<script src="./js/signup.js"></script>
+{{!-- <script src="/js/signup.js"></script> --}}
+<script src="/js/login.js"></script>
