@@ -22,7 +22,6 @@
     "homepage": "https://github.com/ErikPlachta/POSN-KBA-Builder#readme",
     "dependencies": {
         "bcrypt": "^5.0.1",
-        "bootstrap-markdown-editor": "^2.2.4",
         "connect-session-sequelize": "^7.1.2",
         "dotenv": "^14.3.2",
         "express": "^4.17.2",
