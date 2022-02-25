@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-
+const withAuth = require('../../utils/auth.js')
 
 
 // Run LOGIN script
@@ -57,7 +57,7 @@ router.post('/logout', (req, res) => {
 });
 
 // CREATE new user
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const dbUserData = await User.create({
       name: req.body.name,
@@ -86,16 +86,14 @@ router.post('/', async (req, res) => {
 
 
 // DELETE existing user
-router.delete('/', async (req, res) => {
+router.delete('/',withAuth, async (req, res) => {
   try {
 
     if (req.session.loggedIn) {
 
       //-- Check if email in Database
       const dbUserData = await User.findOne({
-        where: {
-          email: req.body.email,
-        },
+        where: {  email: req.body.email  }
       });
       
       //-- If not in database, exists
@@ -110,10 +108,7 @@ router.delete('/', async (req, res) => {
       
       //TODO:: 02/15/2022 #EP || ADD if current user logged in
       const deleteUserResults = await User.destroy({
-        where: {
-          email: req.body.email
-          // password: req.body.password
-          }
+        where: {   email: req.body.email  }
       });
       
       //-- respond

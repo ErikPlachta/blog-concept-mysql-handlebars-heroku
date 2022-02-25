@@ -8,15 +8,26 @@ const router = require('express').Router();
 //-- Importing other routes to ensure existing express has access 
 const userRoutes = require('./user-routes');
 router.use('/users', userRoutes);
+router.use('/user', userRoutes);
 
 const resourceRoutes = require('./resource-routes');
 router.use('/resources', resourceRoutes);
+router.use('/resource', resourceRoutes);
 
 const postRoutes = require('./post-routes');
 router.use('/posts', postRoutes);
+router.use('/post', postRoutes);
 
 const commentRoutes = require('./comment-routes');
 router.use('/comments', commentRoutes);
+router.use('/comment', commentRoutes);
+
+
+
+// error page MM effort
+router.get("/*", (req, res) => {
+  res.redirect('/');
+})
 
 
 //-- if gets here when rounting, throw 404
@@ -34,7 +45,8 @@ router.use((req, res) => {
       message: "API rquest failure. Page not found."
 
     }
-  }).end();
+  })
+  .render('homepage')
   
 });
 
