@@ -279,8 +279,12 @@ img {
 
 #post-title-label,
 #post-title {
-  margin: .5rem 1rem;
+  margin: .5rem;
   padding: 1rem;
+}
+
+#post-title-label{
+  text-align: center;
 }
 
 #post-title {
@@ -290,11 +294,28 @@ img {
 
 #post-text{
   min-height: 10vh;
+  margin: .5rem;
+  flex: 100%;
+  resize: vertical;
 }
 
 .post-new-comment:hover .create-post-text  {
   border: var(--border-hover);
 }
+
+#post-button-homepage{
+  border-radius: var(--border-radius);
+  background-color: var(--tertiary);
+  font-size: 1.25rem;
+  color: white;
+}
+
+#post-button-homepage:hover {
+  background-color: var(--border-hover);
+  cursor: pointer;
+
+}
+
 
 .post-new-comment img {
   display: inline-block;
@@ -320,7 +341,6 @@ img {
 .create-post-text:focus, input:focus {
   background: var(--active-hover);
   color: var(--text-area_text);
-  
 }
 
 /*----------------------------------------------------------------------------*/
