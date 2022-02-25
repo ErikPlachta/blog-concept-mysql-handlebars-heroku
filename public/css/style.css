@@ -360,18 +360,18 @@ aside {
 /* LOGINS */
 
 .login-section {
+  
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 
 .login-card {
-  flex: 40%;
   text-align: center;
-  
-  margin: 2rem;
+  width: 60%;
+  margin: 1rem auto;
   border: var(--border);
   border-radius: var(--border-radius);
   background-color: var(--bg_Section);
@@ -383,7 +383,7 @@ aside {
   justify-content: center;
   overflow:hidden;
 
-  margin: 1rem;
+  
 }
 
 .login-card header {
