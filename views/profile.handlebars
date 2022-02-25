@@ -1,10 +1,9 @@
-<style>  aside{display: none;}  </style>
+<style>  aside { display: none; }  </style>
 
 
 {{!-- <textarea name="text" id="myEditor"># Test</textarea> --}}
 
-<h2>Preview</h2>
-<div id="preview"></div>
+
 
 {{#if loggedIn}}
     <section>
@@ -23,6 +22,14 @@
         </form>
     </section>
 {{else}}
+
+  <section>
+    <div>
+      <h2>User Login Required</h2>
+      <p>You must be logged-in to see this page</p>
+      <button class="btn btn-praimry">Go to Login Page</button>
+    </div>
+  </section>
 
 
 {{/if}}

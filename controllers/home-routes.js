@@ -85,6 +85,13 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/profile', withAuth, (req, res) => {
+  
+  res.render('profile', {
+    loggedIn: req.session.loggedIn 
+  });
+});
+
 router.get('/post/:id', withAuth, async (req, res) => {
   
   try {
@@ -135,7 +142,6 @@ router.get('/post/:id', withAuth, async (req, res) => {
       })
   }
 });
-
 
 // Bad URL send home
 router.get("/*", (req, res) => {
