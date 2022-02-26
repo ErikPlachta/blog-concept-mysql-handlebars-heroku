@@ -175,16 +175,16 @@ router.get('/post/:id', withAuth, async (req, res) => {
     const comments = dbCommentData.map((comment) => comment.get({ plain: true }) );
 
   //-- get the POST data
-  const dbPostData= await Post.findAll({
-     where: {id: req.params.id}, /* TODO:: Get current user */
+  const dbPostData= await Post.findOne({
+     where: { id: req.params.id }, /* TODO:: Get current user */
     });
   //-- building comments
-  const post = dbPostData.map((post) => post.get({ plain: true }) );
-    console.log(post)
+  const post = dbPostData.get({ plain: true });
+    // console.log(post)
     //-- send data
     res.render('post', { 
-      post,
-      comments,
+      'post': post,
+      'comments': comments,
       loggedIn: req.session.loggedIn 
     });
   } 
