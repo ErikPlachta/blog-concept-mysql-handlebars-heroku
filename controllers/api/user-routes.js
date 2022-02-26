@@ -94,13 +94,30 @@ router.post('/login', async (req, res) => {
     if (dbUserData && validPassword ) {  
       //-- Store session variables
       req.session.save(() => { 
-                              req.session.login_date = Date.now();
-                              req.session.username = dbUserData.username;
-                              req.session.user_id = dbUserData.id;
-                              req.session.loggedIn = true;
+        req.session.login_date = Date.now();
+        req.session.username = dbUserData.username;
+        req.session.user_id = dbUserData.id;
+        req.session.loggedIn = true;
+      });
+    
+      //-- Update User Login Date and Login Status
+      try {
+        User.update(
+          {
+            login_date:        Date.now(),
+            login_status:      true
+          },
+          {
+            where: { id:       req.session.user_id  }
+          }
+        )
+      }
+      //-- Unable to update login_status and login_date
+      catch (err) { res.status(500).json(err); }
       
-      //-- Respond to client, EXIT
-      res.status(200).json({ user: dbUserData, message: 'Login success.' });});
+      //-- Update Logged-in status in Database
+
+      res.status(200).json({ message: 'Login success.' });
     }
   } 
   catch (err) {res.status(500).json(err);}
