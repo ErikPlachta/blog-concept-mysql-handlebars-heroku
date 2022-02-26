@@ -120,26 +120,22 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout
-router.post('/logout', (req, res) => {
-  if (req.session.loggedIn) {
+router.post('/logout', withAuth, async (req, res) => {
     
-    //-- Update User Login-Status to false
-    try {
-      User.update( 
-        { logout_date = Date.now(), login_state: false },
-        { where: { id:       dbUserData.id  }}
-    )}
-    //-- Unable to update login_state and login_date
-    catch (err) {
-      res.status(500).json(err)
-    }
-    
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
+  //-- Update User Login-Status to false
+  try {
+    User.update( 
+      { logout_date: Date.now(), login_state: false },
+      { where: { id:       req.session.user_id  }}
+  )}
+  //-- Unable to update login_state and login_date
+  catch (err) {
+    res.status(500).json(err)
   }
+  
+  req.session.destroy(() => {
+    res.status(204).end();
+  });
 });
 
 // CREATE new user
