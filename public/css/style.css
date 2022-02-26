@@ -5,8 +5,11 @@
     COLOR PALLET
   */
   --primary: rgb(3, 3, 3);
+  /* --primary: rgb(30, 31, 28); */
   --secondary: rgb(26, 26, 27);
+  /* --secondary: rgb(39, 40, 34); */
   --tertiary: rgb(39, 39, 41);
+  /* --tertiary: rgb(113, 116, 99); */
   --light: rgb(215, 218, 220);
   --quatrinary: rgb(128, 130, 131);
   --accent: rgb(0, 121, 211);
@@ -18,6 +21,7 @@
   /* 
     BODY
   */
+  
   --bg_body: var(--primary);
   --bg_Section: var(--secondary);
   

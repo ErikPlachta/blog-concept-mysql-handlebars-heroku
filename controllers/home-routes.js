@@ -85,18 +85,54 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/profile', withAuth, (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
   
-  res.render('profile', {
+  // GET POSTS
+  const postData = await Post.findAll({ 
+    // limit: 10,
+    order: [
+      ['created_date', 'DESC']
+    ],
+    include: [
+      {
+        model: User,
+        attributes: ['id','username','created_date'],
+      },
+      {
+        model: Resource,
+        attributes: ['user_id','title','url'],
+      }
+    ],
+  });
+
+  // Build it to prepare for html
+  const posts = postData.map((post) =>
+    post.get({ plain: true })
+  );
+
+  console.log(req.session)
+  //-- get comments related
+  const dbCommentData = await Comment.findAll({
     where: {
-      post_id: req.params.id,
+      user_id: 1,
     },
     include: [
       {
         model: Post,
         attributes: ['id'],
       },
+      // {
+      //   model: Resource,
+      //   attributes: ['post_id','title','url'],
+      // }
     ],
+  });
+  //-- building comments
+  const comments = dbCommentData.map((post) => post.get({ plain: true }) );
+
+  res.render('profile', {
+    comments,
+    posts,
     loggedIn: req.session.loggedIn 
   });
 });
@@ -134,6 +170,8 @@ router.get('/post/:id', withAuth, async (req, res) => {
     });
 
     const comments = dbCommentData.map((post) => post.get({ plain: true }) );
+
+    //-- send data
     res.render('post', { 
       post,
       comments,

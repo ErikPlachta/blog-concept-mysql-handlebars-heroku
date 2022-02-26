@@ -5,13 +5,13 @@
     <h4>Posts</h4>
     <div class="popular-posts">
         {{#each posts as |post|}}
-        {{> post-stats}}
+        {{> feed-post}}
         {{/each}}
     </div>
     <div class="popular-comments">
         <h4>Comments</h4>
         {{#each comments as |comment|}}
-        {{> comment-stats}}
+        {{> feed-comment}}
         {{/each}}
     </div>
     </section>
