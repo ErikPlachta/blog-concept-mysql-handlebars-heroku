@@ -30,7 +30,14 @@ Post.belongsTo(User, {
 
 User.hasMany(Comment, {
   onDelete: 'cascade',
-  hooks:true
+  hooks:true,
+  foreign_key: 'user_id'
+});
+
+Comment.belongsTo(User, {
+  onDelete: 'cascade',
+  hooks:true,
+  foreignKey: "user_id"
 });
 
 //-- Resources to Users - Like images attached to posts, etc.

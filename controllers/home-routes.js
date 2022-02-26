@@ -12,6 +12,14 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     
+  //-- get user data
+  const dbUserData = await User.findAll({
+    attributes: { exclude: ['password'] }, /* no passwords*/
+     where: {id: 1}, /* TODO:: Get current user */
+    });
+  //-- building comments
+  const users = dbUserData.map((user) => user.get({ plain: true }) );
+
     // GET POSTS
     const postData = await Post.findAll({ 
       // limit: 10,
@@ -87,6 +95,14 @@ router.get('/login', (req, res) => {
 
 router.get('/profile', withAuth, async (req, res) => {
   
+  //-- get user data
+  const dbUserData = await User.findAll({
+    attributes: { exclude: ['password'] }, /* no passwords*/
+     where: {id: 1}, /* TODO:: Get current user */
+    });
+  //-- building comments
+  const users = dbUserData.map((user) => user.get({ plain: true }) );
+
   // GET POSTS
   const postData = await Post.findAll({ 
     // limit: 10,
@@ -106,11 +122,9 @@ router.get('/profile', withAuth, async (req, res) => {
   });
 
   // Build it to prepare for html
-  const posts = postData.map((post) =>
-    post.get({ plain: true })
-  );
+  const posts = postData.map((post) => post.get({ plain: true }));
 
-  console.log(req.session)
+  
   //-- get comments related
   const dbCommentData = await Comment.findAll({
     where: {
@@ -131,6 +145,7 @@ router.get('/profile', withAuth, async (req, res) => {
   const comments = dbCommentData.map((post) => post.get({ plain: true }) );
 
   res.render('profile', {
+    users,
     comments,
     posts,
     loggedIn: req.session.loggedIn 
@@ -139,20 +154,9 @@ router.get('/profile', withAuth, async (req, res) => {
 
 router.get('/post/:id', withAuth, async (req, res) => {
   
-  try {
-
-    //-- Get the specific post
-
-    const dbPostData = await Post.findByPk( req.params.id, {
-      include: [
-        { model: User, attributes: ['id','username','created_date'],},
-        { model: Resource, attributes: ['post_id','title','url'], }
-      ],
-    });
-    const post = dbPostData.get({ plain: true });
+  try {    
     
-    
-    //-- get comments related
+    //-- get comments and all releated data
     const dbCommentData = await Comment.findAll({
       where: {
         post_id: req.params.id,
@@ -162,15 +166,21 @@ router.get('/post/:id', withAuth, async (req, res) => {
           model: Post,
           attributes: ['id'],
         },
-        // {
-        //   model: Resource,
-        //   attributes: ['post_id','title','url'],
-        // }
+        {
+          model: User,
+          attributes: ['id','username','login_date'],
+        }
       ],
     });
+    const comments = dbCommentData.map((comment) => comment.get({ plain: true }) );
 
-    const comments = dbCommentData.map((post) => post.get({ plain: true }) );
-
+  //-- get the POST data
+  const dbPostData= await Post.findAll({
+     where: {id: req.params.id}, /* TODO:: Get current user */
+    });
+  //-- building comments
+  const post = dbPostData.map((post) => post.get({ plain: true }) );
+    console.log(post)
     //-- send data
     res.render('post', { 
       post,
@@ -179,20 +189,21 @@ router.get('/post/:id', withAuth, async (req, res) => {
     });
   } 
   catch (err) {
-    res
-      .status(500)
-      .json({
-        response: {
-          status: 500,
-          error: String(err)
-        }
-      })
+    res.render('homepage');
+    // .status(500)
+    //   .json({
+    //     response: {
+    //       status: 500,
+    //       error: String(err)
+    //     }
+    //   })
+      
   }
 });
 
 // Bad URL send home
 router.get("/*", (req, res) => {
-  res.render("homepage")
+  res.render("404")
 })
 
 

@@ -4,10 +4,10 @@
         <hr>
         <div class ="user-stats">
             <h4>User Stats</h4>
-            {{!-- {{#each posts as |post|}}
-                {{> feed-post}}
-            {{/each}} --}}
-        </div>
+            {{#each users as |user| }}
+                {{> feed-user-stats}}
+            {{/each}}
+        </div
         <div class="popular-posts">
             <h4>Posts</h4>
             {{#each posts as |post|}}
