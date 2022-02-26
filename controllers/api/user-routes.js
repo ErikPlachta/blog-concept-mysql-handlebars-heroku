@@ -3,6 +3,62 @@ const { User } = require('../../models');
 const withAuth = require('../../utils/auth.js')
 
 
+//-- Get non-sensitive user dat
+
+router.get('/', async (req,res) => {
+
+  try {
+    const dbUserData = await User.findOne({
+      attributes: {
+        exclude: ['password']
+        
+      },
+    });
+    
+    res
+    .status(200)
+    .json({ users: dbUserData });
+  }
+  catch(err){
+    res.json(err)
+  }
+      
+});
+
+router.put('/', withAuth, (req,res) => {
+  try{
+    User.update(
+      {
+        profile_resource_id:  req.pararms.profile_resource_id,
+        name:                 req.pararms.name,
+        username:             req.pararms.username,
+        email:                req.pararms.email,
+        password:             req.pararms.password,
+        modified_date:        Date.now(),
+        login_date:           Date.now(),
+      },
+      {
+        where: { id:          req.session.user_id  }
+      })
+        .then(userData => {
+          if (!userData[0]) {
+            res.status(400).json({message: 'User not found!'}); return;
+          }
+          res.json(`Update Request Processed: ${userData}`);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);}
+        );
+
+  }
+  catch (err) {
+    res.json(err)
+  }
+
+});
+
+
 // Run LOGIN script
 router.post('/login', async (req, res) => {
   
@@ -40,9 +96,10 @@ router.post('/login', async (req, res) => {
       req.session.loggedIn = true;
 
       res
-        .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+      .status(200)
+      .json({ user: dbUserData, message: 'You are now logged in!' });
     });
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
