@@ -176,11 +176,17 @@ router.get('/post/:id', withAuth, async (req, res) => {
 
   //-- get the POST data
   const dbPostData= await Post.findOne({
-     where: { id: req.params.id }, /* TODO:: Get current user */
+    where: { id: req.params.id },
+    include: [
+      {
+        model: User,
+        attributes: ['id','username','login_date'],
+      }
+    ],
     });
   //-- building comments
   const post = dbPostData.get({ plain: true });
-    // console.log(post)
+    console.log(post)
     //-- send data
     res.render('post', { 
       'post': post,
