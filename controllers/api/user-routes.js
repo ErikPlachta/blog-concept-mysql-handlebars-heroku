@@ -8,11 +8,12 @@ const withAuth = require('../../utils/auth.js')
 router.get('/', async (req,res) => {
 
   try {
-
-    if(!withAuth){ 
-      const dbUserData = await User.findOne({
+    // if NOT logged in, exclude details.
+    if(!req.session.loggedIn){ 
+      console.log("//-- not logged in")
+      const dbUserData = await User.findAll({
         attributes: {
-          exclude: ['password','email']
+          exclude: ['password','email','modified_date','created_date','username','name']
           
         },
       });
@@ -22,11 +23,12 @@ router.get('/', async (req,res) => {
       .json({ users: dbUserData });
     }
 
-    //-- If logged in
-    if(withAuth) {
-      const dbUserData = await User.findOne({
+    //-- If logged-in, include more details
+    if(req.session.loggedIn) {
+      console.log("//-- logged in")
+      const dbUserData = await User.findAll({
         attributes: {
-          exclude: ['password','email']
+          exclude: ['password','email','modified_date','name']
           
         },
       });
