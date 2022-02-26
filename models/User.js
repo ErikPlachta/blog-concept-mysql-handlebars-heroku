@@ -76,6 +76,11 @@ User.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    login_status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },
   },
   {
     // events called by Sequalize based on hook chosen. HASHES PW TO BE SAVED INSTEAD OF OG

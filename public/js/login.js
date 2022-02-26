@@ -1,3 +1,20 @@
+const updateUserStats = async () => {
+  //-- Update User logged-in status and last log in date
+  const responseUpdate = await fetch('/api/users/', { 
+    method: 'PUT',
+    // body: {''},
+    // headers: { 'Content-Type': 'application/json' },
+  });
+  console.log(`responseUpdate: ${responseUpdate}`,responseUpdate)
+  
+  if (responseUpdate.ok) 
+    return true;
+  if (!(responseUpdate.ok)) {
+    console.log('//-- Failed to log in. check with admin.'); 
+    return false
+  }
+} ;
+
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -5,17 +22,25 @@ const loginFormHandler = async (event) => {
   const password = document.querySelector('#password-login').value.trim();
 
   if (email && password) {
-    const response = await fetch('/api/users/login', {
+    const responseLogin = await fetch('/api/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert('Failed to log in.');
-    }
+    
+    //-- If was able to login
+    if (responseLogin.ok) 
+      {
+        updateUserStats()
+        .then( results =>{
+          console.log(results)
+          document.location.replace('/');
+        })
+        // document.location.replace('/');
+        }
+    if (!(responseLogin.ok))
+      { console.log('//-- Failed to log in. check with admin.'); }
   }
 };
 
@@ -43,7 +68,7 @@ document
       if (response.ok) {
         document.location.replace('/');
       } else {
-        alert('Failed to sign up.');
+        console.log('//-- Failed to sign up. Try again or check with admin.');
       }
     }
   };

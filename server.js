@@ -1,5 +1,4 @@
 //------------------------------------------------------------------------------
-
 //-- Express
 const express = require('express');
 const path = require('path'); //-- access to stylesheet within express app for Handlebars.js
@@ -9,11 +8,11 @@ const session = require('express-session');
 //-- for creation session records
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+//-- assigning helper function route to handlebars and onboarding
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
+const hbs = exphbs.create({helpers});
 
-
-//-- TODO  IF THIS EXISTS I CAN NOT USE HANDLEBARS, TOO
 const routes = require('./controllers/');
 const sequelize = require('./config/connection');
 
@@ -25,18 +24,21 @@ const PORT = process.env.PORT || 3001;
 const sess = {
   // TODO:: REMOVE THIS ASAP!
   secret: process.env.SECRET_TECH_BLOG,
-  cookie: {},
-  resave: false,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize
-  })
+  cookie: {
+    // Session expires after 10 mins of inactivity.
+    expires: 600000
+  },
+  
+  // Forces the session to be saved
+  // back to the session store
+  resave: true,
+  // Forces a session that is "uninitialized"
+  // to be saved to the store
+  saveUninitialized: false,
+  store: new SequelizeStore({ db: sequelize  })
 };
-//-- app uses sessions
-app.use(session(sess));
 
-//-- assigning helper function route to handlebars
-const hbs = exphbs.create({helpers});
+
 
 //-- onboarding Handlebars
 app.engine('handlebars', hbs.engine);
@@ -46,8 +48,12 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 //-- Allowing URL encoding for express
 app.use(express.urlencoded({ extended: true }));
-//-- Building association to Handlebars.js content
+
+//-- Building association to Express and public folder
 app.use(express.static(path.join(__dirname, 'public'))); 
+
+//-- Onboarding the secure sessions functionality
+app.use(session(sess));
 
 //-- Give routes to Express app
 app.use(routes);
