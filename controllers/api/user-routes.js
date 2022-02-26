@@ -96,10 +96,10 @@ router.post('/login', async (req, res) => {
       //-- Update User Login Date and Login Status
       try {
         User.update( 
-          { login_date: Date.now(), login_status: true },
+          { login_date: Date.now(), login_state: true },
           { where: { id:       dbUserData.id  }}
       )}
-      //-- Unable to update login_status and login_date
+      //-- Unable to update login_state and login_date
       catch (err) {
         res.status(500).json(err)
       }
@@ -126,10 +126,10 @@ router.post('/logout', (req, res) => {
     //-- Update User Login-Status to false
     try {
       User.update( 
-        { logout_date = Date.now(), login_status: false },
+        { logout_date = Date.now(), login_state: false },
         { where: { id:       dbUserData.id  }}
     )}
-    //-- Unable to update login_status and login_date
+    //-- Unable to update login_state and login_date
     catch (err) {
       res.status(500).json(err)
     }
