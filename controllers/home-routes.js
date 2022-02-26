@@ -186,7 +186,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
     });
   //-- building comments
   const post = dbPostData.get({ plain: true });
-    console.log(post)
+    // console.log(post)
     //-- send data
     res.render('post', { 
       'post': post,
@@ -194,17 +194,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
       loggedIn: req.session.loggedIn 
     });
   } 
-  catch (err) {
-    res.render('homepage');
-    // .status(500)
-    //   .json({
-    //     response: {
-    //       status: 500,
-    //       error: String(err)
-    //     }
-    //   })
-      
-  }
+  catch (err) { res.render('404'); }
 });
 
 // Bad URL send home
