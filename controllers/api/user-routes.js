@@ -46,7 +46,7 @@ router.get('/', async (req,res) => {
 //-- Users able to update their own unique data.
 router.put('/', withAuth, (req,res) => {
   
-  //-- Updtes logged in user data based on what's provided in body
+  //-- Updates logged in user data based on what's provided in body
   try {
     User.update(
       {
@@ -75,52 +75,35 @@ router.put('/', withAuth, (req,res) => {
   catch (err) { res.json(err) }
 });
 
-
-// Run LOGIN script
+// Used to create secure login session IF Username exist and password match 
 router.post('/login', async (req, res) => {
   
   try {
-    const dbUserData = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
-    });
+    //-- look for user with matching email
+    const dbUserData = await User.findOne({ where: { email: req.body.email, }, });
+    //-- Unable to find email in database, EXIT.
+    if (!dbUserData) { res.status(400).json({ message: 'Incorrect email or password.' }); return; }
 
-    // console.log(`/-- Attempting login for ${req.body.email} `);
-    //-- username doesn't exist
-    if (!dbUserData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
+    //-- Email in database, check for password match.
+    const validPassword = await dbUserData.checkPassword(req.body.password)      
+    //-- Password does not match userData associted to email. Exit.
+    if ( !validPassword ) {res.status(400).json({ message: 'Incorrect email or password.' });return;}
+
+
+    //-- Email Exists and Password Matches user email, create session and store user var in session cookies
+    if (dbUserData && validPassword ) {  
+      //-- Store session variables
+      req.session.save(() => { 
+                              req.session.login_date = Date.now();
+                              req.session.username = dbUserData.username;
+                              req.session.user_id = dbUserData.id;
+                              req.session.loggedIn = true;
+      
+      //-- Respond to client, EXIT
+      res.status(200).json({ user: dbUserData, message: 'Login success.' });});
     }
-
-    const validPassword = await dbUserData.checkPassword(req.body.password);
-
-    //-- username exists but bad password
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
-    }
-
-    //-- stores session data that can be accessed by brower locally and securely
-    req.session.save(() => {
-      req.session.login_date = Date.now();
-      req.session.username = dbUserData.username;
-      req.session.user_id = dbUserData.id;
-      req.session.loggedIn = true;
-
-      res
-      .status(200)
-      .json({ user: dbUserData, message: 'You are now logged in!' });
-    });
-
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+  } 
+  catch (err) {res.status(500).json(err);}
 });
 
 // Logout
