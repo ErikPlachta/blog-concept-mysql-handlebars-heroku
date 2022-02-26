@@ -138,7 +138,7 @@ router.get('/profile', withAuth, async (req, res) => {
   //-- building comments
   const comments = dbCommentData.map((post) => post.get({ plain: true }) );
 
-  console.log(req.session)
+  // console.log(req.session)
   res.render('profile', {
     users,
     comments,
