@@ -32,7 +32,11 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    //-- stores session data that can be accessed by brower locally and securely
     req.session.save(() => {
+      req.session.login_date = Date.now();
+      req.session.username = dbUserData.username;
+      req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
 
       res

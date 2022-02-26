@@ -28,6 +28,7 @@ const sess = {
     // Session expires after 1 min of inactivity.
     expires: 60000
   },
+  
   // Forces the session to be saved
   // back to the session store
   resave: true,

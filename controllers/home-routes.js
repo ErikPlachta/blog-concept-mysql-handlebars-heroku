@@ -90,6 +90,7 @@ router.get('/login', (req, res) => {
     res.redirect('/');
     return;
   }
+  
   res.render('login');
 });
 
@@ -120,7 +121,7 @@ router.get('/profile', withAuth, async (req, res) => {
       }
     ],
   });
-  console.log(req.session.user_id)
+  console.log(req.session)
   // Build it to prepare for html
   const posts = postData.map((post) => post.get({ plain: true }));
 
@@ -137,6 +138,7 @@ router.get('/profile', withAuth, async (req, res) => {
   //-- building comments
   const comments = dbCommentData.map((post) => post.get({ plain: true }) );
 
+  console.log(req.session)
   res.render('profile', {
     users,
     comments,
