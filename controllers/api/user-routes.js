@@ -94,17 +94,15 @@ router.post('/login', async (req, res) => {
     if (dbUserData && validPassword ) {  
 
       //-- Update User Login Date and Login Status
-      try { User.update(
-        {
-          login_date:        Date.now(),
-          login_status:      true
-        },
-        {
-          where: { id:       dbUserData.id  }
-        })
-      }
+      try {
+        User.update( 
+          { login_date: Date.now(), login_status: true },
+          { where: { id:       dbUserData.id  }}
+      )}
       //-- Unable to update login_status and login_date
-      catch (err) { res.status(500).json(err); }
+      catch (err) {
+        res.status(500).json(err)
+      }
 
       //-- Store session variables
       req.session.save(() => { 
@@ -124,6 +122,18 @@ router.post('/login', async (req, res) => {
 // Logout
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
+    
+    //-- Update User Login-Status to false
+    try {
+      User.update( 
+        { logout_date = Date.now(), login_status: false },
+        { where: { id:       dbUserData.id  }}
+    )}
+    //-- Unable to update login_status and login_date
+    catch (err) {
+      res.status(500).json(err)
+    }
+    
     req.session.destroy(() => {
       res.status(204).end();
     });
