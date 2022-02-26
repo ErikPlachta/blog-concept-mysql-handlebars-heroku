@@ -76,7 +76,11 @@ User.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    login_status: {
+    logout_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    login_state: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false
