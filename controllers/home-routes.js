@@ -120,7 +120,7 @@ router.get('/profile', withAuth, async (req, res) => {
       }
     ],
   });
-
+  console.log(req.session.user_id)
   // Build it to prepare for html
   const posts = postData.map((post) => post.get({ plain: true }));
 
@@ -131,14 +131,7 @@ router.get('/profile', withAuth, async (req, res) => {
       user_id: 1,
     },
     include: [
-      {
-        model: Post,
-        attributes: ['id'],
-      },
-      // {
-      //   model: Resource,
-      //   attributes: ['post_id','title','url'],
-      // }
+      { model: Post, attributes: ['id'], },
     ],
   });
   //-- building comments
