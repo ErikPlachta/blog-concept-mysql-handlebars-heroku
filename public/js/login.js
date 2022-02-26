@@ -7,17 +7,19 @@ const loginFormHandler = async (event) => {
   const password = document.querySelector('#password-login').value.trim();
   //-- if user provided a username and password inform, attempt to login
   if (email && password) {
-    const responseLogin = await fetch('/api/users/login', {
+    const response = await fetch('/api/users/login', {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: { 'Content-Type': 'application/json' },
     });
 
     //-- Login success. Routing to homepage.
-    if (responseLogin.ok)  { document.location.replace('/')}  
-    //-- If was unable to login, console error
-    // TODO:: 02/26/2022 #EP || Add UI update
-    if (!(responseLogin.ok)){ console.log('//-- Failed to log in. check with admin.'); }
+    if (response.ok)  {      
+      const compeltedRequest = await response.json();
+      document.location.replace('/')
+    }  
+    //-- If was unable to login, console error // TODO:: 02/26/2022 #EP || Add UI update
+    if (!(response.ok)){ console.log('//-- Failed to log in. check with admin.'); }
   }
 };
 //-- Add listener for login submission
@@ -34,6 +36,7 @@ const signupFormHandler = async (event) => {
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
 
+  //-- if ALL var provided when submit event happens, attempt to create new user.
   if (name && username && email && password) {
     const response = await fetch('/api/users/signup', {
             method: 'POST',
@@ -41,8 +44,11 @@ const signupFormHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
     });
     //-- Created user success. Routing to homepage.
-    if (response.ok) { document.location.replace('/');}
-    // TODO:: 02/26/2022 #EP || Add UI update
+    if (response.ok) {
+      const compeltedRequest = await response.json();
+      document.location.replace('/')
+    ;}
+    //-- If was unable to login, console error // TODO:: 02/26/2022 #EP || Add UI update
     if (!response.ok){ console.log('//-- Failed to sign up. Check with admin.');}
   }
 };

@@ -92,32 +92,30 @@ router.post('/login', async (req, res) => {
 
     //-- Email Exists and Password Matches user email, create session and store user var in session cookies
     if (dbUserData && validPassword ) {  
+
+      //-- Update User Login Date and Login Status
+      try { User.update(
+        {
+          login_date:        Date.now(),
+          login_status:      true
+        },
+        {
+          where: { id:       dbUserData.id  }
+        })
+      }
+      //-- Unable to update login_status and login_date
+      catch (err) { res.status(500).json(err); }
+
       //-- Store session variables
       req.session.save(() => { 
         req.session.login_date = Date.now();
         req.session.username = dbUserData.username;
         req.session.user_id = dbUserData.id;
         req.session.loggedIn = true;
-      });
-    
-      //-- Update User Login Date and Login Status
-      try {
-        User.update(
-          {
-            login_date:        Date.now(),
-            login_status:      true
-          },
-          {
-            where: { id:       req.session.user_id  }
-          }
-        )
-      }
-      //-- Unable to update login_status and login_date
-      catch (err) { res.status(500).json(err); }
-      
-      //-- Update Logged-in status in Database
 
-      res.status(200).json({ message: 'Login success.' });
+        //-- respond with success
+        res.status(200).json({ message: 'Login success.' })
+      })
     }
   } 
   catch (err) {res.status(500).json(err);}
