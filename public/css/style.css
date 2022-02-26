@@ -37,6 +37,7 @@
   */
   --border: 2px solid var(--tertiary);
   --border-hover: 2px solid var(--quatrinary);
+  --border-hover_1px: 1px solid var(--quatrinary);
   --border-radius: .25rem;
 
   /*
@@ -59,7 +60,6 @@
 html {
   scroll-behavior: smooth;
   box-sizing: border-box;
-
 }
 
 body {
@@ -122,74 +122,73 @@ h5 {
   LAYOUT CONTENT
 */
 
-header {
-  
-  background: var(--primary);
-  color: var(--light);
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  vertical-align: bottom;
-  height: 100%;
-  text-align: center;
-  overflow: hidden;
-}
-header h1 {
-  flex: 50%;
-}
-header h3 {
-  flex: 10%;
-  margin: auto;
-  transition: transform .2s; /* Animation */
-  /* border: 1px solid red; */
-}
-header h3:hover {
-  cursor: pointer;
-  transform: scale(1.5); 
+    header {
+      background: var(--primary);
+      color: var(--light);
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      vertical-align: bottom;
+      height: 100%;
+      text-align: center;
+      overflow: hidden;
+    }
+    header h1 {
+      flex: 50%;
+    }
+    header h3 {
+      flex: 10%;
+      margin: auto;
+      transition: transform .2s; /* Animation */
+      /* border: 1px solid red; */
+    }
+    header h3:hover {
+      cursor: pointer;
+      transform: scale(1.5); 
 
-}
+    }
 
-main {
-  display: flex;
-  flex-wrap: wrap;
-  flex-grow: 1;
-}
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+    }
 
-nav {
-  
-  display: flex;
-  justify-content: center;
-  background-color: var(--secondary);
-  color: var(--light);
-  overflow: hidden;
-}
+    nav {
+      
+      display: flex;
+      justify-content: center;
+      background-color: var(--secondary);
+      color: var(--light);
+      overflow: hidden;
+    }
 
-nav a {
-  flex: auto;
-  padding: 1rem 2rem;
-  text-decoration: none;
-  color: var(--light);
-  text-align: center;
-  /* transition-delay: .3s;
-  transition: color .3s;  */
-  transition:ease-in-out .2s;
-}
+    nav a {
+      flex: auto;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      color: var(--light);
+      text-align: center;
+      /* transition-delay: .3s;
+      transition: color .3s;  */
+      transition:ease-in-out .2s;
+    }
 
-nav a:hover {
-  color: var(--secondary);
-  background-color: var(--light);
-  text-decoration: none;
-  font-weight: bold;
-  transform: scale(1.02);
-}
+    nav a:hover {
+      color: var(--secondary);
+      background-color: var(--light);
+      text-decoration: none;
+      font-weight: bold;
+      transform: scale(1.02);
+    }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+    img {
+      max-width: 100%;
+      height: auto;
+    }
 
 /*----------------------------------------------------------------------------*/
-/* POSTS */
+/* POSTS INLINE FEED */
 
 .post {
   width: 90%;
@@ -216,11 +215,9 @@ img {
 }
 
 /*----------------------------------------------------------------------------*/
-/* POSTS */
+/* POSTS CREATION */
 
-
-
-
+/* Container holding the new-comment on a post creation box */
 .post-new-comment {
   margin: 1rem 3rem 1rem 2rem;
   padding: 1rem;
@@ -238,6 +235,7 @@ img {
   overflow: hidden;
 }
 
+/* Container holding the new-post creation box */
 .post-new-post {
   margin: 1rem 3rem 1rem 2rem;
   /* padding: 1rem 1rem; */
@@ -258,30 +256,55 @@ img {
   overflow: hidden;
 }
 
+/* Each Section within post container excluding the button. */
 .post-new-post span {
   flex: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: .1rem auto;
   width: 100%;
 }
 
+span.post {
+  transition: all 0.2s ease-in-out;
+}
 
 .post-new-post span #post-title,
 .post-new-post span #post-text {
   flex: 100%;
 }
 
+#post-text,
+#post-text-label,
 #post-title-label,
 #post-title {
   margin: auto .5rem;
-  padding: 1rem;
+  padding: .5rem;
+  transition: all 0.3s ease-in-out;
 }
 
-#post-title-label{
+#post-title-label,
+#post-text-label {
   text-align: center;
+  
+
+}
+
+/* Makes label text even brighter */
+#post-title-label:hover,
+#post-text-label:hover{
+  filter: brightness(110%); 
+  text-shadow: 0 0 .05rem rgba(255,255,255, .4);
+
+}
+
+/* When hovering makes title and body brighter */
+span.post:hover {
+  filter: brightness(120%); 
+  
+  /* box-shadow: 0 0 .1rem rgba(255,255,255, .4); */
 }
 
 #post-title {
@@ -295,31 +318,37 @@ img {
   margin: .5rem;
   flex: 100%;
   resize: vertical;
-  transition: ease-in-out .3s;
+  transition: ease-in-out .4s;
+  border: 1px solid #484848;
+  border-radius: 0.3rem;
+  padding: .75rem;
 }
 
 #post-text:focus{
   min-height: 40vh;
 }
 
-
 .post-new-comment:hover .create-post-text  {
   border: var(--border-hover);
 }
 
-#post-button-homepage{
+#post-new-post-button{
   border-radius: var(--border-radius);
   background-color: var(--tertiary);
   font-size: 1.25rem;
   color: white;
 }
 
-#post-button-homepage:hover {
-  background-color: var(--border-hover);
+#post-new-post-button:hover {
   cursor: pointer;
+  filter: brightness(90%);
 
 }
 
+/*----------------------------------------------------------------------------*/
+/* 
+  POSTS COMMENTS
+*/
 
 .post-new-comment img {
   display: inline-block;
