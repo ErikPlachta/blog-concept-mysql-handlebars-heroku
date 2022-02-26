@@ -8,16 +8,33 @@ const withAuth = require('../../utils/auth.js')
 router.get('/', async (req,res) => {
 
   try {
-    const dbUserData = await User.findOne({
-      attributes: {
-        exclude: ['password']
-        
-      },
-    });
-    
-    res
-    .status(200)
-    .json({ users: dbUserData });
+
+    if(!withAuth){ 
+      const dbUserData = await User.findOne({
+        attributes: {
+          exclude: ['password','email']
+          
+        },
+      });
+      
+      res
+      .status(200)
+      .json({ users: dbUserData });
+    }
+
+    //-- If logged in
+    if(withAuth) {
+      const dbUserData = await User.findOne({
+        attributes: {
+          exclude: ['password','email']
+          
+        },
+      });
+      
+      res
+      .status(200)
+      .json({ users: dbUserData });
+    };
   }
   catch(err){
     res.json(err)
