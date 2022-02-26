@@ -1,12 +1,12 @@
 <section class="card-feed">
   
     <span title="{{username}}" class="card-feed-banner">
-      <img src="{{resource.url}}" alt="{{resource.title}}"> 
-      u/{{username}} • User for {{get_TimePassed created_date}}
+      {{!-- <img src="{{resource.url}}" alt="{{resource.title}}">  --}}
     </span>
-    
-    <header>
-      <h5>{{title}} by {{username}}</h5>
-    </header>
+    <header> u/{{username}} </header>
+    <span>
+      • User for {{get_TimePassed created_date}}
+    </span>
+    u/{{username}} • User for {{get_TimePassed created_date}}
 </section>
 

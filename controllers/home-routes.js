@@ -121,7 +121,7 @@ router.get('/profile', withAuth, async (req, res) => {
       }
     ],
   });
-  console.log(req.session)
+  // console.log(req.session)
   // Build it to prepare for html
   const posts = postData.map((post) => post.get({ plain: true }));
 

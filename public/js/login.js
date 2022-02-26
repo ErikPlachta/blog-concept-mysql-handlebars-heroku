@@ -1,3 +1,20 @@
+const updateUserStats = async () => {
+  //-- Update User logged-in status and last log in date
+  const responseUpdate = await fetch('/api/users/', { 
+    method: 'PUT',
+    // body: {''},
+    // headers: { 'Content-Type': 'application/json' },
+  });
+  console.log(`responseUpdate: ${responseUpdate}`,responseUpdate)
+  
+  if (responseUpdate.ok) 
+    return true;
+  if (!(responseUpdate.ok)) {
+    console.log('//-- Failed to log in. check with admin.'); 
+    return false
+  }
+} ;
+
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -14,28 +31,16 @@ const loginFormHandler = async (event) => {
     
     //-- If was able to login
     if (responseLogin.ok) 
-      { document.location.replace('/'); }
+      {
+        updateUserStats()
+        .then( results =>{
+          console.log(results)
+          document.location.replace('/');
+        })
+        // document.location.replace('/');
+        }
     if (!(responseLogin.ok))
       { console.log('//-- Failed to log in. check with admin.'); }
-      // { 
-        
-      //   //-- Update User logged-in status and last log in date
-      //   const responseUpdate = await fetch('/api/users/', { 
-      //     method: 'PUT',
-      //     // body: {''},
-      //     // headers: { 'Content-Type': 'application/json' },
-      //   });
-      //   console.log(`responseUpdate: ${responseUpdate}`,responseUpdate)
-      //   if (responseUpdate.ok) 
-      //     { document.location.replace('/'); }
-
-      //   if (!(responseUpdate.ok))
-      //     { 
-      //       // console.log(responseUpdate)
-      //       console.log('//-- Failed to log in. check with admin.'); 
-      //     }
-      // } 
-   
   }
 };
 
