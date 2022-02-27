@@ -16,14 +16,14 @@
         </div>
 
         
-        {{#if loggedIn}}
+        {{!-- {{#if loggedIn}} --}}
             <div class="popular-comments">
                 <h4>Comments</h4>
                 {{#each comments as |comment|}}
                 {{> feed-comment}}
                 {{/each}}
             </div>
-        {{/if}}
+        {{!-- {{/if}} --}}
     </section>
     
     {{!-- Within a Post specifically --}}

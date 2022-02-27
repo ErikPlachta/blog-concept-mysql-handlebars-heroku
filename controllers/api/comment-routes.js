@@ -1,13 +1,31 @@
 const router = require('express').Router();
-const { Comment, Post } = require('../../models');
+const { Comment, Post, User } = require('../../models');
 const withAuth = require('../../utils/auth.js')
 
 
 // Get Comment from DB IF logged in
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-      const commentsDB = await Comment.findAll();
-      res.status(200).json( commentsDB );
+
+      if(withAuth){
+        const commentsDB = await Comment.findAll({
+          include: [
+            {
+                model: User,
+                attributes: ['id','username']
+            },
+          ],
+        });
+        res.status(200).json( commentsDB );
+      }
+      if(!withAuth){
+        const commentsDB = await Comment.findAll({
+          // attributes: {
+            // exclude: ['password','email','modified_date','created_date','username','name']
+          },
+        );
+        res.status(200).json( commentsDB );        
+      }
   }
   catch (err) {
     res.status(500).json({ error: err['errors'][0].message });

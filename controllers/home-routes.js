@@ -48,16 +48,12 @@ router.get('/', async (req, res) => {
       order: [
         ['created_date', 'DESC']
       ],
-      // include: [
-      //   {
-      //     model: User,
-      //     attributes: ['id','username','created_date'],
-      //   },
-      //   {
-      //     model: Resource,
-      //     attributes: ['title','url'],
-      //   }
-      // ],
+      include: [
+        {
+          model: User,
+          attributes: ['id','username','created_date'],
+        }
+      ],
     });
 
     //TODO:: 02/10/2022 #EP | Build for Posts

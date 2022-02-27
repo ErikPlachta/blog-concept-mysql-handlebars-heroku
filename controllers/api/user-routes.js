@@ -12,8 +12,7 @@ router.get('/', async (req,res) => {
       console.log("//-- not logged in")
       const dbUserData = await User.findAll({
         attributes: {
-          exclude: ['password','email','modified_date','created_date','username','name']
-          
+          exclude: ['password','email','modified_date','created_date','username','name']  
         },
       });
       
