@@ -60,18 +60,21 @@ router.put('/', withAuth, (req,res) => {
       {
         where: { id:          req.session.user_id  }
       })
-      .then(userData => { //-- If nothing was updated
-        if (!userData[0]) {
-          res.status(400).json({message: 'User not found!'}); 
-          return; 
-        }
-        res.json(`Update Request Processed: ${userData}`);
+      .then(userData => { 
+        
+        //--  if nothing to upate, EXIT
+        if (!userData[0]) { res.status(400).json('User not found'); return; }
+        
+        //--Respond success exit
+        res.status(204).end();
       })
       .catch(err => {
           res.status(500).json({ error: err['errors'][0].message });
       });
   }
-  catch (err) { res.json(err) }
+  catch (err) { 
+    res.status(500).json({ error: err['errors'][0].message });
+  }
 });
 
 // Used to create secure login session IF Username exist and password match 

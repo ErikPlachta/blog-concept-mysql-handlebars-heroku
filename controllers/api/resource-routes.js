@@ -10,7 +10,7 @@ router.get('/', withAuth, async (req, res) => {
     res.status(200).json(resourcesDB);
   } 
   catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
@@ -19,10 +19,10 @@ router.get('/:id', withAuth, async (req, res) => {
   
   try {
     const resourcesDB = await Resource.findOne({ where: { id: req.params.id }});
-    res.status(200).json({ results: resourcesDB});
+    res.status(200).json( resourcesDB );
   }
   catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
@@ -39,10 +39,10 @@ router.post('/', withAuth, async (req, res) => {
             created_date:         Date.now(), 
             modified_date:        Date.now()
       });
-      res.status(200).json(dbUserData);
+      res.status(204).end();
   } 
   catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
@@ -50,33 +50,27 @@ router.post('/', withAuth, async (req, res) => {
 // DELETE existing Resource
 router.delete('/:id', withAuth, async (req, res) => {
   try {
-    //-- Try to delete a 
+    
+    //-- Verify if resource exists and belogns to logged in user
     const dbResourceData = await Resource.findOne({
-      where: { 
-            id:       req.params.id, //-- ID of the resource
-            user_id:  req.session.user_id //-- Logged in user created it
-       } 
+      where: {
+        id:       req.params.id,
+        user_id:  req.session.user_id
+      }
     })
 
     //-- If not in database or owned by user logged in, EXIT
-    if (!dbResourceData) {
-      res.status(400).json({ message: 'Resource does not exist or is owned by another user.' });
-      return;
-    }
+    if (!dbResourceData) { res.status(400).json('Resource does not exist or is owned by another user.'); return; }
 
-    //-- If In Database AND owned by user logged in, delete it
+    //-- If In Database AND owned by user logged in, delete it, EXIT
     if (dbResourceData) {
       const resourceDeletedResponse = await Resource.destroy({ where: { id: req.params.id }, });
-      res.status(200).json( String(resourceDeletedResponse));
+      res.status(204).end();
       return;
     }
-    
-    //-- If some sort of error other than catch error
-    res.status(200).json({  message: "Invalid request. See admin."  });
   }
   catch(err) {
-    res.status(500).json({
-            error: String(err) });
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
