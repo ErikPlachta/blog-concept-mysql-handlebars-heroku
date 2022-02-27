@@ -15,7 +15,6 @@ const loginFormHandler = async (event) => {
 
     //-- Login success. Routing to homepage.
     if (response.ok)  {      
-      const compeltedRequest = await response.json();
       document.location.replace('/')
     }  
     //-- If was unable to login, console error // TODO:: 02/26/2022 #EP || Add UI update
@@ -45,7 +44,6 @@ const signupFormHandler = async (event) => {
     });
     //-- Created user success. Routing to homepage.
     if (response.ok) {
-      const compeltedRequest = await response.json();
       document.location.replace('/')
     ;}
     //-- If was unable to login, console error // TODO:: 02/26/2022 #EP || Add UI update
