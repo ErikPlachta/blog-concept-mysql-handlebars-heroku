@@ -1,91 +1,47 @@
 const router = require('express').Router();
 const { Resource } = require('../../models');
-
-
-
-// Get Resoruces from DB IF logged in
-router.get('/', async (req, res) => {
-  
-  try {
-    if (req.session.loggedIn) {
-      const resourcesDB = await Resource.findAll();
-      res
-        .status(200)
-        .json(
-          {
-            message: 'Connection to ./api/resoruces/ successful.',
-            results: resourcesDB
-          }
-        );
-    } else {
-      res
-        .status(500)
-        .json({ message: 'Authentication error.' });
-    }
-  }
-  catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+const withAuth = require('../../utils/auth.js')
 
 // Get Resoruces from DB IF logged in
-router.get('/:id', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   
   try {
-    if (req.session.loggedIn) {
-      const resourcesDB = await Resource.findOne({
-        where: {
-          id: req.params.id
-        }
-      });
-      res
-        .status(200)
-        .json(
-          {
-            message: 'Connection to ./api/resoruces/ successful.',
-            results: resourcesDB
-          }
-        );
-    } else {
-      res
-        .status(500)
-        .json({ message: 'Authentication error.' });
-    }
-  }
-  catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-
-// CREATE new Resource
-router.post('/', async (req, res) => {
-  try {
-    if (req.session.loggedIn) {
-      const dbUserData = await Resource.create({
-        id: req.body.id,
-        user_id: req.body.user_id,
-        profile_resource_id: req.body.profile_resource_id,
-        post_id: req.body.post_id,
-        title: req.body.title,
-        url: req.body.url,
-        type: req.body.type,
-        created_date: Date.now(),
-        modified_date: Date.now()
-      });
-
-      
-      res
-        .status(200)
-        .json({
-          results: dbUserData
-      });
-    }
+    const resourcesDB = await Resource.findAll();
+    res.status(200).json(resourcesDB);
   } 
   catch (err) {
-    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// Get Resoruces from DB IF logged in
+router.get('/:id', withAuth, async (req, res) => {
+  
+  try {
+    const resourcesDB = await Resource.findOne({ where: { id: req.params.id }});
+    res.status(200).json({ results: resourcesDB});
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// CREATE new External Resource via a URL if Logged In
+router.post('/', withAuth, async (req, res) => {
+  try {    
+      const dbUserData = await Resource.create({
+            user_id:              req.session.user_id, //-- Assigns to user logged in
+            profile_resource_id:  req.body.profile_resource_id, //-- If created in profile
+            post_id:              req.body.post_id, //-- If created in comment/post
+            title:                req.body.title, //-- what it's named
+            url:                  req.body.url, //-- where it's located
+            type:                 req.body.type, //-- String value to define type
+            created_date:         Date.now(), 
+            modified_date:        Date.now()
+      });
+      res.status(200).json(dbUserData);
+  } 
+  catch (err) {
     res.status(500).json(err);
   }
 });
