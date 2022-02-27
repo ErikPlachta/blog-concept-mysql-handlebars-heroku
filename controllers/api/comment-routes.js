@@ -120,83 +120,35 @@ router.post('/', async (req, res) => {
     }
   } 
   catch (err) {
-    console.log(err);
-    res.status(500).json({
-      message: "Catch failure",
-      error: String(err)
-    });
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
 
-// DELETE existing Resource
+// DELETE existing comment if user owns it
 router.delete('/:id', async (req, res) => {
   try {
-
-    if (req.session.loggedIn) {
-
-      const commentDB = await Comment.findOne({
-        where: {
-          id: req.params.id
-        }
-      })
-
+    
+    //-- Look for the Comment by ID
+    const commentDB = await Comment.findOne({ where: { id: req.params.id }})
+    //-- If not in database, EXIT
+    if (!commentDB) { res.status(400).json({ message: 'Invalid Request.' }); return; }
+    //-- If comment exists but not User's, EXIT
+    if(!commentDB.user_id == req.session.user_id){   res.status(400).json({ message: 'Invalid Request.' }); return; }
       
-      //-- If not in database, exists
-      if (!commentDB) {
-        res
-          .status(400)
-          .json({ message: 'Invalid Request. Please try again!' });
-        return;
-      }
-
-      
-      
-      //-- Delete Resource
+    //-- if comment exists and the logged in user owns it, delete it
+    if(commentDB && (commentDB.user_id == req.session.user_id) ) {
       const commentDeletedResponse = await Comment.destroy({
         where: {
-          id: req.params.id,
+          id:       req.params.id,
+          user_id:  req.session.user_id
         },
       });
-      
-      //-- respond
-      res
-        .status(200)
-        .json(
-          {
-            response: {
-              status: 200,
-              results: String(commentDeletedResponse)
-            }
-          }
-        );
-      return;
+      res.status(204).end();
     }
-    
-    //-- If some sort of error other than catch error
-    res
-    .status(200)
-    .json(
-      {
-        response: {
-          status: 200,
-          results: "Invalid request. See admin."
-        }
-      }
-    );
-    return;
   }
   catch(err) {
-    // console.log(err);
-    res
-      .status(500)
-      .json(
-        {
-          response: {
-            error: String(err)
-          }
-        }
-      );
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 

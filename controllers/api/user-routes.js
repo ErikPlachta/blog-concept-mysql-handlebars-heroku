@@ -53,7 +53,7 @@ router.put('/', withAuth, (req,res) => {
         profile_resource_id:  req.body.profile_resource_id,
         name:                 req.body.name,
         username:             req.body.username,
-        email:                req.body.email,
+        // email:                req.body.email, //-- TODO:: 02/26/2022 #EP || Ability to check if email exists first before changing
         password:             req.body.password,
         modified_date:        Date.now(),
       },

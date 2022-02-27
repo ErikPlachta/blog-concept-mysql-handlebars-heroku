@@ -47,6 +47,42 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 
+//-- Users able to update their own unique data.
+router.put('/:id', withAuth, (req,res) => {
+  
+  //-- Updates logged in user data based on what's provided in body
+  try {
+    Resource.update(
+      {
+        user_id:              req.session.user_id, //-- Assigns to user logged in
+        profile_resource_id:  req.body.profile_resource_id, //-- If created in profile
+        post_id:              req.body.post_id, //-- If created in comment/post
+        title:                req.body.title, //-- what it's named
+        url:                  req.body.url, //-- where it's located
+        type:                 req.body.type, //-- String value to define type
+        modified_date:        Date.now(),
+      },
+      {
+        where: { id:          req.params.id  }
+      })
+      .then(resourceData => { 
+        
+        //--  if nothing to upate, EXIT
+        if (!resourceData[0]) { res.status(400).json('Resource not found'); return; }
+        
+        //--Respond success exit
+        res.status(204).end();
+      })
+      .catch(err => {
+          res.status(500).json({ error: err['errors'][0].message });
+      });
+  }
+  catch (err) { 
+    res.status(500).json({ error: err['errors'][0].message });
+  }
+});
+
+
 // DELETE existing Resource
 router.delete('/:id', withAuth, async (req, res) => {
   try {

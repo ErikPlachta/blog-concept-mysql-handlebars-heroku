@@ -1,42 +1,23 @@
 const router = require('express').Router();
 const { Post, User } = require('../../models');
-
+const withAuth = require('../../utils/auth.js')
 
 
 // Get Resoruces from DB IF logged in
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   
-  try {
-    if (req.session.loggedIn) {
-      
-      const dbPosts = await Post.findAll({});
-      
-      res
-        .status(200)
-        .json(
-          {
-            loggedIn: req.session.loggedIn,
-            message: 'Connection to ./api/posts/ successful.' ,
-            results: dbPosts,
-          }
-        );
-    } else {
-      res
-        .status(500)
-        .json({ message: 'Authentication error.' });
-    }
+  try {  
+    const dbPosts = await Post.findAll({});
+    res.status(200).json(dbPosts);
   }
   catch (err) {
-    console.log(err);
-    res.status(500).json({
-      error: String(err)
-    });
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
 
 // CREATE new post
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.create({
       title: req.body.title,
@@ -51,17 +32,10 @@ router.post('/', async (req, res) => {
     });
 
    
-    res
-      .status(200)
-      .json({
-        
-        results: postData
-      });
-    
+    res.status(204).end();
   } 
   catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
