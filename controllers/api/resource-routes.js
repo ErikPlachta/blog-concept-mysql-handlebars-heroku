@@ -63,7 +63,10 @@ router.put('/:id', withAuth, (req,res) => {
         modified_date:        Date.now(),
       },
       {
-        where: { id:          req.params.id  }
+        where: {
+          id:          req.params.id,
+          user_id:     req.session.user_id
+        }
       })
       .then(resourceData => { 
         
