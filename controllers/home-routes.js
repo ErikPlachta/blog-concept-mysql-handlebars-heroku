@@ -12,15 +12,7 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     
-  //-- get user data
-  const dbUserData = await User.findAll({
-    attributes: { exclude: ['password'] }, /* no passwords*/
-     where: {id: 1}, /* TODO:: Get current user */
-    });
-  //-- building comments
-  const users = dbUserData.map((user) => user.get({ plain: true }) );
-
-    // GET POSTS
+    // Get all Posts
     const postData = await Post.findAll({ 
       // limit: 10,
       order: [
@@ -37,12 +29,12 @@ router.get('/', async (req, res) => {
         }
       ],
     });
-
     // Build it to prepare for html
     const posts = postData.map((post) =>
       post.get({ plain: true })
     );
 
+    // Get all COmments
     const commentData = await Comment.findAll({ 
       // limit: 10,
       order: [
@@ -52,6 +44,10 @@ router.get('/', async (req, res) => {
         {
           model: User,
           attributes: ['id','username','created_date'],
+        },
+        {
+          model: Post,
+          attributes: ['id','title'],
         }
       ],
     });
@@ -61,12 +57,37 @@ router.get('/', async (req, res) => {
       post.get({ plain: true })
     );
     
-    res.render('homepage', {
-      comments,
-      posts,
-      loggedIn: req.session.loggedIn,
-      username: req.sessionID.username
-    });
+
+    //-- if logged in, grab user data to build navbar with their info in it
+    if(req.session.loggedIn){
+      const dbUserData = await User.findOne({
+        attributes: { exclude: ['password','name'] }, /* no passwords*/
+        where: { id: req.session.user_id }, 
+      });
+      //-- building active-user data
+      const activeUserData = dbUserData.get({ plain: true });
+
+      res.render('homepage', {
+        activeUserData,
+        comments,
+        posts,
+        loggedIn: req.session.loggedIn,
+        username: req.sessionID.username
+      });
+    }
+
+    //-- if not logged in, just basic nav
+    if(!req.session.loggedIn){
+      res.render('homepage', {
+        comments,
+        posts,
+        loggedIn: req.session.loggedIn,
+        username: req.sessionID.username
+      });
+    }
+  
+
+    
   } 
   
   catch (err) {  
