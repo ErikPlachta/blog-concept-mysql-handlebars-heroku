@@ -1,37 +1,21 @@
 const router = require('express').Router();
 const { Comment, Post } = require('../../models');
+const withAuth = require('../../utils/auth.js')
 
 
-
-// Get Resoruces from DB IF logged in
-router.get('/', async (req, res) => {
-  
+// Get Comment from DB IF logged in
+router.get('/', withAuth, async (req, res) => {
   try {
-    if (req.session.loggedIn) {
       const commentsDB = await Comment.findAll();
-      res
-        .status(200)
-        .json(
-          {
-            results: commentsDB,
-            message: 'Connection to ./api/comments/ successful. NOTE: Authentication and script to be setup.' 
-          }
-        );
-    } else {
-      res
-        .status(500)
-        .json({ message: 'Authentication error.' });
-    }
+      res.status(200).json( commentsDB );
   }
   catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
-
-// Get Resoruces from DB IF logged in by :id
-router.get('/:id', async (req, res) => {
+// Get Comment from DB IF logged in by :id
+router.get('/:id', withAuth, async (req, res) => {
   
   try {
     if (req.session.loggedIn) {
@@ -74,52 +58,57 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
-
-// CREATE new Resource
-router.post('/', async (req, res) => {
+// Create new Comment
+router.post('/', withAuth, async (req, res) => {
   try {
-    if (req.session.loggedIn) {
-
-      const postExists = await Comment.findOne({
-        where: {
-          id: req.body.post_id,
+      const commentCreatedResponse = await Comment.create(
+        {
+          user_id: req.body.user_id,
+          post_id: req.body.post_id,
+          title: req.body.title,
+          content: req.body.content,
+          resource_id: req.body.resource_id,
+          modified_date: Date.now(),
+          created_date: Date.now()
         }
-      });
-      
-      
-      if(!postExists) {
-        res
-          .status(500)
-          .json({
-            message: `Invalid request. Post id: ${req.body.post_id} does not exist.`,
-            results: postExists
-        });
-        return;
-      }
+      );
+      res.status(204).end()
+  } 
+  catch (err) {
+    res.status(500).json({ error: err['errors'][0].message });
+  }
+});
 
-      const commentCreatedResponse = await Comment.create({
-        user_id: req.body.user_id,
-        post_id: req.body.post_id,
+//-- Users able to update their own unique data.
+router.put('/:id', withAuth, (req,res) => {
+  
+  //-- Updates logged in user data based on what's provided in body
+  try {
+    Comment.update(
+      {
         title: req.body.title,
         content: req.body.content,
         resource_id: req.body.resource_id,
-        created_date: Date.now(),
-        modified_date: Date.now()
+        modified_date: Date.now(),
+      },
+      {
+        where: {
+          id:          req.params.id,
+          user_id:     req.session.user_id
+        }
+      })
+      .then(commentData => { 
+        //--  if nothing to upate, EXIT
+        if (!commentData[0]) { res.status(400).json('Resource not found'); return; }
+        
+        //--Respond success exit
+        res.status(204).end();
+      })
+      .catch(err => {
+          res.status(500).json({ error: err['errors'][0].message });
       });
-
-      
-      
-      res
-        .status(200)
-        .json({
-          message: "Commented added to post.",
-          results: commentCreatedResponse
-      });
-      return;
-    }
-  } 
-  catch (err) {
+  }
+  catch (err) { 
     res.status(500).json({ error: err['errors'][0].message });
   }
 });

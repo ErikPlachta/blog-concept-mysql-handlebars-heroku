@@ -47,7 +47,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 
-//-- Users able to update their own unique data.
+//-- Users able to update their own unique resource by ID
 router.put('/:id', withAuth, (req,res) => {
   
   //-- Updates logged in user data based on what's provided in body
@@ -69,7 +69,6 @@ router.put('/:id', withAuth, (req,res) => {
         }
       })
       .then(resourceData => { 
-        
         //--  if nothing to upate, EXIT
         if (!resourceData[0]) { res.status(400).json('Resource not found'); return; }
         

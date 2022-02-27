@@ -48,25 +48,25 @@ router.put('/:id', withAuth, (req,res) => {
   try {
     Post.update(
       {
-        title: req.body.title,
-        content: req.body.content,
-        type: req.body.type,
-        status: req.body.status,
-        category: req.body.category,
-        topics: req.body.topics,
-        resource_id: req.body.resource_id,
-        modified_date:        Date.now(),
+        title:          req.body.title,
+        content:        req.body.content,
+        type:           req.body.type,
+        status:         req.body.status,
+        category:       req.body.category,
+        topics:         req.body.topics,
+        resource_id:    req.body.resource_id,
+        modified_date:  Date.now(),
       },
       {
         where: {
-          id:               req.params.id,
-          user_id:          req.params.id
+          id:           req.params.id,
+          user_id:      req.session.user_id
          }
       })
       .then(postData => { 
         
         //--  if nothing to upate, EXIT
-        if (!postData[0]) { res.status(400).json('Post not found'); return; }
+        if (!postData[0]) { res.status(400).json("Post not found"); return; }
         
         //--Respond success exit
         res.status(204).end();
