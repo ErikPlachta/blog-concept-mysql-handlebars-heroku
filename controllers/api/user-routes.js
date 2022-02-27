@@ -38,7 +38,7 @@ router.get('/', async (req,res) => {
     };
   }
   catch(err){
-    res.json(err)
+    res.status(500).json({ error: err['errors'][0].message });
   }
       
 });
@@ -66,11 +66,10 @@ router.put('/', withAuth, (req,res) => {
           return; 
         }
         res.json(`Update Request Processed: ${userData}`);
-        })
-        .catch(err => {
-          console.log(err);
-          res.status(500).json(err);}
-        );
+      })
+      .catch(err => {
+          res.status(500).json({ error: err['errors'][0].message });
+      });
   }
   catch (err) { res.json(err) }
 });
@@ -101,7 +100,7 @@ router.post('/login', async (req, res) => {
       )}
       //-- Unable to update login_state and login_date
       catch (err) {
-        res.status(500).json(err)
+        res.status(500).json({ error: err['errors'][0].message });
       }
 
       //-- Store session variables
@@ -112,11 +111,13 @@ router.post('/login', async (req, res) => {
         req.session.loggedIn = true;
 
         //-- respond with success
-        res.status(200).json({ message: 'Login success.' })
+        res.status(204).end();
       })
     }
   } 
-  catch (err) {res.status(500).json(err);}
+  catch (err) {
+    res.status(500).json({ error: err['errors'][0].message });
+  }
 });
 
 // Logout
@@ -130,11 +131,11 @@ router.post('/logout', withAuth, async (req, res) => {
   )}
   //-- Unable to update login_state and login_date
   catch (err) {
-    res.status(500).json(err)
+    res.status(500).json({ error: err['errors'][0].message });
   }
   
   req.session.destroy(() => {
-    res.status(204).end();
+    res.status(204).end()
   });
 });
 
@@ -158,16 +159,11 @@ router.post('/signup', async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       res
-        .status(200)
-        .json(dbUserData);
+        .status(204).end();
     });
   } 
   catch (err) {
-    console.log(err);
-    res.status(500).json({
-      error: err,
-    }
-    );
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
 
@@ -175,69 +171,31 @@ router.post('/signup', async (req, res) => {
 // DELETE existing user
 router.delete('/',withAuth, async (req, res) => {
   try {
-
-    if (req.session.loggedIn) {
-
-      //-- Check if email in Database
-      const dbUserData = await User.findOne({
-        where: {  email: req.body.email  }
-      });
-      
-      //-- If not in database, exists
-      if (!dbUserData) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect email or password. Please try again!' });
-        return;
-      }
-
-      //-- Run delete request based on email address
-      
-      //TODO:: 02/15/2022 #EP || ADD if current user logged in
-      const deleteUserResults = await User.destroy({
-        where: {   email: req.body.email  }
-      });
-      
-      //-- respond
-      res
-        .status(200)
-        .json(
-          {
-            response: {
-              status: 200,
-              results: String(deleteUserResults)
-            }
-          }
-        );
+    
+    //-- Check if email in Database
+    const dbUserData = await User.findOne({ where: {  email: req.body.email  }});
+    
+    //-- If not in database, exists
+    if (!dbUserData) {
+      res.status(400).json( 'Incorrect email or password. Please try again!' );
       return;
     }
     
-    //-- If some sort of error other than catch error
-    res
-    .status(200)
-    .json(
-      {
-        response: {
-          status: 200,
-          results: "Invalid request. See admin."
+    //-- Run delete request based on email address and user logged in
+    if (dbUserData){
+      const deleteUserResults = await User.destroy({
+        where: {   
+          email:    req.body.email,
+          id:       req.session.user_id  
         }
-      }
-    );
-    return;
+      });
+      //-- respond
+      res.status(204).end()
+    }
   }
   catch(err) {
-    // console.log(err);
-    res
-      .status(500)
-      .json(
-        {
-          response: {
-            error: String(err)
-          }
-        }
-      );
+    res.status(500).json({ error: err['errors'][0].message });
   }
 });
-
 
 module.exports = router;

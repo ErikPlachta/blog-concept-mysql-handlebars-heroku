@@ -48,76 +48,37 @@ router.post('/', withAuth, async (req, res) => {
 
 
 // DELETE existing Resource
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
+    //-- Try to delete a 
+    const dbResourceData = await Resource.findOne({
+      where: { 
+            id:       req.params.id, //-- ID of the resource
+            user_id:  req.session.user_id //-- Logged in user created it
+       } 
+    })
 
-    if (req.session.loggedIn) {
+    //-- If not in database or owned by user logged in, EXIT
+    if (!dbResourceData) {
+      res.status(400).json({ message: 'Resource does not exist or is owned by another user.' });
+      return;
+    }
 
-      const dbResourceData = await Resource.findOne({
-        where: {
-          id: req.params.id
-        }
-      })
-
-      
-      //-- If not in database, exists
-      if (!dbResourceData) {
-        res
-          .status(400)
-          .json({ message: 'Invalid Request. Please try again!' });
-        return;
-      }
-
-      
-      
-      //-- Delete Resource
-      const resourceDeletedResponse = await Resource.destroy({
-        where: {
-          id: req.params.id,
-        },
-      });
-      
-      //-- respond
-      res
-        .status(200)
-        .json(
-          {
-            response: {
-              status: 200,
-              results: String(resourceDeletedResponse)
-            }
-          }
-        );
+    //-- If In Database AND owned by user logged in, delete it
+    if (dbResourceData) {
+      const resourceDeletedResponse = await Resource.destroy({ where: { id: req.params.id }, });
+      res.status(200).json( String(resourceDeletedResponse));
       return;
     }
     
     //-- If some sort of error other than catch error
-    res
-    .status(200)
-    .json(
-      {
-        response: {
-          status: 200,
-          results: "Invalid request. See admin."
-        }
-      }
-    );
-    return;
+    res.status(200).json({  message: "Invalid request. See admin."  });
   }
   catch(err) {
-    // console.log(err);
-    res
-      .status(500)
-      .json(
-        {
-          response: {
-            error: String(err)
-          }
-        }
-      );
+    res.status(500).json({
+            error: String(err) });
   }
 });
 
-
-
+//-- Exports updates back out ./index.js
 module.exports = router;

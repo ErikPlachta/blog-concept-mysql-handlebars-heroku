@@ -1,5 +1,7 @@
 # A Tech Blog Concept App
 
+## https://erikplachta.herokuapp.com/login
+
 ## 02/12/2022 #EP | Actively under Development
 
 A Tech Blog concept app hosted on the cloud. Fully built out MVC with JawsDB database, Node - Express.js API server, using Sequelize as an ORM, and Handlebars to build content dynamically.
