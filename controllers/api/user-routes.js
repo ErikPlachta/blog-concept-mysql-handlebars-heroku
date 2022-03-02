@@ -157,41 +157,52 @@ router.put('/', withAuth, (req,res) => {
 router.post('/login', async (req, res) => {
   
   try {
-    //-- look for user with matching email
-    const dbUserData = await User.findOne({ where: { email: req.body.email, }, });
-    //-- Unable to find email in database, EXIT.
-    if (!dbUserData) { res.status(400).json({ message: 'Incorrect email or password.' }); return; }
 
-    //-- Email in database, check for password match.
-    const validPassword = await dbUserData.checkPassword(req.body.password)      
-    //-- Password does not match userData associted to email. Exit.
-    if ( !validPassword ) {res.status(400).json({ message: 'Incorrect email or password.' });return;}
+    //-- If logged in already, exit
+    if(req.session.loggedIn){
+      res.status(400).json({ 'message': 'You are already logged in' }).end();
+      return;
+    }
 
-    //-- Email Exists and Password Matches user email, create session and store user var in session cookies
-    if (dbUserData && validPassword ) {  
+    //-- If not yet logged in, try to login
+    if(!req.session.loggedIn){
+      
+      //-- look for user with matching email
+      const dbUserData = await User.findOne({ where: { email: req.body.email, }, });
+      //-- Unable to find email in database, EXIT.
+      if (!dbUserData) { res.status(400).json({ message: 'Incorrect email or password.' }); return; }
 
-      //-- Update User Login Date and Login Status
-      try {
-        User.update( 
-          { login_date: Date.now(), login_state: true },
-          { where: { id:       dbUserData.id  }}
-      )}
-      //-- Unable to update login_state and login_date
-      catch (err) {
-        res.status(500).json({ error: err['errors'][0].message });
+      //-- Email in database, check for password match.
+      const validPassword = await dbUserData.checkPassword(req.body.password)      
+      //-- Password does not match userData associted to email. Exit.
+      if ( !validPassword ) {res.status(400).json({ message: 'Incorrect email or password.' });return;}
+
+      //-- Email Exists and Password Matches user email, create session and store user var in session cookies
+      if (dbUserData && validPassword ) {  
+
+        //-- Update User Login Date and Login Status
+        try {
+          User.update( 
+            { login_date: Date.now(), login_state: true },
+            { where: { id:       dbUserData.id  }}
+        )}
+        //-- Unable to update login_state and login_date
+        catch (err) {
+          res.status(500).json({ error: err['errors'][0].message });
+        }
+
+        //-- Store session variables
+        req.session.save(() => { 
+          req.session.login_date = Date.now();
+          req.session.username = dbUserData.username;
+          req.session.user_id = dbUserData.id;
+          req.session.user_type = dbUserData.type;
+          req.session.loggedIn = true;
+
+          //-- respond with success
+          res.status(204).end();
+        })
       }
-
-      //-- Store session variables
-      req.session.save(() => { 
-        req.session.login_date = Date.now();
-        req.session.username = dbUserData.username;
-        req.session.user_id = dbUserData.id;
-        req.session.user_type = dbUserData.type;
-        req.session.loggedIn = true;
-
-        //-- respond with success
-        res.status(204).end();
-      })
     }
   } 
   catch (err) {
