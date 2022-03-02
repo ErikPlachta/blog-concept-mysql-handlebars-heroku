@@ -108,8 +108,6 @@ router.get('/type/:id', async (req,res) => {
       
 });
 
-
-
 //-- Users able to update their own unique data.
 router.put('/', withAuth, (req,res) => {
   
@@ -133,7 +131,7 @@ router.put('/', withAuth, (req,res) => {
         if (!userData[0]) { res.status(400).json('User not found'); return; }
         
         //--Respond success exit
-        res.status(204).end();
+        res.status(202).end();
       })
       .catch(err => {
           res.status(500).json({ error: err['errors'][0].message });
@@ -191,7 +189,7 @@ router.post('/login', async (req, res) => {
           req.session.loggedIn = true;
 
           //-- respond with success
-          res.status(204).end();
+          res.status(202).end();
         })
       }
     }
@@ -216,7 +214,7 @@ router.post('/logout', withAuth, async (req, res) => {
   }
   
   req.session.destroy(() => {
-    res.status(204).end()
+    res.status(202).end()
   });
 });
 
@@ -240,7 +238,7 @@ router.post('/signup', async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       res
-        .status(204).end();
+        .status(202).end();
     });
   } 
   catch (err) {
@@ -261,12 +259,27 @@ router.delete('/',withAuth, async (req, res) => {
     //-- Run delete request based on email address and user logged in
     if (dbUserData){
 
+      console.log(`req.session.user_type: ${req.session.user_type}`)
+      console.log(`req.session.user_id: ${req.session.user_id}`)
+      console.log("is admin: ", req.session.user_type != "admin")
+      console.log(`dbUserData.id: ${dbUserData.id}`)
+      console.log("is current user", req.session.user_id != dbUserData.id)
 
-      if(req.session.type != 'admin' ) { res.status(401).end(); return; }
+
+      
+
+      // if(req.session.user_type != 'admin' ) { res.status(401).end(); return; }
 
       //-- If NOT type admin or NOT current logged in user, EXIT. ( only admin can delete other users )
-      if( (req.session.type != 'admin') || ( req.session.id != dbUserData.UserData.id) ){res.status(401).end(); return;}
+      if( (req.session.user_type != "admin") ){
+        if(req.session.user_id != dbUserData.id){ res.status(403).end(); return; }
+      };
       
+      console.log(`req.session.type: ${req.session.type}`)
+      console.log(`req.session.id: ${req.session.id}`)
+      console.log(`dbUserData.UserData.id: ${dbUserData.id}`)
+
+      //-- Otherwise, continue deleting
       const deleteUserResults = await User.destroy({
         where: {   
           id:       req.session.user_id
@@ -274,9 +287,9 @@ router.delete('/',withAuth, async (req, res) => {
       });
       console.log(deleteUserResults)
       //-- If deleted
-      if(deleteUserResults){ res.status(204).end() }
+      if(deleteUserResults){ res.status(202).end() }
       //-- If did not delete
-      if(!deleteUserResults){ res.status(400).json( { "message" : "Can only delete your own user account." }).end() };
+      if(!deleteUserResults){ res.status(403).json( { "message" : "Can only delete your own user account." }).end() };
       
     }
   }
