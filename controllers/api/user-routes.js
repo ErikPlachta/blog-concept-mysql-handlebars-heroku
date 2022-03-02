@@ -49,15 +49,12 @@ router.get('/:id', async (req,res) => {
     // if NOT logged in, exclude details.
     if(!req.session.loggedIn){ 
       console.log("//-- not logged in")
-      const dbUserData = await User.findAll({
-        attributes: {
-          exclude: ['type','password','email','modified_date','created_date','username','name']  
-        },
+      const dbUserData = await User.findOne({
+        where: {    id: req.params.id   },
+        attributes: { exclude: ['type','password','email','modified_date','created_date','username','name']  },
       });
       
-      res
-      .status(200)
-      .json({ users: dbUserData });
+      res.status(200).json({ users: dbUserData });
     }
 
     //-- If logged-in, include more details
@@ -86,17 +83,11 @@ router.get('/:id', async (req,res) => {
 router.get('/type/:id', async (req,res) => {
 
   try {
-    // if NOT logged in, exclude details.
-    if(!req.session.loggedIn){ 
-      console.log("//-- not logged in")
-      
-      res
-      .status(204).end();
-    }
+    // if NOT logged in, exit.
+    if(!req.session.loggedIn){  res.status(401).end(); return; }
 
     //-- If logged-in, include more details
     if(req.session.loggedIn) {
-      console.log("//-- logged in")
       
       const dbUserData = await User.findOne({
         attributes: {
@@ -116,8 +107,6 @@ router.get('/type/:id', async (req,res) => {
   }
       
 });
-
-
 
 //-- Users able to update their own unique data.
 router.put('/', withAuth, (req,res) => {
@@ -142,7 +131,7 @@ router.put('/', withAuth, (req,res) => {
         if (!userData[0]) { res.status(400).json('User not found'); return; }
         
         //--Respond success exit
-        res.status(204).end();
+        res.status(202).end();
       })
       .catch(err => {
           res.status(500).json({ error: err['errors'][0].message });
@@ -157,41 +146,52 @@ router.put('/', withAuth, (req,res) => {
 router.post('/login', async (req, res) => {
   
   try {
-    //-- look for user with matching email
-    const dbUserData = await User.findOne({ where: { email: req.body.email, }, });
-    //-- Unable to find email in database, EXIT.
-    if (!dbUserData) { res.status(400).json({ message: 'Incorrect email or password.' }); return; }
 
-    //-- Email in database, check for password match.
-    const validPassword = await dbUserData.checkPassword(req.body.password)      
-    //-- Password does not match userData associted to email. Exit.
-    if ( !validPassword ) {res.status(400).json({ message: 'Incorrect email or password.' });return;}
+    //-- If logged in already, exit
+    if(req.session.loggedIn){ res.status(403).end(); return; }
 
-    //-- Email Exists and Password Matches user email, create session and store user var in session cookies
-    if (dbUserData && validPassword ) {  
+    //-- If not yet logged in, try to login
+    if(!req.session.loggedIn){
+      
+      //-- look for user with matching email
+      const dbUserData = await User.findOne({ where: { email: req.body.email, }, });
+      //-- Unable to find email in database, EXIT.
 
-      //-- Update User Login Date and Login Status
-      try {
-        User.update( 
-          { login_date: Date.now(), login_state: true },
-          { where: { id:       dbUserData.id  }}
-      )}
-      //-- Unable to update login_state and login_date
-      catch (err) {
-        res.status(500).json({ error: err['errors'][0].message });
+      
+      
+      if (!dbUserData) { res.status(400).json({ message: 'Incorrect email or password.' }); return; }
+
+      //-- Email in database, check for password match.
+      const validPassword = await dbUserData.checkPassword(req.body.password)      
+      //-- Password does not match userData associted to email. Exit.
+      if ( !validPassword ) {res.status(400).json({ message: 'Incorrect email or password.' });return;}
+
+      //-- Email Exists and Password Matches user email, create session and store user var in session cookies
+      if (dbUserData && validPassword ) {  
+
+        //-- Update User Login Date and Login Status
+        try {
+          User.update( 
+            { login_date: Date.now(), login_state: true },
+            { where: { id:       dbUserData.id  }}
+        )}
+        //-- Unable to update login_state and login_date
+        catch (err) {
+          res.status(500).json({ error: err['errors'][0].message });
+        }
+
+        //-- Store session variables
+        req.session.save(() => { 
+          req.session.login_date = Date.now();
+          req.session.username = dbUserData.username;
+          req.session.user_id = dbUserData.id;
+          req.session.user_type = dbUserData.type;
+          req.session.loggedIn = true;
+
+          //-- respond with success
+          res.status(202).end();
+        })
       }
-
-      //-- Store session variables
-      req.session.save(() => { 
-        req.session.login_date = Date.now();
-        req.session.username = dbUserData.username;
-        req.session.user_id = dbUserData.id;
-        req.session.user_type = dbUserData.type;
-        req.session.loggedIn = true;
-
-        //-- respond with success
-        res.status(204).end();
-      })
     }
   } 
   catch (err) {
@@ -214,7 +214,7 @@ router.post('/logout', withAuth, async (req, res) => {
   }
   
   req.session.destroy(() => {
-    res.status(204).end()
+    res.status(202).end()
   });
 });
 
@@ -238,7 +238,7 @@ router.post('/signup', async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       res
-        .status(204).end();
+        .status(202).end();
     });
   } 
   catch (err) {
@@ -253,15 +253,33 @@ router.delete('/',withAuth, async (req, res) => {
     //-- Check if email in Database
     const dbUserData = await User.findOne({ where: {  email: req.body.email  }});
     
-    //-- If not in database, exists
-    if (!dbUserData) {
-      res.status(400).json( 'Incorrect email or password. Please try again!' );
-      return;
-    }
+    //-- If user tried to login with account that doesn't exist, EXIT
+    if (!dbUserData) { res.status(401).end(); return; }
     
     //-- Run delete request based on email address and user logged in
     if (dbUserData){
+
+      console.log(`req.session.user_type: ${req.session.user_type}`)
+      console.log(`req.session.user_id: ${req.session.user_id}`)
+      console.log("is admin: ", req.session.user_type != "admin")
+      console.log(`dbUserData.id: ${dbUserData.id}`)
+      console.log("is current user", req.session.user_id != dbUserData.id)
+
+
       
+
+      // if(req.session.user_type != 'admin' ) { res.status(401).end(); return; }
+
+      //-- If NOT type admin or NOT current logged in user, EXIT. ( only admin can delete other users )
+      if( (req.session.user_type != "admin") ){
+        if(req.session.user_id != dbUserData.id){ res.status(403).end(); return; }
+      };
+      
+      console.log(`req.session.type: ${req.session.type}`)
+      console.log(`req.session.id: ${req.session.id}`)
+      console.log(`dbUserData.UserData.id: ${dbUserData.id}`)
+
+      //-- Otherwise, continue deleting
       const deleteUserResults = await User.destroy({
         where: {   
           id:       req.session.user_id
@@ -269,9 +287,9 @@ router.delete('/',withAuth, async (req, res) => {
       });
       console.log(deleteUserResults)
       //-- If deleted
-      if(deleteUserResults){ res.status(204).end() }
+      if(deleteUserResults){ res.status(202).end() }
       //-- If did not delete
-      if(!deleteUserResults){ res.status(400).json( { "message" : "Can only delete your own user account." }).end() };
+      if(!deleteUserResults){ res.status(403).json( { "message" : "Can only delete your own user account." }).end() };
       
     }
   }
