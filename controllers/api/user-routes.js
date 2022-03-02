@@ -12,7 +12,7 @@ router.get('/', async (req,res) => {
       console.log("//-- not logged in")
       const dbUserData = await User.findAll({
         attributes: {
-          exclude: ['password','email','modified_date','created_date','username','name']  
+          exclude: ['type','password','email','modified_date','created_date','username','name']  
         },
       });
       
@@ -51,46 +51,7 @@ router.get('/:id', async (req,res) => {
       console.log("//-- not logged in")
       const dbUserData = await User.findAll({
         attributes: {
-          exclude: ['password','email','modified_date','created_date','username','name']  
-        },
-      });
-      
-      res
-      .status(200)
-      .json({ users: dbUserData });
-    }
-
-    //-- If logged-in, include more details
-    if(req.session.loggedIn) {
-      console.log("//-- logged in")
-      const dbUserData = await User.findAll({
-        attributes: {
-          exclude: ['password','email','modified_date','name']
-          
-        },
-      });
-      
-      res
-      .status(200)
-      .json({ users: dbUserData });
-    };
-  }
-  catch(err){
-    res.status(500).json({ error: err['errors'][0].message });
-  }
-      
-});
-
-//-- Get user-type specifically
-router.get('/type', async (req,res) => {
-
-  try {
-    // if NOT logged in, exclude details.
-    if(!req.session.loggedIn){ 
-      console.log("//-- not logged in")
-      const dbUserData = await User.findAll({
-        attributes: {
-          exclude: ['password','email','modified_date','created_date','username','name']  
+          exclude: ['type','password','email','modified_date','created_date','username','name']  
         },
       });
       
@@ -121,16 +82,21 @@ router.get('/type', async (req,res) => {
 });
 
 
-//-- Get user-type specifically
+//-- Get user-type by id
 router.get('/type/:id', async (req,res) => {
 
   try {
     // if NOT logged in, exclude details.
     if(!req.session.loggedIn){ 
       console.log("//-- not logged in")
-      const dbUserData = await User.findAll({
+      const dbUserData = await User.findAll(
+      {
+        where: {
+          type: req.params.id
+        },
+        
         attributes: {
-          exclude: ['password','email','modified_date','created_date','username','name']  
+          exclude: ['type','password','email','modified_date','created_date','username','name']
         },
       });
       
@@ -142,16 +108,18 @@ router.get('/type/:id', async (req,res) => {
     //-- If logged-in, include more details
     if(req.session.loggedIn) {
       console.log("//-- logged in")
-      const dbUserData = await User.findAll({
+      
+      const dbUserData = await User.findOne({
         attributes: {
-          exclude: ['password','email','modified_date','name']
-          
+          exclude: ['type','password','email','modified_date','created_date','username','name']
         },
+        where: {
+          id: req.params.id,
+        },
+        
       });
       
-      res
-      .status(200)
-      .json({ users: dbUserData });
+      res.status(200).json({ users: dbUserData });
     };
   }
   catch(err){
@@ -229,6 +197,7 @@ router.post('/login', async (req, res) => {
         req.session.login_date = Date.now();
         req.session.username = dbUserData.username;
         req.session.user_id = dbUserData.id;
+        req.session.user_type = dbUserData.type;
         req.session.loggedIn = true;
 
         //-- respond with success
