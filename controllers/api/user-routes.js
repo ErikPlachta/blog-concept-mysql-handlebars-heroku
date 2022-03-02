@@ -90,7 +90,6 @@ router.post('/login', async (req, res) => {
     //-- Password does not match userData associted to email. Exit.
     if ( !validPassword ) {res.status(400).json({ message: 'Incorrect email or password.' });return;}
 
-
     //-- Email Exists and Password Matches user email, create session and store user var in session cookies
     if (dbUserData && validPassword ) {  
 

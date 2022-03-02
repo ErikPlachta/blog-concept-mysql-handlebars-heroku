@@ -57,7 +57,6 @@ router.get('/', async (req, res) => {
       post.get({ plain: true })
     );
     
-
     //-- if logged in, grab user data to build navbar with their info in it
     if(req.session.loggedIn){
       const dbUserData = await User.findOne({
@@ -66,7 +65,7 @@ router.get('/', async (req, res) => {
       });
       //-- building active-user data
       const activeUserData = dbUserData.get({ plain: true });
-
+      //-- render homepage with user session data
       res.render('homepage', {
         activeUserData,
         comments,
@@ -75,7 +74,7 @@ router.get('/', async (req, res) => {
         username: req.sessionID.username
       });
     }
-
+    
     //-- if not logged in, just basic nav
     if(!req.session.loggedIn){
       res.render('homepage', {
@@ -83,9 +82,6 @@ router.get('/', async (req, res) => {
         posts
       });
     }
-  
-
-    
   } 
   
   catch (err) {  
