@@ -80,9 +80,7 @@ router.get('/', async (req, res) => {
     if(!req.session.loggedIn){
       res.render('homepage', {
         comments,
-        posts,
-        loggedIn: req.session.loggedIn,
-        username: req.sessionID.username
+        posts
       });
     }
   
