@@ -42,6 +42,126 @@ router.get('/', async (req,res) => {
       
 });
 
+//-- Get non-sensitive user data by ID
+router.get('/:id', async (req,res) => {
+
+  try {
+    // if NOT logged in, exclude details.
+    if(!req.session.loggedIn){ 
+      console.log("//-- not logged in")
+      const dbUserData = await User.findAll({
+        attributes: {
+          exclude: ['password','email','modified_date','created_date','username','name']  
+        },
+      });
+      
+      res
+      .status(200)
+      .json({ users: dbUserData });
+    }
+
+    //-- If logged-in, include more details
+    if(req.session.loggedIn) {
+      console.log("//-- logged in")
+      const dbUserData = await User.findAll({
+        attributes: {
+          exclude: ['password','email','modified_date','name']
+          
+        },
+      });
+      
+      res
+      .status(200)
+      .json({ users: dbUserData });
+    };
+  }
+  catch(err){
+    res.status(500).json({ error: err['errors'][0].message });
+  }
+      
+});
+
+//-- Get user-type specifically
+router.get('/type', async (req,res) => {
+
+  try {
+    // if NOT logged in, exclude details.
+    if(!req.session.loggedIn){ 
+      console.log("//-- not logged in")
+      const dbUserData = await User.findAll({
+        attributes: {
+          exclude: ['password','email','modified_date','created_date','username','name']  
+        },
+      });
+      
+      res
+      .status(200)
+      .json({ users: dbUserData });
+    }
+
+    //-- If logged-in, include more details
+    if(req.session.loggedIn) {
+      console.log("//-- logged in")
+      const dbUserData = await User.findAll({
+        attributes: {
+          exclude: ['password','email','modified_date','name']
+          
+        },
+      });
+      
+      res
+      .status(200)
+      .json({ users: dbUserData });
+    };
+  }
+  catch(err){
+    res.status(500).json({ error: err['errors'][0].message });
+  }
+      
+});
+
+
+//-- Get user-type specifically
+router.get('/type/:id', async (req,res) => {
+
+  try {
+    // if NOT logged in, exclude details.
+    if(!req.session.loggedIn){ 
+      console.log("//-- not logged in")
+      const dbUserData = await User.findAll({
+        attributes: {
+          exclude: ['password','email','modified_date','created_date','username','name']  
+        },
+      });
+      
+      res
+      .status(200)
+      .json({ users: dbUserData });
+    }
+
+    //-- If logged-in, include more details
+    if(req.session.loggedIn) {
+      console.log("//-- logged in")
+      const dbUserData = await User.findAll({
+        attributes: {
+          exclude: ['password','email','modified_date','name']
+          
+        },
+      });
+      
+      res
+      .status(200)
+      .json({ users: dbUserData });
+    };
+  }
+  catch(err){
+    res.status(500).json({ error: err['errors'][0].message });
+  }
+      
+});
+
+
+
 //-- Users able to update their own unique data.
 router.put('/', withAuth, (req,res) => {
   
@@ -168,7 +288,6 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-
 // DELETE existing user
 router.delete('/',withAuth, async (req, res) => {
   try {
@@ -184,18 +303,27 @@ router.delete('/',withAuth, async (req, res) => {
     
     //-- Run delete request based on email address and user logged in
     if (dbUserData){
+      
       const deleteUserResults = await User.destroy({
         where: {   
-          email:    req.body.email,
-          id:       req.session.user_id  
+          id:       req.session.user_id
         }
       });
-      //-- respond
-      res.status(204).end()
+      console.log(deleteUserResults)
+      //-- If deleted
+      if(deleteUserResults){ res.status(204).end() }
+      //-- If did not delete
+      if(!deleteUserResults){ res.status(400).json( { "message" : "Can only delete your own user account." }).end() };
+      
     }
   }
   catch(err) {
-    res.status(500).json({ error: err['errors'][0].message });
+    try{
+      res.status(500).json({ error: err['errors'][0].message });
+    }
+    catch {
+      res.status(500).json( err );
+    }
   }
 });
 
