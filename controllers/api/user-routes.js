@@ -230,6 +230,7 @@ router.post('/signup', async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
+      type: 'user',
       created_date: (Date.now()),
       modified_date: (Date.now()),
       login_date: (Date.now()),
