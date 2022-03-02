@@ -83,17 +83,11 @@ router.get('/:id', async (req,res) => {
 router.get('/type/:id', async (req,res) => {
 
   try {
-    // if NOT logged in, exclude details.
-    if(!req.session.loggedIn){ 
-      console.log("//-- not logged in")
-      
-      res
-      .status(401).end();
-    }
+    // if NOT logged in, exit.
+    if(!req.session.loggedIn){  res.status(401).end(); return; }
 
     //-- If logged-in, include more details
     if(req.session.loggedIn) {
-      console.log("//-- logged in")
       
       const dbUserData = await User.findOne({
         attributes: {
@@ -156,10 +150,7 @@ router.post('/login', async (req, res) => {
   try {
 
     //-- If logged in already, exit
-    if(req.session.loggedIn){
-      res.status(403).end();
-      return;
-    }
+    if(req.session.loggedIn){ res.status(403).end(); return; }
 
     //-- If not yet logged in, try to login
     if(!req.session.loggedIn){
@@ -167,6 +158,9 @@ router.post('/login', async (req, res) => {
       //-- look for user with matching email
       const dbUserData = await User.findOne({ where: { email: req.body.email, }, });
       //-- Unable to find email in database, EXIT.
+
+      
+      
       if (!dbUserData) { res.status(400).json({ message: 'Incorrect email or password.' }); return; }
 
       //-- Email in database, check for password match.
@@ -261,14 +255,17 @@ router.delete('/',withAuth, async (req, res) => {
     //-- Check if email in Database
     const dbUserData = await User.findOne({ where: {  email: req.body.email  }});
     
-    //-- If not in database, exists
-    if (!dbUserData) {
-      res.status(400).json( 'Incorrect email or password. Please try again!' );
-      return;
-    }
+    //-- If user tried to login with account that doesn't exist, EXIT
+    if (!dbUserData) { res.status(401).end(); return; }
     
     //-- Run delete request based on email address and user logged in
     if (dbUserData){
+
+
+      if(req.session.type != 'admin' ) { res.status(401).end(); return; }
+
+      //-- If NOT type admin or NOT current logged in user, EXIT. ( only admin can delete other users )
+      if( (req.session.type != 'admin') || ( req.session.id != dbUserData.UserData.id) ){res.status(401).end(); return;}
       
       const deleteUserResults = await User.destroy({
         where: {   
