@@ -49,15 +49,12 @@ router.get('/:id', async (req,res) => {
     // if NOT logged in, exclude details.
     if(!req.session.loggedIn){ 
       console.log("//-- not logged in")
-      const dbUserData = await User.findAll({
-        attributes: {
-          exclude: ['type','password','email','modified_date','created_date','username','name']  
-        },
+      const dbUserData = await User.findOne({
+        where: {    id: req.params.id   },
+        attributes: { exclude: ['type','password','email','modified_date','created_date','username','name']  },
       });
       
-      res
-      .status(200)
-      .json({ users: dbUserData });
+      res.status(200).json({ users: dbUserData });
     }
 
     //-- If logged-in, include more details
@@ -91,7 +88,7 @@ router.get('/type/:id', async (req,res) => {
       console.log("//-- not logged in")
       
       res
-      .status(204).end();
+      .status(401).end();
     }
 
     //-- If logged-in, include more details
@@ -160,7 +157,7 @@ router.post('/login', async (req, res) => {
 
     //-- If logged in already, exit
     if(req.session.loggedIn){
-      res.status(400).json({ 'message': 'You are already logged in' }).end();
+      res.status(403).end();
       return;
     }
 
