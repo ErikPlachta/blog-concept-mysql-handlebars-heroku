@@ -89,20 +89,9 @@ router.get('/type/:id', async (req,res) => {
     // if NOT logged in, exclude details.
     if(!req.session.loggedIn){ 
       console.log("//-- not logged in")
-      const dbUserData = await User.findAll(
-      {
-        where: {
-          type: req.params.id
-        },
-        
-        attributes: {
-          exclude: ['type','password','email','modified_date','created_date','username','name']
-        },
-      });
       
       res
-      .status(200)
-      .json({ users: dbUserData });
+      .status(204).end();
     }
 
     //-- If logged-in, include more details
