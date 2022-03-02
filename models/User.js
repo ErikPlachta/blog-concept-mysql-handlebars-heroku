@@ -57,6 +57,11 @@ User.init(
         isEmail: true
       }
     },
+    //-- Type of users used for access to unique things
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,

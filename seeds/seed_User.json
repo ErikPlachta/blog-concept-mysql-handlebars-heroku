@@ -2,12 +2,27 @@
     {
         "id": 1,
         "profile_resource_id" : 1,
+        "name": "Tech Blog - Bot",
+        "username": "Bot",
+        "email" : "admin@noemail.com",
+        "password": "my-password",
+        "type" : "admin",
+        "created_date": "2022-02-10 13:08:03",
+        "modified_date" : "2022-02-10 13:08:03",
+        "login_date" : "2022-02-10 13:08:03",
+        "logout_date" : "2022-02-10 14:08:03"
+    },
+    {
+        "id": 2,
+        "profile_resource_id" : 2,
         "name": "Erik Plachta",
         "username": "ErikPlachta",
         "email" : "erik@noemail.com",
         "password": "my-password",
+        "type" : "user",
         "created_date": "2022-02-10 13:08:03",
         "modified_date" : "2022-02-10 13:08:03",
-        "login_date" : "2022-02-10 13:08:03"
+        "login_date" : "2022-02-10 13:08:03",
+        "logout_date" : "2022-02-10 14:08:03"
     }
 ]
