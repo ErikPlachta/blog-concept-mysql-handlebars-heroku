@@ -556,7 +556,11 @@ form .form-input.form-input-squared {
   border-radius: 0;
 }
 
-#post-new-post-button,
+#post-new-post-button:is(:disabled){
+  background-color: lightslategray;
+}
+
+#post-new-post-button:not(:disabled),
 .btn.btn-primary {
   padding: 1rem;
   margin: 1rem auto 0;
@@ -570,8 +574,8 @@ form .form-input.form-input-squared {
   flex: 100%;
 }
 
-#post-new-post-button:hover,
-.btn.btn-primary:hover {
+#post-new-post-button:not(:disabled):hover,
+.btn.btn-primary:not(:disabled):hover {
   background-color: var(--accent-fade);
   cursor: pointer;
   filter: brightness(90%);
