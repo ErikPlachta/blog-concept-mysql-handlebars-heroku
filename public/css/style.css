@@ -171,6 +171,7 @@ h5 {
       background-color: var(--secondary);
       color: var(--light);
       overflow: hidden;
+      transition: ease-in-out 200ms;
     }
 
     nav a {
@@ -181,8 +182,8 @@ h5 {
       text-align: center;
       /* transition-delay: .3s;
       transition: color .3s;  */
-      transition:ease-in-out .1s;
-      border-bottom: 1px solid  transparent;
+      border-bottom: 2px solid var(--accent-fade);
+      transition: ease-in-out 200ms;
     }
 
     /* makes sure about is on the far-right */
@@ -192,9 +193,9 @@ h5 {
 
     nav a:hover {
       /* color: var(--secondary); */
-      border-bottom: 1px solid  var(--light);
+      border-bottom: 2px solid  var(--accent);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 450;
       /* transform: scale(1.01); */
     }
 
@@ -560,7 +561,7 @@ form .form-input.form-input-squared {
   padding: 1rem;
   margin: 1rem auto 0;
   font-size: 1rem;
-  
+  font-weight: 550;
   width: 100%;
   border-radius: .3rem;
   background-color: var(--accent);
