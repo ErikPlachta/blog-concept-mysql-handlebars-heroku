@@ -1,11 +1,21 @@
 const newPostTemplate={
-	"title" : "",
-	"content" : "",
-	"type" : "user",
-	"status" : true,
-	"category" : "post",
-	"topics" : "post"
+  "title" : "",
+  "content" : "",
+  "type" : "user",
+  "status" : true,
+  "category" : "post",
+  "topics" : "post"
 }
+
+
+const newReplyTemplate={
+  "user_id" : "",
+  "post_id" : "",
+  "title" : "",
+  "content" :"",
+  "resources_id" : null,
+  "status" : 1
+}      
 
 
 const postNewPost = async (event) => {
@@ -17,16 +27,54 @@ const postNewPost = async (event) => {
     if (title && body) {
         newPostTemplate.title = title;
         newPostTemplate.content = body;
-        const response = await fetch('api/posts/', {
-                method: 'POST',
-                body: (JSON.stringify(newPostTemplate)),
-                headers: { 'Content-Type': 'application/json' },
-        });
-        if (response.ok) {
-            document.location.replace('/');
-          } else {
-            alert('failed to post.');
-          }
+
+        //-- if posting a comment to a post, different route than if profile or homepage
+        if(window.location.pathname.includes("/post/")){
+          console.log(window.location.pathname)
+          const response = await fetch('api/posts/', {
+            method: 'POST',
+            body: (JSON.stringify(newPostTemplate)),
+            headers: { 'Content-Type': 'application/json' },
+          });
+          if (response.ok) {
+              document.location.replace('/');
+            } else {
+              alert('failed to post.');
+            }
+          return null;
+        }
+
+
+        if(window.location.pathname.includes("/profile")){
+          console.log("from profile")
+          const response = await fetch('api/posts/', {
+            method: 'POST',
+            body: (JSON.stringify(newPostTemplate)),
+            headers: { 'Content-Type': 'application/json' },
+          });
+          if (response.ok) {
+              document.location.replace('/profile');
+            } else {
+              alert('failed to post.');
+            }
+          return null;
+        };
+
+
+        if(window.location.pathname === ("/")){
+          console.log("homepage")
+          const response = await fetch('api/posts/', {
+            method: 'POST',
+            body: (JSON.stringify(newPostTemplate)),
+            headers: { 'Content-Type': 'application/json' },
+          });
+          if (response.ok) {
+              document.location.replace('/');
+            } else {
+              alert('failed to post.');
+            }
+            return null;
+        };
     };
 
         //TODO: 04/02/2022 #EP || Add posting animation

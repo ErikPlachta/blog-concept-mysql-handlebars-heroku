@@ -11,32 +11,21 @@ const format_date = date => {
 
 
 const get_TimePassed = ( date ) => {
-  
-  //-- Get curent time
+  //-- Get current time
   var now = moment(new Date()); 
   //-- Get the diff between now and created date
   var duration = moment.duration(now.diff(date));
   //-- Return value in hours
   var results = duration.asHours();
-  
-  if(results < 1){
-    minutes = (Math.trunc(results)) + " minutes ago";
-    return minutes;
-  }
-  
-  if(results < 24){
-    hours = (Math.trunc(results)) + " hours ago";
-    return hours;
-  }
 
-  if(results > 24){
-    days = Math.trunc(results / 24) + " d";
-    return days;
-  }
+  if(results < 0.01){ let seconds = ((duration._data.seconds)) + " s"; return seconds; }
+  if(results < 1){ let minutes = ((duration._data.minutes)) + " m"; return minutes; }
+  if(results < 24){ let hours = (Math.trunc(results)) + " h"; return hours; }
+  if(results >= 24){ let days = Math.trunc(results / 24) + " d"; return days; }
   
+  //-- If for some reason gets to this point, return nothing. ( shouldn't happen but being safe )
   return null;
 };
-
 
 
 const shrinkContent = content => {
