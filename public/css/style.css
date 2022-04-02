@@ -105,12 +105,12 @@ h1,h2,h3,h4,h5 {
 
 h1 {
   font-weight: 300;
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 h2 {
   padding-top: 5rem;
   font-weight: 450;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 h3 {
   font-weight: 400;
@@ -246,8 +246,9 @@ h5 {
 
 /* Container holding the new-post creation box */
 .post-new-post {
-  margin: 1rem 3rem 1rem 2rem;
+  margin: 1rem 2rem 1rem 1rem;
   /* padding: 1rem 1rem; */
+  
   padding: .5rem;
   flex: 0 1 100%;
   
@@ -257,53 +258,56 @@ h5 {
   color: var(--text-area_text);
 
   display: flex;
-  
-  flex-direction: column;
+  flex-direction: row;
   vertical-align: middle;
-  /* flex-flow: row; */
+  flex-flow: wrap;
   width: auto;
   overflow: hidden;
 }
 
 /* Each Section within post container excluding the button. */
-.post-new-post span {
-  flex: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: .1rem auto;
-  width: 100%;
-}
-
-span.post {
-  transition: all 0.2s ease-in-out;
-}
-
-.post-new-post span #post-title,
-.post-new-post span #post-text {
-  flex: 100%;
-}
-
-#post-text,
-#post-text-label,
-#post-title-label,
-#post-title {
-  margin: auto .5rem;
-  padding: .5rem;
-  transition: all 0.3s ease-in-out;
-}
-
-#post-title-label,
-#post-text-label {
-  text-align: center;
+.post-new-post span{
   
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  flex: 100%;
+  width: 100%;
+  transition: all 0.2s ease-in-out; 
+  align-items: center;
+}
+.post-new-post span label{
+  width: 100%;
+  flex: 100%;
+   /* centers text in container vertically */
+   text-align: center;
+  /* display: flex; */
+  align-items: center;
+  
+}
 
+#post-new-post-text,
+#post-new-post-title {
+  flex: 2 80%;
+  margin: .5rem 1rem;
+  padding: .75rem;
+  min-width: 80%;
+  color: white;  
+  border: 1px solid #484848;
+  border-radius: 0.3rem;
+  background-color: var(--tertiary);
+  transition: ease-in-out .4s;
+}
+
+#post-new-post-text{
+  min-height: 5vh;
+  resize: vertical;
 }
 
 /* Makes label text even brighter */
-#post-title-label:hover,
-#post-text-label:hover{
+#new-post-title-label:hover,
+#new-post-text-label:hover{
   filter: brightness(110%); 
   text-shadow: 0 0 .05rem rgba(255,255,255, .4);
 
@@ -316,25 +320,8 @@ span.post:hover {
   /* box-shadow: 0 0 .1rem rgba(255,255,255, .4); */
 }
 
-#post-title {
-  background-color: var(--tertiary);
-  color: white;
-  
-}
-
-#post-text {
-  min-height: 5vh;
-  margin: .5rem;
-  flex: 100%;
-  resize: vertical;
-  transition: ease-in-out .4s;
-  border: 1px solid #484848;
-  border-radius: 0.3rem;
-  padding: .75rem;
-}
-
-#post-text:focus{
-  min-height: 40vh;
+#post-new-post-text:focus{
+  min-height: 30vh;
 }
 
 .post-new-comment:hover .create-post-text  {
@@ -391,6 +378,7 @@ span.post:hover {
 */
 
 aside {
+  display: none;
   flex: 1;
   background-color: var(--primary);
   padding: 1rem 0 1rem 1rem;
@@ -546,6 +534,7 @@ form .form-label {
 }
 
 /* input itself */
+
 form .form-input {
   flex: 70%;
   
@@ -674,12 +663,39 @@ form .form-input.form-input-squared {
     width: 60%;
     max-width: 641px;
   }
+
+  .post-new-post {
+    margin: 1rem 2rem 1rem 1rem;
+    padding: .5rem;
+    flex: 0 1 100%;
+    
+    border: var(--border);
+    border-radius: var(--border-radius);
+    background-color: var(--bg_Section);
+    color: var(--text-area_text);
+  
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    flex-flow: wrap;
+    /* width: auto; */
+    overflow: hidden;
+  }
+
+  .post-new-post span{
+    flex-direction: row;
+  }
 }
 
 
 @media only screen and (max-width: 600px) {
+  .post-new-post {
+    
+  }
   .login-card {
     width: 90%;
     max-width: 641px;
   }
+
+  
 }

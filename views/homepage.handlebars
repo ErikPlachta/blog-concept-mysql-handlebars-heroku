@@ -4,7 +4,7 @@
   }
 </style>
 
-{{!-- <textarea name="text" id="myEditor"># Test</textarea> --}}
+{{!-- If logged in, add section containing a form to create new post --}}
 {{#if loggedIn}}
     {{> post-create}}
 {{else}}
@@ -12,7 +12,7 @@
 
 {{/if}}
 
-{{!-- build post previews --}}
+{{!-- Load a preview of all posts into homepage --}}
 {{#each posts as |post|}}
     {{> post-preview}}
 {{/each}}
