@@ -71,7 +71,8 @@ router.get('/', async (req, res) => {
         comments,
         posts,
         loggedIn: req.session.loggedIn,
-        username: req.sessionID.username
+        username: req.session.username,
+        id: req.session.user_id
       });
     }
     
@@ -90,7 +91,7 @@ router.get('/', async (req, res) => {
       .json({
         response: {
           status: 500,
-          error: String(err)
+          // error: String(err)
         }
       });
   }
@@ -155,7 +156,9 @@ router.get('/profile', withAuth, async (req, res) => {
     users,
     comments,
     posts,
-    loggedIn: req.session.loggedIn 
+    loggedIn: req.session.loggedIn,
+    username: req.session.username,
+    id: req.session.user_id
   });
 });
 
@@ -199,7 +202,8 @@ router.get('/post/:id', withAuth, async (req, res) => {
       'post': post,
       'comments': comments,
       loggedIn: req.session.loggedIn,
-      session: req.session
+      username: req.session.username,
+      id: req.session.user_id
     });
   } 
   catch (err) { res.render('404'); }

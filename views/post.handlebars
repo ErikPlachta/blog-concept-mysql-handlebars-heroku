@@ -5,7 +5,7 @@
 
 <div class="landing">
   <section class="card">
-    <div class="post-details">
+    <div class="post-details" data-id="{{post.id}}">
       <h3>{{post.id}}. {{post.title}} by {{post.user.username}}</h3>
       
       <p>{{{post.content}}}</p>
@@ -31,7 +31,7 @@
     {{/if}}
   </section>
   
-  <section class="card" id="comments">
+  <section class="card" id="post-reply">
     <h3>Post a Reply</h3>
     {{> post-create }}
   </section>

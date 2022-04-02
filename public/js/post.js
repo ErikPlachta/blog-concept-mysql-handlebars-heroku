@@ -1,3 +1,4 @@
+//-- what a post body needs to contain. Used in Profile and homepage
 const newPostTemplate={
   "title" : "",
   "content" : "",
@@ -7,15 +8,16 @@ const newPostTemplate={
   "topics" : "post"
 }
 
-
+//-- what a reply body needs to contain. Used in /post/:id
 const newReplyTemplate={
-  "user_id" : "",
-  "post_id" : "",
-  "title" : "",
-  "content" :"",
-  "resources_id" : null,
-  "status" : 1
+  "user_id" : document.querySelector("#profile").dataset.id, //-- user logged in
+  "post_id" : document.querySelector(".post-details").dataset.id, //-- the parent post id
+  "title" : "", //-- the users reply title
+  "content" :"", //-- users reply message
+  "resources_id" : null, //-- commented out for now but including
+  "status" : 1 //-- not deleted
 }      
+
 
 const postNewPost = async (event) => {
     // post-new-post
