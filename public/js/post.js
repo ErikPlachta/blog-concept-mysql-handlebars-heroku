@@ -10,77 +10,93 @@ const newPostTemplate={
 
 //-- what a reply body needs to contain. Used in /post/:id
 const newReplyTemplate={
-  "user_id" : document.querySelector("#profile").dataset.id, //-- user logged in
-  "post_id" : document.querySelector(".post-details").dataset.id, //-- the parent post id
+  "user_id" : "", //-- user logged in
+  "post_id" : "", //-- the parent post id
   "title" : "", //-- the users reply title
   "content" :"", //-- users reply message
-  "resources_id" : null, //-- commented out for now but including
+  "resources_id" : 1, //-- commented out for now but including
   "status" : 1 //-- not deleted
 }      
 
 
 const postNewPost = async (event) => {
-    // post-new-post
+  //-- Post-new-post or reply based on location
 
-    const title = document.querySelector('#post-new-post-title').value.trim();
-    const body = document.querySelector('#post-new-post-text').value.trim();
+  const title = document.querySelector('#post-new-post-title').value.trim();
+  const body = document.querySelector('#post-new-post-text').value.trim();
 
-    if (title && body) {
-        newPostTemplate.title = title;
-        newPostTemplate.content = body;
+  if (title && body) {
 
-        //-- if posting a comment to a post, different route than if profile or homepage
-        if(window.location.pathname.includes("/post/")){
-          console.log(window.location.pathname.split("/")[2])
-          newReplyTemplate.post_id = window.location.pathname.split("/")[2];
-          const response = await fetch('api/posts/', {
-            method: 'POST',
-            body: (JSON.stringify(newPostTemplate)),
-            headers: { 'Content-Type': 'application/json' },
-          });
-          if (response.ok) {
-              document.location.replace('/');
-            } else {
-              alert('failed to post.');
-            }
-          return null;
+    //-- POSTING A  REPLY from /post/:id
+    if(window.location.pathname.includes("/post/")){
+      
+      //-- BUILDING CONTENT TO POST
+      
+      newReplyTemplate.user_id = document.querySelector("#profile").dataset.id; //-- user logged in
+      newReplyTemplate.post_id = document.querySelector(".post-details").dataset.id; //-- the parent post id
+      newReplyTemplate.title = title;
+      newReplyTemplate.content = body;
+      console.table(newReplyTemplate)
+
+      const response = await fetch('../api/comments', {
+        method: 'POST',
+        body: (JSON.stringify(newReplyTemplate)),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+          document.location.replace(window.location.pathname);
+        } else {
+          alert('failed to post.');
         }
+      return null;
+    }
 
 
-        if(window.location.pathname.includes("/profile")){
-          console.log("from profile")
-          const response = await fetch('api/posts/', {
-            method: 'POST',
-            body: (JSON.stringify(newPostTemplate)),
-            headers: { 'Content-Type': 'application/json' },
-          });
-          if (response.ok) {
-              document.location.replace('/profile');
-            } else {
-              alert('failed to post.');
-            }
-          return null;
-        };
+    //-- POSTING A POST from profile
+    if(window.location.pathname.includes("/profile")){
+      console.log("from profile")
 
+      //-- grab content from post
+      newPostTemplate.title = title;
+      newPostTemplate.content = body;
 
-        if(window.location.pathname === ("/")){
-          console.log("homepage")
-          const response = await fetch('api/posts/', {
-            method: 'POST',
-            body: (JSON.stringify(newPostTemplate)),
-            headers: { 'Content-Type': 'application/json' },
-          });
-          if (response.ok) {
-              document.location.replace('/');
-            } else {
-              alert('failed to post.');
-            }
-            return null;
-        };
+      const response = await fetch('api/posts/', {
+        method: 'POST',
+        body: (JSON.stringify(newPostTemplate)),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+          document.location.replace('/profile');
+        } else {
+          alert('failed to post.');
+        }
+      return null;
     };
 
-        //TODO: 04/02/2022 #EP || Add posting animation
-        //TODO: 04/02/2022 #EP || Add refresh once posted
+    //-- POSTING A POST from homepage
+    if(window.location.pathname === ("/")){
+      console.log("homepage")
+
+      //-- grab content from post
+      newPostTemplate.title = title;
+      newPostTemplate.content = body;
+
+      const response = await fetch('api/posts/', {
+        method: 'POST',
+        body: (JSON.stringify(newPostTemplate)),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+          document.location.replace('/');
+        } else {
+          alert('failed to post.');
+        }
+        return null;
+    };
+  };
+
+  //TODO: 04/02/2022 #EP || Add posting animation
+  //TODO: 04/02/2022 #EP || Add refresh once posted
 }
 
 
