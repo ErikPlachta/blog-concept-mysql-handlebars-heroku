@@ -193,8 +193,8 @@ h5 {
       /* color: var(--secondary); */
       border-bottom: 1px solid  var(--light);
       text-decoration: none;
-      font-weight: bold;
-      transform: scale(1.01);
+      font-weight: 500;
+      /* transform: scale(1.01); */
     }
 
     img {
@@ -336,18 +336,7 @@ span.post:hover {
   border: var(--border-hover);
 }
 
-#post-new-post-button{
-  border-radius: var(--border-radius);
-  background-color: var(--tertiary);
-  font-size: 1.25rem;
-  color: white;
-}
 
-#post-new-post-button:hover {
-  cursor: pointer;
-  filter: brightness(90%);
-
-}
 
 /*----------------------------------------------------------------------------*/
 /* 
@@ -565,6 +554,7 @@ form .form-input.form-input-squared {
   border-radius: 0;
 }
 
+#post-new-post-button,
 .btn.btn-primary {
   padding: 1rem;
   margin: 1rem auto 0;
@@ -578,8 +568,11 @@ form .form-input.form-input-squared {
   flex: 100%;
 }
 
+#post-new-post-button:hover,
 .btn.btn-primary:hover {
   background-color: var(--accent-fade);
+  cursor: pointer;
+  filter: brightness(90%);
 }
 
 /*----------------------------------------------------------------------------*/
