@@ -11,18 +11,35 @@
         
         <div class="popular-posts">
             <h4>Posts</h4>
-            {{#each posts as |post|}}
-            {{> feed-post}}
-            {{/each}}
+            {{#if posts}}
+
+                {{#each posts as |post|}}
+                    {{> feed-post}}
+                {{/each}}
+            {{else}}
+                <section class="card-feed">
+                    <span class="card-feed-banner">
+                        No posts created...
+                    </span>
+                </section>
+            {{/if}}
         </div>
 
         
         {{!-- {{#if loggedIn}} --}}
             <div class="popular-comments">
                 <h4>Comments</h4>
-                {{#each comments as |comment|}}
-                {{> feed-comment}}
-                {{/each}}
+                {{#if comments}}
+                    {{#each comments as |comment|}}
+                        {{> feed-comment}}
+                    {{/each}}
+                {{else}}
+                   <section class="card-feed">
+                        <span class="card-feed-banner">
+                            No comments created...
+                        </span>
+                    </section>
+                {{/if}}
             </div>
         {{!-- {{/if}} --}}
     </section>
