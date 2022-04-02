@@ -1,8 +1,9 @@
-<section class="card">
+<section class="post card" data-id="{{user.id}}">
   <a href="/post/{{id}}">
     <banner>Posted by u/{{user.username}} ago, on {{hours_passed created_date}}</banner>
     <header>
       <h4>{{title}} by {{user.username}}</h4>
+      <span class="delete-post"></span>
     </header>
     
     <span>{{{shrinkContent content}}}</span>

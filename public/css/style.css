@@ -10,8 +10,11 @@
   --tertiary: rgb(39, 39, 41);
   /* --tertiary: rgb(113, 116, 99); */
   --light: rgb(215, 218, 220);
-  --quatrinary: rgb(128, 130, 131);
+  --light2: rgb(217, 233, 232);
+  --light3: rgb(250, 250, 250);
+  --quaternary: rgb(128, 130, 131);
   --accent: rgb(0, 121, 211);
+  --accent-fade: rgb(0, 121, 211,.8);
   
 
   --dark: #182c23;
@@ -39,8 +42,8 @@
     BORDERS
   */
   --border: 2px solid var(--tertiary);
-  --border-hover: 2px solid var(--quatrinary);
-  --border-hover_1px: 1px solid var(--quatrinary);
+  --border-hover: 2px solid var(--quaternary);
+  --border-hover_1px: 1px solid var(--quaternary);
   --border-radius: .25rem;
 
   /*
@@ -82,7 +85,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
   justify-content: flex-start;
-  background-color: var(--quatrinary);
+  background-color: var(--quaternary);
+  font-size: .9rem;
   /* font: inherit; */
   /* vertical-align: baseline; */
 }
@@ -102,26 +106,26 @@ h1,h2,h3,h4,h5 {
 
 h1 {
   font-weight: 300;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 h2 {
   padding-top: 5rem;
   font-weight: 450;
-  font-size: 2.5rem;
-}
-h3 {
-  font-weight: 400;
   font-size: 1.5rem;
 }
-
-h4 {
+h3 {
   font-weight: 400;
   font-size: 1.25rem;
 }
 
-h5 {
+h4 {
   font-weight: 400;
   font-size: 1.1rem;
+}
+
+h5 {
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -146,13 +150,12 @@ h5 {
     header h3 {
       flex: 10%;
       margin: auto;
-      transition: transform .2s; /* Animation */
+      transition: transform 200ms; /* Animation */
       /* border: 1px solid red; */
     }
     header h3:hover {
-      cursor: pointer;
-      transform: scale(1.5); 
-
+      /* cursor: pointer; */
+      transform: scale(1.01); 
     }
 
     main {
@@ -168,6 +171,7 @@ h5 {
       background-color: var(--secondary);
       color: var(--light);
       overflow: hidden;
+      transition: ease-in-out 200ms;
     }
 
     nav a {
@@ -178,21 +182,29 @@ h5 {
       text-align: center;
       /* transition-delay: .3s;
       transition: color .3s;  */
-      transition:ease-in-out .2s;
+      border-bottom: 2px solid var(--accent-fade);
+      transition: ease-in-out 200ms;
+    }
+
+    /* makes sure about is on the far-right */
+    nav #about{
+      max-width: 5%;
     }
 
     nav a:hover {
-      color: var(--secondary);
-      background-color: var(--light);
+      /* color: var(--secondary); */
+      border-bottom: 2px solid  var(--accent);
       text-decoration: none;
-      font-weight: bold;
-      transform: scale(1.02);
+      font-weight: 450;
+      /* transform: scale(1.01); */
     }
 
     img {
       max-width: 100%;
       height: auto;
     }
+
+
 
 /*----------------------------------------------------------------------------*/
 /* POSTS INLINE FEED */
@@ -216,6 +228,7 @@ h5 {
 }
 
 .post-details {
+  position: relative;
   /* text-align: center; */
   padding: 10px 20px;
   /* font-weight: bold; */
@@ -244,8 +257,9 @@ h5 {
 
 /* Container holding the new-post creation box */
 .post-new-post {
-  margin: 1rem 3rem 1rem 2rem;
+  margin: 1rem 2rem 1rem 1rem;
   /* padding: 1rem 1rem; */
+  
   padding: .5rem;
   flex: 0 1 100%;
   
@@ -255,53 +269,56 @@ h5 {
   color: var(--text-area_text);
 
   display: flex;
-  
-  flex-direction: column;
+  flex-direction: row;
   vertical-align: middle;
-  /* flex-flow: row; */
+  flex-flow: wrap;
   width: auto;
   overflow: hidden;
 }
 
 /* Each Section within post container excluding the button. */
-.post-new-post span {
-  flex: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: .1rem auto;
-  width: 100%;
-}
-
-span.post {
-  transition: all 0.2s ease-in-out;
-}
-
-.post-new-post span #post-title,
-.post-new-post span #post-text {
-  flex: 100%;
-}
-
-#post-text,
-#post-text-label,
-#post-title-label,
-#post-title {
-  margin: auto .5rem;
-  padding: .5rem;
-  transition: all 0.3s ease-in-out;
-}
-
-#post-title-label,
-#post-text-label {
-  text-align: center;
+.post-new-post span{
   
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  flex: 100%;
+  width: 100%;
+  transition: all 0.2s ease-in-out; 
+  align-items: center;
+}
+.post-new-post span label{
+  width: 100%;
+  flex: 100%;
+   /* centers text in container vertically */
+   text-align: center;
+  /* display: flex; */
+  align-items: center;
+  
+}
 
+#post-new-post-text,
+#post-new-post-title {
+  flex: 2 80%;
+  margin: .5rem 1rem;
+  padding: .75rem;
+  min-width: 80%;
+  color: white;  
+  border: 1px solid #484848;
+  border-radius: 0.3rem;
+  background-color: var(--tertiary);
+  transition: ease-in-out .4s;
+}
+
+#post-new-post-text{
+  min-height: 5vh;
+  resize: vertical;
 }
 
 /* Makes label text even brighter */
-#post-title-label:hover,
-#post-text-label:hover{
+#new-post-title-label:hover,
+#new-post-text-label:hover{
   filter: brightness(110%); 
   text-shadow: 0 0 .05rem rgba(255,255,255, .4);
 
@@ -314,48 +331,49 @@ span.post:hover {
   /* box-shadow: 0 0 .1rem rgba(255,255,255, .4); */
 }
 
-#post-title {
-  background-color: var(--tertiary);
-  color: white;
-  
-}
-
-#post-text {
-  min-height: 5vh;
-  margin: .5rem;
-  flex: 100%;
-  resize: vertical;
-  transition: ease-in-out .4s;
-  border: 1px solid #484848;
-  border-radius: 0.3rem;
-  padding: .75rem;
-}
-
-#post-text:focus{
-  min-height: 40vh;
+#post-new-post-text:focus{
+  min-height: 10vh;
 }
 
 .post-new-comment:hover .create-post-text  {
   border: var(--border-hover);
 }
 
-#post-new-post-button{
-  border-radius: var(--border-radius);
-  background-color: var(--tertiary);
-  font-size: 1.25rem;
-  color: white;
-}
 
-#post-new-post-button:hover {
-  cursor: pointer;
-  filter: brightness(90%);
-
-}
 
 /*----------------------------------------------------------------------------*/
 /* 
   POSTS COMMENTS
 */
+
+#comments{
+  /* background-color: red; */
+
+  width: auto;
+}
+
+.delete-post,
+.delete-comment{
+  display: none;
+  cursor: pointer;
+}
+
+.delete-post:hover,
+.delete-comment:hover{
+  text-shadow: 0 0 .1rem white;
+
+}
+
+.delete-post:before,
+.delete-comment:before{
+  content: "\274c"; 
+}
+
+.delete-post{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
 .post-new-comment img {
   display: inline-block;
@@ -389,6 +407,7 @@ span.post:hover {
 */
 
 aside {
+  /* display: none; */
   flex: 1;
   background-color: var(--primary);
   padding: 1rem 0 1rem 1rem;
@@ -420,7 +439,8 @@ aside {
 }
 
 .card-feed h5{
-  padding: .5rem;
+  margin: 0 auto;
+  padding: 0 .5rem;
   font-size: .9rem;
 }
 
@@ -487,7 +507,7 @@ aside {
 
 .login-card {
   text-align: center;
-  width: 60%;
+  width: 90%;
   margin: 1rem auto;
   border: var(--border);
   border-radius: var(--border-radius);
@@ -500,6 +520,7 @@ aside {
   justify-content: center;
   overflow:hidden;
 
+  transition: ease-in-out 200ms;
   
 }
 
@@ -515,9 +536,9 @@ aside {
 
 .login-card .form-input {
   margin: auto 1rem;
-  flex: 100%;
+  flex: 70%;
   width: inherit;
-  max-width: 80%;
+  max-width: 400px;
   overflow: hidden;
   align-self: center;
   
@@ -539,38 +560,60 @@ form .form-label {
   display: inline-block;
   font-size: 1.2rem;
   margin: 0.625rem 0 0.25rem 0.3rem; 
+  flex: 20%;
 }
 
 /* input itself */
+
 form .form-input {
-  align-content: center;
-  /* width: 70%; */
+  flex: 70%;
+  
+  align-content: center;  
   padding: 0.75rem;
   color: #1a1a1a;
-  background-color: #ffffff;
+  background-color: var(--light2);
   margin: 0.625rem 0;
   font-size: 1.2rem;
   border: 1px solid #484848;
   border-radius: 0.3rem;
+  max-width: 400px;
+}
+
+form .form-input:focus {
+  background-color: var(--light3);
 }
 
 form .form-input.form-input-squared {
   border-radius: 0;
 }
 
+#btn-user-signup:is(:disabled),
+#btn-user-login:is(:disabled),
+#post-new-post-button:is(:disabled){
+  background-color: lightslategray;
+}
+
+#btn-user-signup:not(:disabled),
+#post-new-post-button:not(:disabled),
 .btn.btn-primary {
   padding: 1rem;
   margin: 1rem auto 0;
-  
+  font-size: 1rem;
+  font-weight: 550;
   width: 100%;
-  background-color: #2d3e50;
+  border-radius: .3rem;
+  background-color: var(--accent);
   color: #d9e9e8;
-
+  transition: ease-in-out 200ms;
   flex: 100%;
 }
 
-.btn.btn-primary:hover {
-  background-color: #57779a;
+#btn-user-signup:not(:disabled):hover,
+#post-new-post-button:not(:disabled):hover,
+.btn.btn-primary:not(:disabled):hover {
+  background-color: var(--accent-fade);
+  cursor: pointer;
+  filter: brightness(90%);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -651,4 +694,50 @@ form .form-input.form-input-squared {
   text-decoration: none;
   cursor: pointer;
 
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* MEDIA TYPES */
+
+@media only screen and (min-width: 800px) {
+  .login-card {
+    width: 60%;
+    max-width: 641px;
+  }
+
+  .post-new-post {
+    margin: 1rem 2rem 1rem 1rem;
+    padding: .5rem;
+    flex: 0 1 100%;
+    
+    border: var(--border);
+    border-radius: var(--border-radius);
+    background-color: var(--bg_Section);
+    color: var(--text-area_text);
+  
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    flex-flow: wrap;
+    /* width: auto; */
+    overflow: hidden;
+  }
+
+  .post-new-post span{
+    flex-direction: row;
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .post-new-post {
+    
+  }
+  .login-card {
+    width: 90%;
+    max-width: 641px;
+  }
+
+  
 }

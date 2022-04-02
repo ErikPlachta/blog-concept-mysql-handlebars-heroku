@@ -12,13 +12,13 @@
 <body>
   <header>
     <h1>Tech Blog - Concept</h1>
-    <h3 id="about">About</h3>
   </header>
   <nav>
-    <a href="/">Home</a>
-    {{#if loggedIn}}<a href="/profile" id="profile"><img src="{{url}}" alt="{{title}}">  Profile</a>{{/if}}
-    {{#if loggedIn}}<a id="logout">Logout</a>
-    {{else}}<a href="/login">Login</a>{{/if}}
+    <a href="/">Homepage</a>
+    {{#if loggedIn}}<a href="/profile" id="profile" data-id="{{id}}"><img src="{{url}}" alt="{{title}}">u/{{username}}</a>{{/if}}
+    {{#if loggedIn}}<a id="logout" href="#">Logout</a>
+    {{else}}<a href="/login">Login / Sign Up</a>{{/if}}
+    {{!-- <a id="about" href="#">About</a> --}}
     
   </nav>
   <!-- Trigger/Open The Modal -->
@@ -33,5 +33,10 @@
   </main>
   
   <!-- If the user is logged in, load the JS script for if clicked logout btn -->
-  {{#if loggedIn}}<script src="/js/logout.js"></script>{{/if}}
+  {{#if loggedIn}}
+  {{!-- logout script to run event --}}
+  <script src="/js/logout.js"></script>
+  {{!-- creating a post script to manage posting events --}}
+  <script src="/js/post.js"></script>
+  {{/if}}
 

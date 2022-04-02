@@ -3,31 +3,31 @@
 
   {{!--- LOGIN ---}}
   <div class="login-card">
-    <header><h3>Login</h3></header>
+    {{!-- <header><h3>Login</h3></header> --}}
     
     <form class="form login-form">
       <div class="form-group">
         <label for="email-login">Email:</label>
-        <input class="form-input" type="email" id="email-login" required/>
+        <input class="form-input" type="email" id="email-login" autocomplete="email" required autofocus />
       </div>
       <div class="form-group">
         <label for="password-login">Password:</label>
         <input class="form-input" type="password" id="password-login" minlength="8" required/>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
+        <button class="btn btn-primary" id="btn-user-login" type="submit" disabled>Login</button>
       </div>
     </form>
   </div>
 
   {{!-- SIGNUP --}}
   <div class="login-card">
-    <header><h3>signup</h3></header>
+    <header><h3>Create New Account</h3></header>
     
     <form class="form signup-form">
       <span class="form-group">
         <label for="name-signup">Name:</label>
-        <input class="form-input" type="text" id="name-signup" minlength="2" required/>
+        <input class="form-input" type="text" id="name-signup" autocomplete="name" minlength="2" required/>
       </span>
       <span class="form-group">
         <label for="username-signup">Username:</label>
@@ -35,14 +35,14 @@
       </span>
       <span class="form-group">
         <label for="email-signup">Email:</label>
-        <input class="form-input" type="email" id="email-signup" />
+        <input class="form-input" type="email" id="email-signup" autocomplete="email" required/>
       </span>
       <span class="form-group">
         <label for="password-signup">Password:</label>
         <input class="form-input" type="password" id="password-signup" minlength="8" required/>
       </span>
       <span class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
+        <button class="btn btn-primary" id="btn-user-signup" type="submit" disabled>Sign Up</button>
       </span>
     </form>
   </div>

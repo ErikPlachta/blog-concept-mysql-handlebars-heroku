@@ -12,13 +12,16 @@ router.get('/', async (req,res) => {
       console.log("//-- not logged in")
       const dbUserData = await User.findAll({
         attributes: {
-          exclude: ['type','password','email','modified_date','created_date','username','name']  
+          exclude: ['type','password','email','modified_date','created_date','name']
+          // exclude: ['type','password','email','modified_date','created_date','username','name']  
         },
       });
       
       res
       .status(200)
-      .json({ users: dbUserData });
+      .json({ users: dbUserData })
+      .end();
+      return null;
     }
 
     //-- If logged-in, include more details
@@ -33,7 +36,9 @@ router.get('/', async (req,res) => {
       
       res
       .status(200)
-      .json({ users: dbUserData });
+      .json({ users: dbUserData })
+      .end();
+      return null; 
     };
   }
   catch(err){
@@ -148,7 +153,10 @@ router.post('/login', async (req, res) => {
   try {
 
     //-- If logged in already, exit
-    if(req.session.loggedIn){ res.status(403).end(); return; }
+    if(req.session.loggedIn){
+      res.status(403).json({message: "Already logged in."}).end();
+      return;
+    }
 
     //-- If not yet logged in, try to login
     if(!req.session.loggedIn){
@@ -189,7 +197,7 @@ router.post('/login', async (req, res) => {
           req.session.loggedIn = true;
 
           //-- respond with success
-          res.status(202).end();
+          res.status(204).json({message: "Logout success."}).end();
         })
       }
     }
@@ -201,7 +209,7 @@ router.post('/login', async (req, res) => {
 
 // Logout
 router.post('/logout', withAuth, async (req, res) => {
-    
+  
   //-- Update User Login-Status to false
   try {
     User.update( 
@@ -234,6 +242,7 @@ router.post('/signup', async (req, res) => {
       created_date: (Date.now()),
       modified_date: (Date.now()),
       login_date: (Date.now()),
+      type: 'user'
     });
 
     req.session.save(() => {
