@@ -17,7 +17,6 @@ const newReplyTemplate={
   "status" : 1
 }      
 
-
 const postNewPost = async (event) => {
     // post-new-post
 
@@ -30,7 +29,8 @@ const postNewPost = async (event) => {
 
         //-- if posting a comment to a post, different route than if profile or homepage
         if(window.location.pathname.includes("/post/")){
-          console.log(window.location.pathname)
+          console.log(window.location.pathname.split("/")[2])
+          newReplyTemplate.post_id = window.location.pathname.split("/")[2];
           const response = await fetch('api/posts/', {
             method: 'POST',
             body: (JSON.stringify(newPostTemplate)),

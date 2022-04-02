@@ -110,9 +110,9 @@ router.get('/profile', withAuth, async (req, res) => {
   //-- get user data
   const dbUserData = await User.findAll({
     attributes: { exclude: ['password'] }, /* no passwords*/
-     where: {id: 1}, /* TODO:: Get current user */
-    });
-  //-- building comments
+     where: {id: req.session.user_id}, /* TODO:: Get current user */
+  });
+
   const users = dbUserData.map((user) => user.get({ plain: true }) );
 
   // GET POSTS
@@ -125,6 +125,7 @@ router.get('/profile', withAuth, async (req, res) => {
       {
         model: User,
         attributes: ['id','username','created_date'],
+        where: {id: req.session.user_id}, /* TODO:: Get current user */
       },
       {
         model: Resource,
@@ -140,7 +141,7 @@ router.get('/profile', withAuth, async (req, res) => {
   //-- get comments related
   const dbCommentData = await Comment.findAll({
     where: {
-      user_id: 1,
+      user_id: req.session.user_id,
     },
     include: [
       { model: Post, attributes: ['id'], },
@@ -162,7 +163,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
   
   try {    
     
-    //-- get comments and all releated data
+    //-- get comments and all related data
     const dbCommentData = await Comment.findAll({
       where: {
         post_id: req.params.id,
@@ -197,7 +198,8 @@ router.get('/post/:id', withAuth, async (req, res) => {
     res.render('post', { 
       'post': post,
       'comments': comments,
-      loggedIn: req.session.loggedIn 
+      loggedIn: req.session.loggedIn,
+      session: req.session
     });
   } 
   catch (err) { res.render('404'); }

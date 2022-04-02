@@ -15,7 +15,7 @@
   </header>
   <nav>
     <a href="/">Homepage</a>
-    {{#if loggedIn}}<a href="/profile" id="profile"><img src="{{url}}" alt="{{title}}">  Profile</a>{{/if}}
+    {{#if loggedIn}}<a href="/profile" id="profile"><img src="{{url}}" alt="{{title}}">u/{{session.username}}</a>{{/if}}
     {{#if loggedIn}}<a id="logout">Logout</a>
     {{else}}<a href="/login">Login / Sign Up</a>{{/if}}
     <a id="about" href="#">About</a>
