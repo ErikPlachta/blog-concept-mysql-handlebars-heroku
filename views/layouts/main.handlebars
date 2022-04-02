@@ -33,5 +33,10 @@
   </main>
   
   <!-- If the user is logged in, load the JS script for if clicked logout btn -->
-  {{#if loggedIn}}<script src="/js/logout.js"></script>{{/if}}
+  {{#if loggedIn}}
+  {{!-- logout script to run event --}}
+  <script src="/js/logout.js"></script>
+  {{!-- creating a post script to manage posting events --}}
+  <script src="/js/post.js"></script>
+  {{/if}}
 

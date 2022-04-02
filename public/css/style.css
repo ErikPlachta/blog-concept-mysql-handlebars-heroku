@@ -378,7 +378,7 @@ span.post:hover {
 */
 
 aside {
-  display: none;
+  /* display: none; */
   flex: 1;
   background-color: var(--primary);
   padding: 1rem 0 1rem 1rem;
