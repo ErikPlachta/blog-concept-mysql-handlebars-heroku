@@ -556,10 +556,13 @@ form .form-input.form-input-squared {
   border-radius: 0;
 }
 
+#btn-user-signup:is(:disabled),
+#btn-user-login:is(:disabled),
 #post-new-post-button:is(:disabled){
   background-color: lightslategray;
 }
 
+#btn-user-signup:not(:disabled),
 #post-new-post-button:not(:disabled),
 .btn.btn-primary {
   padding: 1rem;
@@ -574,6 +577,7 @@ form .form-input.form-input-squared {
   flex: 100%;
 }
 
+#btn-user-signup:not(:disabled):hover,
 #post-new-post-button:not(:disabled):hover,
 .btn.btn-primary:not(:disabled):hover {
   background-color: var(--accent-fade);
