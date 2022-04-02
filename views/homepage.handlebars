@@ -7,13 +7,25 @@
 
 {{!-- If logged in, add section containing a form to create new post --}}
 {{#if loggedIn}}
-    {{> post-create}}
+<section>
+    <div class="card section-title">
+      <h3>Create new Post</h3>
+      {{> post-create}}
+    </div>
+  </section>
 {{else}}
 
 
 {{/if}}
 
 {{!-- Load a preview of all posts into homepage --}}
-{{#each posts as |post|}}
-    {{> post-preview}}
-{{/each}}
+<section>
+  <div class="card section-title">
+    <h3>Posts Feed</h3>
+    <hr>
+ 
+  {{#each posts as |post|}}
+      {{> post-preview}}
+  {{/each}}
+   </div>
+</section>

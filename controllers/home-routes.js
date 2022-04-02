@@ -57,7 +57,7 @@ router.get('/', async (req, res) => {
     const comments = commentData.map((post) =>
       post.get({ plain: true })
     );
-    console.log(req.session)
+    // console.log(req.session)
     //-- if logged in, grab user data to build navbar with their info in it
     if(req.session.loggedIn){
       const dbUserData = await User.findOne({
