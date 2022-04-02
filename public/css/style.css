@@ -10,8 +10,9 @@
   --tertiary: rgb(39, 39, 41);
   /* --tertiary: rgb(113, 116, 99); */
   --light: rgb(215, 218, 220);
-  --quatrinary: rgb(128, 130, 131);
+  --quaternary: rgb(128, 130, 131);
   --accent: rgb(0, 121, 211);
+  --accent-fade: rgb(0, 121, 211,.8);
   
 
   --dark: #182c23;
@@ -39,8 +40,8 @@
     BORDERS
   */
   --border: 2px solid var(--tertiary);
-  --border-hover: 2px solid var(--quatrinary);
-  --border-hover_1px: 1px solid var(--quatrinary);
+  --border-hover: 2px solid var(--quaternary);
+  --border-hover_1px: 1px solid var(--quaternary);
   --border-radius: .25rem;
 
   /*
@@ -82,7 +83,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   justify-content: flex-start;
-  background-color: var(--quatrinary);
+  background-color: var(--quaternary);
   /* font: inherit; */
   /* vertical-align: baseline; */
 }
@@ -487,7 +488,7 @@ aside {
 
 .login-card {
   text-align: center;
-  width: 60%;
+  width: 90%;
   margin: 1rem auto;
   border: var(--border);
   border-radius: var(--border-radius);
@@ -500,6 +501,7 @@ aside {
   justify-content: center;
   overflow:hidden;
 
+  transition: ease-in-out 200ms;
   
 }
 
@@ -563,14 +565,15 @@ form .form-input.form-input-squared {
   margin: 1rem auto 0;
   
   width: 100%;
-  background-color: #2d3e50;
+  /* background-color: #2d3e50; */
+  background-color: var(--accent);
   color: #d9e9e8;
-
+  transition: ease-in-out 200ms;
   flex: 100%;
 }
 
 .btn.btn-primary:hover {
-  background-color: #57779a;
+  background-color: var(--accent-fade);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -651,4 +654,23 @@ form .form-input.form-input-squared {
   text-decoration: none;
   cursor: pointer;
 
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* MEDIA TYPES */
+
+@media only screen and (min-width: 800px) {
+  .login-card {
+    width: 60%;
+    max-width: 641px;
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .login-card {
+    width: 90%;
+    max-width: 641px;
+  }
 }

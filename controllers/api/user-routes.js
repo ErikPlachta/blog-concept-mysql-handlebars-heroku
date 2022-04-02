@@ -12,13 +12,16 @@ router.get('/', async (req,res) => {
       console.log("//-- not logged in")
       const dbUserData = await User.findAll({
         attributes: {
-          exclude: ['type','password','email','modified_date','created_date','username','name']  
+          exclude: ['type','password','email','modified_date','created_date','name']
+          // exclude: ['type','password','email','modified_date','created_date','username','name']  
         },
       });
       
       res
       .status(200)
-      .json({ users: dbUserData });
+      .json({ users: dbUserData })
+      .end();
+      return null;
     }
 
     //-- If logged-in, include more details
@@ -33,7 +36,9 @@ router.get('/', async (req,res) => {
       
       res
       .status(200)
-      .json({ users: dbUserData });
+      .json({ users: dbUserData })
+      .end();
+      return null; 
     };
   }
   catch(err){
@@ -157,7 +162,7 @@ router.post('/login', async (req, res) => {
 
     //-- If logged in already, exit
     if(req.session.loggedIn){
-      res.status(403).end();
+      res.status(403).json({message: "Already logged in."}).end();
       return;
     }
 
@@ -197,7 +202,7 @@ router.post('/login', async (req, res) => {
           req.session.loggedIn = true;
 
           //-- respond with success
-          res.status(204).end();
+          res.status(204).json({message: "Logout success."}).end();
         })
       }
     }
