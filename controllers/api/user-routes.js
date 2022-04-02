@@ -151,7 +151,6 @@ router.put('/', withAuth, (req,res) => {
 router.post('/login', async (req, res) => {
   
   try {
-
     //-- If logged in already, exit
     if(req.session.loggedIn){
       res.status(403).json({message: "Already logged in."}).end();
@@ -162,12 +161,10 @@ router.post('/login', async (req, res) => {
     if(!req.session.loggedIn){
       
       //-- look for user with matching email
-      const dbUserData = await User.findOne({ where: { email: req.body.email, }, });
-      //-- Unable to find email in database, EXIT.
-
-      
-      
+      const dbUserData = await User.findOne({ where: { email: req.body.email } });
+      //-- Unable to find email in database, EXITs
       if (!dbUserData) { res.status(400).json({ message: 'Incorrect email or password.' }); return; }
+
 
       //-- Email in database, check for password match.
       const validPassword = await dbUserData.checkPassword(req.body.password)      
@@ -183,7 +180,7 @@ router.post('/login', async (req, res) => {
             { login_date: Date.now(), login_state: true },
             { where: { id:       dbUserData.id  }}
         )}
-        //-- Unable to update login_state and login_date
+        //-- Unable to update login_state and login_date. Exit
         catch (err) {
           res.status(500).json({ error: err['errors'][0].message}).end();
         }
@@ -229,7 +226,7 @@ router.post('/logout', withAuth, async (req, res) => {
 // CREATE new user
 router.post('/signup', async (req, res) => {
   
-  console.log("attempting to creat new user")
+  // console.log("attempting to creat new user")
 
   console.table(req.body)
   try {
@@ -246,9 +243,13 @@ router.post('/signup', async (req, res) => {
     });
 
     req.session.save(() => {
+       //-- Store session variables and exit
+      req.session.login_date = Date.now();
+      req.session.username = dbUserData.username;
+      req.session.user_id = dbUserData.id;
+      req.session.user_type = dbUserData.type;
       req.session.loggedIn = true;
-      res
-        .status(202).end();
+      res.status(202).end();
     });
   } 
   catch (err) {

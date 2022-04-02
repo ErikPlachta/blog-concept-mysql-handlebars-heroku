@@ -15,7 +15,7 @@ const loginFormHandler = async (event) => {
 
     //-- Login success. Routing to homepage.
     if (response.ok)  {      
-      document.location.replace('/')
+      document.location.replace('/profile')
     }  
     //-- If was unable to login, console error // TODO:: 02/26/2022 #EP || Add UI update
     if (!(response.ok)){ console.log('//-- Failed to log in. check with admin.'); }
@@ -37,14 +37,15 @@ const signupFormHandler = async (event) => {
 
   //-- if ALL var provided when submit event happens, attempt to create new user.
   if (name && username && email && password) {
-    const response = await fetch('/api/users/signup', {
+    const response = await fetch('api/users/signup', {
             method: 'POST',
             body: JSON.stringify({ name, username, email, password }),
             headers: { 'Content-Type': 'application/json' },
     });
     //-- Created user success. Routing to homepage.
     if (response.ok) {
-      document.location.replace('/')
+      
+      document.location.replace('/profile')
     ;}
     //-- If was unable to login, console error // TODO:: 02/26/2022 #EP || Add UI update
     if (!response.ok){ console.log('//-- Failed to sign up. Check with admin.');}
