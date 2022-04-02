@@ -10,6 +10,8 @@
   --tertiary: rgb(39, 39, 41);
   /* --tertiary: rgb(113, 116, 99); */
   --light: rgb(215, 218, 220);
+  --light2: rgb(217, 233, 232);
+  --light3: rgb(250, 250, 250);
   --quaternary: rgb(128, 130, 131);
   --accent: rgb(0, 121, 211);
   --accent-fade: rgb(0, 121, 211,.8);
@@ -147,13 +149,12 @@ h5 {
     header h3 {
       flex: 10%;
       margin: auto;
-      transition: transform .2s; /* Animation */
+      transition: transform 200ms; /* Animation */
       /* border: 1px solid red; */
     }
     header h3:hover {
-      cursor: pointer;
-      transform: scale(1.5); 
-
+      /* cursor: pointer; */
+      transform: scale(1.01); 
     }
 
     main {
@@ -517,9 +518,9 @@ aside {
 
 .login-card .form-input {
   margin: auto 1rem;
-  flex: 100%;
+  flex: 70%;
   width: inherit;
-  max-width: 80%;
+  max-width: 400px;
   overflow: hidden;
   align-self: center;
   
@@ -541,19 +542,26 @@ form .form-label {
   display: inline-block;
   font-size: 1.2rem;
   margin: 0.625rem 0 0.25rem 0.3rem; 
+  flex: 20%;
 }
 
 /* input itself */
 form .form-input {
-  align-content: center;
-  /* width: 70%; */
+  flex: 70%;
+  
+  align-content: center;  
   padding: 0.75rem;
   color: #1a1a1a;
-  background-color: #ffffff;
+  background-color: var(--light2);
   margin: 0.625rem 0;
   font-size: 1.2rem;
   border: 1px solid #484848;
   border-radius: 0.3rem;
+  max-width: 400px;
+}
+
+form .form-input:focus {
+  background-color: var(--light3);
 }
 
 form .form-input.form-input-squared {
@@ -566,7 +574,7 @@ form .form-input.form-input-squared {
   font-size: 1rem;
   
   width: 100%;
-  /* background-color: #2d3e50; */
+  border-radius: .3rem;
   background-color: var(--accent);
   color: #d9e9e8;
   transition: ease-in-out 200ms;
