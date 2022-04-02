@@ -246,6 +246,7 @@ router.post('/signup', async (req, res) => {
       created_date: (Date.now()),
       modified_date: (Date.now()),
       login_date: (Date.now()),
+      type: 'user'
     });
 
     req.session.save(() => {
