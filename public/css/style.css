@@ -321,7 +321,7 @@ span.post:hover {
 }
 
 #post-new-post-text:focus{
-  min-height: 30vh;
+  min-height: 10vh;
 }
 
 .post-new-comment:hover .create-post-text  {
