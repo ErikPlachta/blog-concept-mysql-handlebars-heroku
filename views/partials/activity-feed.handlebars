@@ -1,0 +1,53 @@
+<aside>
+    <section class="activity-feed">
+        <h3>Activity Feed</h3>
+        <hr>
+        <div class ="user-stats">
+            <h4>User Stats</h4>
+            {{#each users as |user| }}
+                {{> feed-user-stats}}
+            {{/each}}
+        </div>
+        
+        <div class="popular-posts">
+            <h4>Posts</h4>
+            {{#if posts}}
+
+                {{#each posts as |post|}}
+                    {{> feed-post}}
+                {{/each}}
+            {{else}}
+                <section class="card-feed">
+                    <span class="card-feed-banner">
+                        No posts created...
+                    </span>
+                </section>
+            {{/if}}
+        </div>
+
+        
+        {{!-- {{#if loggedIn}} --}}
+            <div class="popular-comments">
+                <h4>Comments</h4>
+                {{#if comments}}
+                    {{#each comments as |comment|}}
+                        {{> feed-comment}}
+                    {{/each}}
+                {{else}}
+                   <section class="card-feed">
+                        <span class="card-feed-banner">
+                            No comments created...
+                        </span>
+                    </section>
+                {{/if}}
+            </div>
+        {{!-- {{/if}} --}}
+    </section>
+    
+    {{!-- Within a Post specifically --}}
+    <section class="post-stats">
+        <h3>Post Stats</h3>
+        <hr>
+        <h4>TBD</h4>
+    </section>
+</aside>

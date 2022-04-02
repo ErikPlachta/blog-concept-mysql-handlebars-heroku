@@ -1,9 +1,10 @@
-<section class="post card" data-id="{{user.id}}">
-  <a href="/post/{{id}}">
-    <banner>Posted by u/{{user.username}} ago, on {{hours_passed created_date}}</banner>
+
+<section class="comment card" data-id="{{id}}" data-userid="{{user.id}}">
+  {{!-- <a href="/post/{{id}}"> --}}
+    {{!-- <banner>Reply by u/{{user.username}} on {{hours_passed created_date}}</banner> --}}
     <header>
       <h4>{{title}} by {{user.username}}</h4>
-      <span class="delete-post"></span>
+      <span class="delete-comment"></span>
     </header>
     
     <span>{{{shrinkContent content}}}</span>
@@ -13,5 +14,6 @@
       • <span>Created: {{format_date created_date}}</span>
       • <span>Last Modified: {{format_date modified_date}}</span>
     </div>
-  </a>
+    
+  {{!-- </a> --}}
 </section>

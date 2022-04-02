@@ -1,0 +1,22 @@
+<article class="card-feed">
+  <a href="/post/{{post_id}}">
+    {{#if user.username}}  
+      <span title=" {{title}} on {{get_TimePassed created_date}}" class="card-feed-banner">
+        u/{{user.username}} • {{get_TimePassed created_date}}
+    {{else}}
+      <span title=" {{title}} on {{get_TimePassed created_date}}" class="card-feed-banner">
+        {{get_TimePassed created_date}}
+    {{/if}}
+      
+    </span>
+    <header>
+      <h5>
+        {{title}} 
+        {{#if user.username}} 
+          by {{user.username}}
+        {{/if}}
+      </h5>
+    </header>
+    
+  </a>
+</article>

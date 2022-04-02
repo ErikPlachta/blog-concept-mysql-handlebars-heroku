@@ -1,0 +1,24 @@
+<section class="card">
+  <a href="/post/{{id}}">
+    <span title="{{user.username}}" class="card-banner ">
+      {{!-- <img src="{{resource.url}}" alt="{{resource.title}}">  --}}
+      Posted by u/{{user.username}} • {{get_TimePassed created_date}}
+    </span>
+    <header>
+      <h4>{{title}} by {{user.username}}</h4>
+    </header>
+    
+    <div class="card-content">
+      {{{shrinkContent content}}}
+    </div>
+    
+    {{!-- <img src="{{resource.url}}" alt="{{resource.title}}"> --}}
+
+    <div class="card-footer">
+      <span>Post ID: {{id}}</span>
+      • <span>Created: {{format_date created_date}}</span>
+      • <span>Last Modified: {{format_date modified_date}}</span>
+    </div>
+    
+  </a>
+</section>

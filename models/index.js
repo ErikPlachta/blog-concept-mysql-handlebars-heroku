@@ -9,16 +9,35 @@ const Resource = require('./Resource');
 //------------------------------------------------------------------------------
 //-- Associations between tables
 
+
+// Category.hasMany(models.Product, { onDelete: 'cascade', hooks:true });
+
 //-- Post to Users
 /*
   If user related to a Post
 // */
 User.hasMany(Post, {
-  foreignKey: 'user_id'
+  foreignKey: 'user_id',
+  onDelete: 'cascade',
+  hooks:true
 });
 
 Post.belongsTo(User, {
   foreignKey: 'user_id',
+  onDelete: 'cascade',
+  hooks:true
+});
+
+User.hasMany(Comment, {
+  onDelete: 'cascade',
+  hooks:true,
+  foreign_key: 'user_id'
+});
+
+Comment.belongsTo(User, {
+  onDelete: 'cascade',
+  hooks:true,
+  foreignKey: "user_id"
 });
 
 //-- Resources to Users - Like images attached to posts, etc.
@@ -27,7 +46,9 @@ Post.belongsTo(User, {
   If a User creates posts or comments with resources, linked to them.
 */
 User.hasMany(Resource, {
-  foreignKey: 'user_id'
+  foreignKey: 'user_id',
+  onDelete: 'cascade',
+  hooks:true
 });
 
 Resource.belongsTo(User, {
@@ -43,7 +64,8 @@ Resource.belongsTo(User, {
   If a Post has a comment
 */
 Post.hasMany(Comment, {
-  foreignKey: 'post_id'
+  foreignKey: 'post_id',
+        
 });
 
 Comment.belongsTo(Post, {
@@ -62,9 +84,8 @@ Resource.belongsTo(Post, {
 });
 
 /*
-  If a 
+  If a user creates a resource
 */
-
 User.hasMany(Resource, {
   foreignKey: 'user_id'
 });
@@ -73,6 +94,17 @@ Resource.belongsTo(User, {
   foreignKey: 'user_id',
 });
 
+/*
+  If a user creates a profile-resource-image
+*/
+
+User.hasOne(Resource, {
+  foreignKey: 'profile_resource_id',
+});
+
+Resource.belongsTo(User, {
+  foreignKey: 'profile_resource_id',
+});
 
 /* 
 { TODO:: 02/10/2022 #EP | Add cascading

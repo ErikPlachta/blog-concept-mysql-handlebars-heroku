@@ -1,0 +1,19 @@
+<article class="card-feed">
+  <a href="/post/{{id}}">
+    <span title="{{user.username}}" class="card-feed-banner">
+      {{!-- <img src="{{resource.url}}" alt="{{resource.title}}">  --}}
+      u/{{user.username}} •  {{get_TimePassed created_date}}
+    </span>
+    
+    <header>
+      <h5>{{title}}</h5>
+    </header>
+    {{!-- <section>
+      {{content}}
+    </section> --}}
+    {{!-- <footer>
+      By {{user.username}}
+    </footer> --}}
+    
+  </a>
+</article>

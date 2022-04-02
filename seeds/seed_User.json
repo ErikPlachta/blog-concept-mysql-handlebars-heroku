@@ -1,8 +1,41 @@
 [
     {
         "id": 1,
+        "profile_resource_id" : 1,
+        "name": "Bot",
+        "username": "Bot",
+        "email" : "bot@noemail.com",
+        "password": "my-password",
+        "type" : "bot",
+        "created_date": "2022-02-10 13:08:03",
+        "modified_date" : "2022-02-10 13:08:03",
+        "login_date" : "2022-02-10 13:08:03",
+        "logout_date" : "2022-02-10 14:08:03"
+    },
+    {
+        "id": 2,
+        "profile_resource_id" : 2,
+        "name": "Admin",
+        "username": "Admin",
+        "email" : "admin@noemail.com",
+        "password": "my-password",
+        "type" : "admin",
+        "created_date": "2022-02-10 13:08:03",
+        "modified_date" : "2022-02-10 13:08:03",
+        "login_date" : "2022-02-10 13:08:03",
+        "logout_date" : "2022-02-10 14:08:03"
+    },
+    {
+        "id": 3,
+        "profile_resource_id" : 3,
+        "name": "Erik Plachta",
         "username": "ErikPlachta",
         "email" : "erik@noemail.com",
-        "password": "my-password"
+        "password": "my-password",
+        "type" : "user",
+        "created_date": "2022-02-10 13:08:03",
+        "modified_date" : "2022-02-10 13:08:03",
+        "login_date" : "2022-02-10 13:08:03",
+        "logout_date" : "2022-02-10 14:08:03"
     }
 ]

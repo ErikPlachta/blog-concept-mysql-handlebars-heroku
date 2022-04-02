@@ -1,0 +1,22 @@
+<style>  .user-stats, .activity-feed { display: block;  }  </style>
+
+
+{{!-- <textarea name="text" id="myEditor"># Test</textarea> --}}
+
+
+
+{{#if loggedIn}}
+    {{> post-create}}
+    
+{{else}}
+
+  <section>
+    <div>
+      <h2>User Login Required</h2>
+      <p>You must be logged-in to see this page</p>
+      <button class="btn btn-praimry">Go to Login Page</button>
+    </div>
+  </section>
+
+
+{{/if}}

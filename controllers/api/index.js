@@ -2,21 +2,25 @@
 //-- Imports
 const router = require('express').Router();
 
+const userRoutes = require('./user-routes');
+const resourceRoutes = require('./resource-routes');
+const postRoutes = require('./post-routes');
+const commentRoutes = require('./comment-routes');
 //------------------------------------------------------------------------------
 //-- Routing
 
 //-- Importing other routes to ensure existing express has access 
-const userRoutes = require('./user-routes');
 router.use('/users', userRoutes);
+router.use('/user', userRoutes);
 
-const resourceRoutes = require('./resource-routes');
 router.use('/resources', resourceRoutes);
+router.use('/resource', resourceRoutes);
 
-const postRoutes = require('./post-routes');
-router.use('/kbas', postRoutes);
+router.use('/posts', postRoutes);
+router.use('/post', postRoutes);
 
-const commentRoutes = require('./post-routes');
-router.use('/kbas', commentRoutes);
+router.use('/comments', commentRoutes);
+router.use('/comment', commentRoutes);
 
 
 //-- if gets here when rounting, throw 404
@@ -34,9 +38,11 @@ router.use((req, res) => {
       message: "API rquest failure. Page not found."
 
     }
-  }).end();
+  })
+  .end();
   
 });
+
 
 //------------------------------------------------------------------------------
 //-- Exports

@@ -5,7 +5,7 @@ const { Model, DataTypes } = require('sequelize');
 /* 
   Pointing to seeds/connection_sequlzie because it's used by seeds to build
 */
-const sequelize = require('../seeds/connection_sequelize');
+const sequelize = require('../config/connection');
 
 //------------------------------------------------------------
 //-- Class
@@ -28,14 +28,13 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: {
-      type: DataTypes.STRING,
+    content: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
     type: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     //-- if false stays in database but just doesn't show up
     status: {
@@ -50,6 +49,14 @@ Post.init(
     //-- assigned tags
     topics: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    created_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    modified_date: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
     //-- Who created it

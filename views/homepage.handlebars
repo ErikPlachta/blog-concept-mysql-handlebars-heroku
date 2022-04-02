@@ -1,3 +1,19 @@
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<style>
+  .activity-feed{
+    display: block;
+  }
+</style>
+
+{{!-- If logged in, add section containing a form to create new post --}}
+{{#if loggedIn}}
+    {{> post-create}}
+{{else}}
+
+
+{{/if}}
+
+{{!-- Load a preview of all posts into homepage --}}
 {{#each posts as |post|}}
-{{> post-details }}
+    {{> post-preview}}
 {{/each}}

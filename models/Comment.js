@@ -5,7 +5,7 @@ const { Model, DataTypes } = require('sequelize');
 /* 
   Pointing to seeds/connection_sequlzie because it's used by seeds to build
 */
-const sequelize = require('../seeds/connection_sequelize');
+const sequelize = require('../config/connection');
 
 //------------------------------------------------------------
 //-- Class
@@ -33,12 +33,20 @@ Comment.init(
       type: DataTypes.TEXT,
       allowNull: false
     },
+    created_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    modified_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
     //-- Who made comment
     user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',
-        key: 'id'
+        key: 'id',
       }
     },
     //-- Original post

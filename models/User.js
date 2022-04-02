@@ -5,7 +5,7 @@ const { Model, DataTypes } = require('sequelize');
 /* 
   Pointing to seeds/connection_sequlzie because it's used by seeds to build
 */
-const sequelize = require('../seeds/connection_sequelize');
+const sequelize = require('../config/connection');
 
 //-- Password encryption
 /* 
@@ -35,6 +35,13 @@ User.init(
       primaryKey: true,
       autoIncrement: true
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2]
+      }
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -50,13 +57,39 @@ User.init(
         isEmail: true
       }
     },
+    //-- Type of users used for access to unique things
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [4]
+        len: [8]
       }
-    }
+    },
+    created_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    modified_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    login_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    logout_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    login_state: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },
   },
   {
     // events called by Sequalize based on hook chosen. HASHES PW TO BE SAVED INSTEAD OF OG
