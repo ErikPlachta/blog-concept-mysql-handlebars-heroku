@@ -209,7 +209,7 @@ router.post('/login', async (req, res) => {
 
 // Logout
 router.post('/logout', withAuth, async (req, res) => {
-    
+  
   //-- Update User Login-Status to false
   try {
     User.update( 
