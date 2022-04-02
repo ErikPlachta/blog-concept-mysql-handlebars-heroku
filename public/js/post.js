@@ -19,10 +19,25 @@ const newReplyTemplate={
 }      
 
 
+//-- API CALL for if logged-in user owns comment and is viewing on post page, can delete posts.
+  //-- if delete, navigate home, delete all replies
 const _deletePost = async post =>{
-  console.log(post.target.parentNode)
+
+  const postId = post.target.parentNode.dataset.id;
+  const response = await fetch(`../api/posts/${postId}`, {
+    method: 'DELETE',
+    body: '',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert('failed to post.');
+    }
+  return null;
 }
 
+//-- API CALL for if logged-in user owns comment and is viewing on post page, can delete comments
 const _deleteComment = async comment =>{
   const commentId = comment.target.parentNode.parentNode.dataset.id;
   const response = await fetch(`../api/comments/${commentId}`, {
@@ -46,7 +61,7 @@ const _canDelete = () => {
   [].forEach.call(allComments, function(comment){
     if(comment.dataset.userid === document.querySelector("#profile").dataset.id){
       comment.querySelector( ".delete-comment" ).style.display = "block";
-      comment.addEventListener("click",_deleteComment)
+      comment.querySelector( ".delete-comment" ).addEventListener("click",_deleteComment);
     }
   });
 
@@ -58,7 +73,7 @@ const _canDelete = () => {
     
     if(postDetails.dataset.userid === document.querySelector("#profile").dataset.id){
       postDetails.querySelector( ".delete-post" ).style.display = "block";
-      postDetails.addEventListener("click",_deletePost)
+      postDetails.querySelector( ".delete-post" ).addEventListener("click",_deletePost)
     }
   }
 };
