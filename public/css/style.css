@@ -358,6 +358,12 @@ span.post:hover {
   cursor: pointer;
 }
 
+.delete-post:hover,
+.delete-comment:hover{
+  text-shadow: 0 0 .1rem white;
+
+}
+
 .delete-post:before,
 .delete-comment:before{
   content: "\274c"; 
