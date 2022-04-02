@@ -24,12 +24,22 @@ const _deletePost = async post =>{
 }
 
 const _deleteComment = async comment =>{
-  console.log(comment.target.parentNode.parentNode)
+  const commentId = comment.target.parentNode.parentNode.dataset.id;
+  const response = await fetch(`../api/comments/${commentId}`, {
+    method: 'DELETE',
+    body: '',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (response.ok) {
+      document.location.replace(window.location.pathname);
+    } else {
+      alert('failed to post.');
+    }
+  return null;
 }
 
 //-- for all elements of type reply that match data-id value of user logged in ID's, show option to delete
 const _canDelete = () => {
-  console.log("Running _canDelete")
   
   //-- get all comments, see if logged in user owns, is yes, option to delete
   const allComments = document.querySelectorAll(".comment.card");
