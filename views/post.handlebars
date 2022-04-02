@@ -1,4 +1,7 @@
-<style> .post-stats{display: block;} </style>
+<style> .post-stats{display: inline-block;} </style>
+
+
+{{!-- when you're looking at a specific  --}}
 
 <div class="landing">
   <section class="card">
@@ -15,10 +18,22 @@
     </div>
   </section>
 
-  <section class="comments">
+  <section class="card" id="comments">
     <h3>Comments</h3>
-    {{#each comments as |comment|}}
-        {{> comment-details}}
-      {{/each}}
+    
+    {{#if comments}}
+      {{#each comments as |comment|}}
+          {{> comment-details}}
+        {{/each}}
+    
+    {{else}}
+      No comments, yet.
+    {{/if}}
+  </section>
+  
+  <section class="card" id="comments">
+    <h3>Post a Reply</h3>
+    
+    {{> post-create}}
   </section>
 </div>

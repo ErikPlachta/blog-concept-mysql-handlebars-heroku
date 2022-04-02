@@ -345,6 +345,12 @@ span.post:hover {
   POSTS COMMENTS
 */
 
+#comments{
+  /* background-color: red; */
+
+  width: auto;
+}
+
 .post-new-comment img {
   display: inline-block;
   height: 40px;
