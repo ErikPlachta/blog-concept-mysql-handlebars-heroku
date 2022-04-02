@@ -3,12 +3,12 @@
     <form class="post-new-post">
       <span class="post-new-post-form-element">
         <label id='new-post-title-label'for="new-post-title">Title</label>
-        <input class="form-input" type="text" id="post-new-post-title" minlength="5" required />
+        <input class="form-input" type="text" id="post-new-post-title" minlength="5" maxlength="50" required />
       </span>
       
       <span class="post-new-post-form-element">
         <label for="post-text" id="new-post-text-label">Body</label>
-        <textarea class="create-post-text" id="post-new-post-text" placeholder="Click to start typing" minlength="10" maxlength="50" required></textarea>
+        <textarea class="create-post-text" id="post-new-post-text" placeholder="Click to start typing" minlength="10" maxlength="256" required></textarea>
       </span>
 
       <button class="btn btn-primary" id="post-new-post-button" type="submit" disabled>Post</button>

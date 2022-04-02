@@ -171,7 +171,7 @@ router.post('/login', async (req, res) => {
 
       //-- Email in database, check for password match.
       const validPassword = await dbUserData.checkPassword(req.body.password)      
-      //-- Password does not match userData associted to email. Exit.
+      //-- Password does not match userData associated to email. Exit.
       if ( !validPassword ) {res.status(400).json({ message: 'Incorrect email or password.' });return;}
 
       //-- Email Exists and Password Matches user email, create session and store user var in session cookies
@@ -185,7 +185,7 @@ router.post('/login', async (req, res) => {
         )}
         //-- Unable to update login_state and login_date
         catch (err) {
-          res.status(500).json({ error: err['errors'][0].message });
+          res.status(500).json({ error: err['errors'][0].message}).end();
         }
 
         //-- Store session variables
