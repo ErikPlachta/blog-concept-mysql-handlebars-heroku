@@ -1,21 +1,28 @@
-<style> aside{display:none;} .post-stats{display: inline-block;} .card{margin:1rem .5rem} </style>
+{{!-- <style>   .activity-feed { display: block;  } .popular-posts,.popular-posts h4{ display:none !important; }  </style> --}}
+<style>aside{display: none;} div .card{margin: 1rem 4rem;} </style>
 
 
 {{!-- when you're looking at a specific  --}}
 
 <div class="landing">
   <section class="card">
-    <div class="post-details" data-id="{{post.id}}">
-      <h3>{{post.id}}. {{post.title}} by {{post.user.username}}</h3>
+    <div class="post-details" data-userid="{{post.user.id}}" data-id="{{post.id}}">
+      <span class="delete-post"></span>
+      <h3> {{post.id}}. {{post.title}} by {{post.user.username}} </h3>
       
       <p>{{{post.content}}}</p>
       {{!-- <span>
         <img src="{{post.resource.url}}" alt="{{post.resource.title}}">
       </span> --}}
-      <div class="card-footer">
+      <span class="card-footer">
         Posted {{get_TimePassed post.created_date}} ago, on {{format_date post.created_date}}
-      </div>
+      </span>
     </div>
+  </section>
+
+  <section class="card" id="post-reply">
+    <h3>Post a Reply</h3>
+    {{> post-create }}
   </section>
 
   <section class="card" id="comments">
@@ -29,10 +36,5 @@
     {{else}}
       No comments, yet.
     {{/if}}
-  </section>
-  
-  <section class="card" id="post-reply">
-    <h3>Post a Reply</h3>
-    {{> post-create }}
   </section>
 </div>

@@ -228,6 +228,7 @@ h5 {
 }
 
 .post-details {
+  position: relative;
   /* text-align: center; */
   padding: 10px 20px;
   /* font-weight: bold; */
@@ -349,6 +350,23 @@ span.post:hover {
   /* background-color: red; */
 
   width: auto;
+}
+
+.delete-post,
+.delete-comment{
+  display: none;
+  cursor: pointer;
+}
+
+.delete-post:before,
+.delete-comment:before{
+  content: "\274c"; 
+}
+
+.delete-post{
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .post-new-comment img {

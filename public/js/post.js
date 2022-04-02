@@ -19,6 +19,31 @@ const newReplyTemplate={
 }      
 
 
+//-- for all elements of type reply that match data-id value of user logged in ID's, show option to delete
+const _canDelete = () => {
+  console.log("Running _canDelete")
+  
+  //-- get all comments, see if logged in user owns, is yes, option to delete
+  const allComments = document.querySelectorAll(".comment.card");
+  [].forEach.call(allComments, function(comment){
+    if(comment.dataset.id === document.querySelector("#profile").dataset.id){
+      comment.querySelector( ".delete-comment" ).style.display = "block";
+    }
+  });
+
+  if(window.location.pathname.includes("/post")){
+    //-- get all posts, see if logged in user owns, is yes, option to delete
+    const postDetails = document.querySelector(".post-details");
+    console.log(postDetails)
+    if(postDetails.dataset.userid === document.querySelector("#profile").dataset.id){
+      postDetails.querySelector( ".delete-post" ).style.display = "block";
+    }
+  }
+
+}
+
+_canDelete();
+
 const postNewPost = async (event) => {
   //-- Post-new-post or reply based on location
 
@@ -98,7 +123,6 @@ const postNewPost = async (event) => {
   //TODO: 04/02/2022 #EP || Add posting animation
   //TODO: 04/02/2022 #EP || Add refresh once posted
 }
-
 
 const _canPost = event => {
   // console.log(event.target.value);
