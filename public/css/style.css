@@ -536,6 +536,8 @@ aside {
 }
 .login-section {
   
+  max-width: 641px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -718,7 +720,7 @@ form .form-input.form-input-squared {
 
   .card.section-title{
     padding: 0;
-    margin: 1rem;
+    margin: 1rem 0;
     color: white;
     background-color: var(--primary);
     align-items: center;
@@ -826,6 +828,17 @@ form .form-input.form-input-squared {
 /*----------------------------------------------------------------------------*/
 /* MEDIA TYPES */
 
+@media only screen and (min-width: 1140px) {
+
+  main{
+    margin: auto;
+  }
+  .login-section {
+    min-width: 641px;
+    max-width: 641px;
+  }
+}
+
 @media only screen and (min-width: 800px) {
   aside {
     padding: 1rem;
@@ -897,8 +910,8 @@ form .form-input.form-input-squared {
     margin: 0;
   }
 
-  [data-id="nav-spacer"] {
-    display: none;
+  .nav-spacer {
+    display:none;
   }
   
   aside,
@@ -919,3 +932,4 @@ form .form-input.form-input-squared {
     max-width: 641px;
   }  
 }
+
