@@ -428,6 +428,8 @@ section.comment.card{
   padding: 0;
 }
 
+
+
 .comment-details-header{
   /* display: inline-block; */
   padding: 0;
@@ -461,6 +463,31 @@ section.comment.card{
   content: "\274c"; 
 }
 
+
+.card-comment-header{
+  transition: ease-in-out 200ms;
+}
+.card-comment-header:hover{
+  text-decoration: underline;
+  -moz-text-decoration-color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: .1rem;
+  text-underline-offset: 1px;
+
+}
+
+.comment-title{
+  text-decoration: underline;
+  -moz-text-decoration-color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: .1rem;
+  text-underline-offset: 2px;
+}
+
+.comment-content{
+  padding: 2rem 1rem;
+  display: inline-block;
+}
 
 
 .post-new-comment img {
