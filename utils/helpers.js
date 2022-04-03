@@ -1,12 +1,10 @@
 var moment = require('moment'); //-- Using to add more dynamic date-time in view
 
+//-- Formatting Date
 const format_date = date => {
-  return `
-  ${new Date(date)
-    .getMonth() + 1}/${new Date(date)
-    .getDate()}/${new Date(date)
-    .getFullYear()
-  }`;
+  return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(
+    date
+  ).getFullYear()}`;
 };
 
 
@@ -34,10 +32,19 @@ const shrinkContent = content => {
   return content;
 }
 
+// comparison operators
+const eq = (var1, var2) =>  { console.log(var1,var2);return var1 === var2 };
+const ne = (var1, var2) =>  { return var1 !== var2 };
+const lt = (var1, var2) =>  { return var1 <   var2 };
+const gt = (var1, var2) =>  { return var1 >   var2 };
+const lte = (var1, var2) => { return var1 <=  var2 };
+const gte = (var1, var2) => { return var1 >=  var2 };
+
 module.exports = {
   format_date,
   get_TimePassed,
-  shrinkContent
+  shrinkContent,
+  eq, ne, lt, gt, lte, gte
 }
   
 // Handlebars.registerHelper('dotdotdot', function(str) {

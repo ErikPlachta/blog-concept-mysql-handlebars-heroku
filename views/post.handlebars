@@ -28,7 +28,11 @@
     
     {{#if comments}}
       <section class="card" id="comments">
-        <h3>Comments</h3>
+        {{#if (comments-length eq 1)}}
+          <h3>{{comments-length}} Comment</h3>
+        {{else}}
+          <h3>{{comments-length}} Comments</h3>
+        {{/if}}
       </section>
       {{#each comments as |comment|}}
           {{> comment-details}}
