@@ -166,7 +166,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
-  /* margin: auto;  */
+  margin: auto 2rem; 
   max-width: 1800px;
 }
 
@@ -498,7 +498,7 @@ section.comment.card{
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
-  background-color: var(--bg_body);
+  /* background-color: var(--bg_body); */
 
 }
 
@@ -583,7 +583,6 @@ aside {
   flex: 2.5;
   background-color: var(--bg_body);
   padding: 0;
-  margin: 0;
   /* display: flex; */ /* Removed flex so cards fit better */
   flex-flow: row wrap;
   justify-content: center;
@@ -921,6 +920,7 @@ form .form-input.form-input-squared {
   aside {
     padding: 1rem;
   }
+
   
   .login-card {
     width: 100%;
@@ -950,15 +950,31 @@ form .form-input.form-input-squared {
   }
 }
 
-
 @media only screen and (max-width: 550px) {
-  
+  header,
+  .card,
+  .card.section-title,  
+  .card-header{
+    width: 100%;
+    flex: 100%;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   aside{
     padding-top: 1rem;
   }
+
   .card{
-    margin: 1rem .5rem;
+    margin: 1rem 0;
   }
+
+  section.card{
+    margin: 1rem 0;
+  }
+
   [data-id="nav-spacer"] {
     display: none;
   }
@@ -970,27 +986,23 @@ form .form-input.form-input-squared {
 }
 
 @media only screen and (max-width: 400px) {
+  main{
+      
+      margin: 1rem;
+      padding: 0;
+      
+    }
+    .landing{
+      display: flex;
+
+    }
+  }
   .brand-header h1{
     font-size: 1.5rem;
     padding-top: .5rem;  
   }
   .brand-header span{
     padding-left: 1rem;
-  }
-
-  header,
-  .card,
-  .card.section-title,  
-  .card-header,
-  main{
-    width: 100%;
-    flex: 100%;
-    padding: 0;
-    margin: 0;
-
-  max-width: 100%;
-  overflow-x: hidden;
-  
   }
 
   .nav-spacer {
@@ -1014,10 +1026,5 @@ form .form-input.form-input-squared {
     width: 90%;
     max-width: 641px;
   }  
-}
-
-@media only screen and (max-width: 315px) {
-
   
-
 }
