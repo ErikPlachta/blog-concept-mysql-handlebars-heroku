@@ -299,7 +299,7 @@ nav #about{
 
 /* Used for creation a new post specifically */
 #create-new-post-section{
-  display: none;
+  /* display: none; */
 }
 
 /* Container holding the new-comment on a post creation box */

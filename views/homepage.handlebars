@@ -1,8 +1,6 @@
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+{{!-- inline styling to simplify inline behavior --}}
 <style>
-  .activity-feed{
-    display: block;
-  }
+  .activity-feed{display: block;}
 </style>
 
 {{!-- If logged in, add section containing a form to create new post --}}
@@ -10,7 +8,7 @@
   <section id="create-new-post-section">
     {{!-- TODO:: 04/02/2022 #EP || Make this a modal --}}
     <div class="card section-title">
-      <h3>Create new Post</h3>
+      <h3>Make a Post</h3>
       {{> post-create}}
     </div>
   </section>

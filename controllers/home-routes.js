@@ -207,7 +207,6 @@ router.get('/post/:id', withAuth, async (req, res) => {
     //-- send data
     res.render('post', { 
       'post': post,
-      'posts-length': posts.length,
       'comments': comments,
       'comments-length': comments.length,
       loggedIn: req.session.loggedIn,
