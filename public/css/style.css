@@ -409,6 +409,17 @@ span.post:hover {
 /* 
   POSTS COMMENTS
 */
+.comment-details-header{
+  display: flex;
+  flex-direction: row;
+  
+}
+.comment-details-header span{
+  flex: 1;
+}
+.comment-details-header h4{
+  flex: 4;
+}
 
 #comments{
   /* background-color: red; */
@@ -421,6 +432,7 @@ span.post:hover {
 .delete-comment{
   display: none;
   cursor: pointer;
+  width: 100%;
 }
 
 .delete-post:hover,
@@ -432,6 +444,8 @@ span.post:hover {
 .delete-post:before,
 .delete-comment:before{
   content: "\274c"; 
+  float: right;
+  
 }
 
 .delete-post{
