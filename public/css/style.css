@@ -412,7 +412,8 @@ span.post:hover {
 
 #comments{
   /* background-color: red; */
-
+  background-color: transparent;
+  border: none;
   width: auto;
 }
 

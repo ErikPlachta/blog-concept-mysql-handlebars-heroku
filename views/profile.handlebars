@@ -1,15 +1,14 @@
 <style>  .user-stats, .activity-feed { display: block;  }  </style>
 
-
-{{!-- <textarea name="text" id="myEditor"># Test</textarea> --}}
-
-
-
 {{#if loggedIn}}
-    {{> post-create}}
-    
+    <section>
+      <div class="card">
+        <h2>Your Profile</h2>
+        {{!--TODO:: 04/03/2022 #EP || Add more content to this placeholder concept --}}
+      </div>
+    </section>
+    {{> post-create}}    
 {{else}}
-
   <section>
     <div>
       <h2>User Login Required</h2>
@@ -17,6 +16,4 @@
       <button class="btn btn-praimry">Go to Login Page</button>
     </div>
   </section>
-
-
 {{/if}}

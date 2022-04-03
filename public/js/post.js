@@ -22,7 +22,7 @@ const newReplyTemplate={
   //-- if delete, navigate home, delete all replies
 const _deletePost = async post =>{
 
-  const postId = post.target.parentNode.dataset.userid;
+  const postId = post.target.parentNode.dataset.id;
   const response = await fetch(`../api/posts/${postId}`, {
     method: 'DELETE',
     body: '',
