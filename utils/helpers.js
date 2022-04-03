@@ -1,10 +1,12 @@
 var moment = require('moment'); //-- Using to add more dynamic date-time in view
 
-//-- Formatting Date
+//-- Formatting Date from moment to MM/DD/YYYY 
 const format_date = date => {
-  return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(
-    date
-  ).getFullYear()}`;
+  return `${
+    new Date(date).getMonth() + 1}
+    /${new Date(date).getDate()}
+    /${new Date(date ).getFullYear()
+  }`;
 };
 
 
