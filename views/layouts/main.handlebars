@@ -18,15 +18,15 @@
     </header>
   </a>
   <nav>
-    <a></a>
-    <a></a>
+    <a data-id="nav-spacer"></a>
+    <a data-id="nav-spacer"></a>
     <a data-id="nav" href="/">Home</a>
     {{#if loggedIn}}<a data-id="nav" href="/profile" id="profile" data-id="{{id}}"><img src="{{url}}" alt="{{title}}">u/{{username}}</a>{{/if}}
     {{#if loggedIn}}<a data-id="nav" id="logout" href="#">Logout</a>
     {{else}}<a data-id="nav" href="/login">Login / Sign Up</a>{{/if}}
     {{!-- <a id="about" href="#">About</a> --}}
-    <a></a>
-    <a></a>
+    <a data-id="nav-spacer"></a>
+    <a data-id="nav-spacer"></a>
   </nav>
   <!-- Trigger/Open The Modal -->
 
