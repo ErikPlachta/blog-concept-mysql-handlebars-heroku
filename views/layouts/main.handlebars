@@ -31,12 +31,12 @@
   <!-- Trigger/Open The Modal -->
 
   <main>
-    {{!-- loading left sidebar --}}
-    {{> activity-feed}}
     {{!-- Main area --}}
     <div class="landing">
       {{{body}}}
     </div>
+    {{!-- loading right sidebar --}}
+    {{> activity-feed}}
   </main>
   
   <!-- If the user is logged in, load the JS script for if clicked logout btn -->
