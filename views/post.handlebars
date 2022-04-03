@@ -1,10 +1,14 @@
+{{!-- USED WHEN LOOKING AT SPECIFIC POST a https://pathane.com/post/:id  --}}
+
 {{!-- <style>   .activity-feed { display: block;  } .popular-posts,.popular-posts h4{ display:none !important; }  </style> --}}
-<style>aside{display: none;} div .card{margin: 1rem 4rem;} </style>
-
-
-{{!-- when you're looking at a specific  --}}
+<style>aside{display: none;}  </style>
 
 <div class="landing">
+  
+  {{!-- BUILD THE PARENT POST ELEMENT --}}
+  <section class="card" id="comments">
+        <h3>Post</h3>
+  </section>
   <section class="card">
     <div class="post-details" data-id="{{post.id}}" data-userid="{{post.user.id}}">
       <span class="delete-post"></span>
@@ -20,14 +24,18 @@
     </div>
   </section>
 
-  <section class="card" id="comments">
-    <h3>Comments</h3>
     
     {{#if comments}}
+      <section class="card" id="comments">
+        {{#if (eq comments-length 1)}}
+          <h3>{{comments-length}} Comment</h3>
+        {{else}}
+          <h3>{{comments-length}} Comments</h3>
+        {{/if}}
+      </section>
       {{#each comments as |comment|}}
           {{> comment-details}}
         {{/each}}
-    
     {{else}}
       No comments, yet.
     {{/if}}

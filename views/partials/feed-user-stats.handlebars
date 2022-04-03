@@ -1,15 +1,39 @@
-<section class="card-feed">
+<section class="card-feed user-stats">
     <span title="{{username}}" class="card-feed-banner">
-      {{!-- <img src="{{resource.url}}" alt="{{resource.title}}">  --}}
-      • u/{{username}}
+      <header class="card-header">
+        <h4>
+          {{#if resource.url}}
+            <img src="{{resource.url}}" alt="{{resource.title}}"> 
+          {{else}}
+              <img src="/images/blog_icon_nobg.png" alt="default profile image" class="card-brand-logo"> 
+          {{/if}}
+          • u/{{username}}
+        </h4>
+      </header>
     </span>
-    <header class='card-content'>  
-      <ul>
-        <li>Created: {{format_date created_date}}</li>
-        <li>Age: {{get_TimePassed created_date}}</li>
-        <li>Modifier: {{format_date modified_date}}</li>
-    </ul>
-    </header>
+    {{!-- THE USERS CONTENT --}}
+    <div class="card-content">
+      
+      {{!-- all about user account --}}
+      <span>
+        <h5>Account Details</h5>  
+        <ul>
+          <li>Name: {{format_date created_date}}</li>
+          <li>Account Created Date: {{format_date created_date}}</li>
+          <li>Last Dated: {{format_date modified_date}}</li>
+          <li>Account Age: {{get_TimePassed created_date}}</li>
+          <li>User ID: {{id}}</li>
+        </ul>
+      </span>
+      {{!-- all about posts and comments --}}
+      {{!-- <span>
+        <h5>Post Details</h5>  
+        <ul>
+          <li>Number of Posts: {{posts-length}}</li>
+          <li>Number of Comments: {{comments-length}}</li>
+        </ul>
+      </span>--}}
+    </div> 
     {{!-- footer --}}
     <span class="card-footer">User ID: {{id}}</span>
 </section>

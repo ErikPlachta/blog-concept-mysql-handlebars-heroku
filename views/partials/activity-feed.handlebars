@@ -2,15 +2,15 @@
     <section class="activity-feed">
         <h3>Activity Feed</h3>
         <hr>
-        <div class ="user-stats">
+        {{!-- <div class ="user-stats">
             <h4>User Stats</h4>
             {{#each users as |user| }}
                 {{> feed-user-stats}}
             {{/each}}
-        </div>
+        </div> --}}
         
         <div class="popular-posts">
-            <h4>Posts</h4>
+            <h4>{{posts-length}} Posts</h4>
             {{#if posts}}
 
                 {{#each posts as |post|}}
@@ -28,7 +28,7 @@
         
         {{#if loggedIn}}
             <div class="popular-comments">
-                <h4>Comments</h4>
+                <h4>{{comments-length}} Comments</h4>
                 {{#if comments}}
                     {{#each comments as |comment|}}
                         {{> feed-comment}}

@@ -166,7 +166,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
-  /* margin: auto;  */
+  margin: auto 2rem; 
   max-width: 1800px;
 }
 
@@ -286,6 +286,7 @@ nav #about{
   padding: 30px 100px;
 }
 
+.comment-details-header,
 .post-details {
   position: relative;
   /* text-align: center; */
@@ -296,9 +297,9 @@ nav #about{
 /*----------------------------------------------------------------------------*/
 /* POSTS CREATION */
 
-/* Used for creation a new post specifically */
-#create-new-post-section{
-  display: none;
+#post-reply{
+  background-color: transparent;
+  border: none;
 }
 
 /* Container holding the new-comment on a post creation box */
@@ -321,7 +322,7 @@ nav #about{
 
 /* Container holding the new-post creation box */
 .post-new-post {
-  margin: 1rem 2rem 1rem 1rem;
+  margin: 1rem;
   /* padding: 1rem 1rem; */
   
   padding: .5rem;
@@ -332,12 +333,19 @@ nav #about{
   background-color: var(--bg_Section);
   color: var(--text-area_text);
 
+  transition: ease-in-out 200ms;
+
   display: flex;
   flex-direction: row;
   vertical-align: middle;
   flex-flow: wrap;
   width: auto;
   overflow: hidden;
+}
+
+/* Used for creation a new post specifically */
+.post-new-post:hover{
+  border: var(--border-hover);
 }
 
 /* Each Section within post container excluding the button. */
@@ -372,7 +380,8 @@ nav #about{
   border: 1px solid #484848;
   border-radius: 0.3rem;
   background-color: var(--tertiary);
-  transition: ease-in-out .4s;
+  transition: ease-in-out .1s;
+  border: 2px solid transparent;
 }
 
 #post-new-post-text{
@@ -380,13 +389,18 @@ nav #about{
   resize: vertical;
 }
 
+#post-new-post-text:hover,
+#post-new-post-title:hover {
+  border: var(--border-hover);
+}
+
 /* Makes label text even brighter */
 #new-post-title-label:hover,
 #new-post-text-label:hover{
   filter: brightness(110%); 
   text-shadow: 0 0 .05rem rgba(255,255,255, .4);
-
 }
+
 
 /* When hovering makes title and body brighter */
 span.post:hover {
@@ -410,9 +424,26 @@ span.post:hover {
   POSTS COMMENTS
 */
 
+section.comment.card{
+  padding: 0;
+}
+
+
+
+.comment-details-header{
+  /* display: inline-block; */
+  padding: 0;
+  width: 100%;
+  background-color: var(--bg_Section);
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
 #comments{
   /* background-color: red; */
-
+  background-color: transparent;
+  border: none;
   width: auto;
 }
 
@@ -420,6 +451,9 @@ span.post:hover {
 .delete-comment{
   display: none;
   cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .delete-post:hover,
@@ -433,11 +467,41 @@ span.post:hover {
   content: "\274c"; 
 }
 
-.delete-post{
-  position: absolute;
-  right: 0;
-  top: 0;
+
+.card-comment-header{
+  transition: ease-in-out 200ms;
 }
+
+.comment-details-header:hover{
+  text-decoration: underline;
+  -moz-text-decoration-color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: .1rem;
+  text-underline-offset: 1px;
+
+}
+
+.comment-title{
+  text-decoration: underline;
+  -moz-text-decoration-color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: .1rem;
+  text-underline-offset: 2px;
+}
+
+.comment-content{
+  display: block;
+  padding: 2rem 1rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  /* background-color: var(--bg_body); */
+
+}
+
 
 .post-new-comment img {
   display: inline-block;
@@ -519,7 +583,6 @@ aside {
   flex: 2.5;
   background-color: var(--bg_body);
   padding: 0;
-  margin: 0;
   /* display: flex; */ /* Removed flex so cards fit better */
   flex-flow: row wrap;
   justify-content: center;
@@ -529,6 +592,18 @@ aside {
   min-height: calc(100vh - 48px)
 }
 
+
+/*----------------------------------------------------------------------------*/
+/* 
+  USER STATS / PROFILE ELEMENTS
+*/
+
+/* Section containing user details */
+.user-stats{
+  margin: 1rem;
+}
+
+
 /*----------------------------------------------------------------------------*/
 /* LOGINS */
 .landing{
@@ -536,6 +611,8 @@ aside {
 }
 .login-section {
   
+  max-width: 641px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -718,7 +795,7 @@ form .form-input.form-input-squared {
 
   .card.section-title{
     padding: 0;
-    margin: 1rem;
+    margin: 1rem 0;
     color: white;
     background-color: var(--primary);
     align-items: center;
@@ -737,6 +814,7 @@ form .form-input.form-input-squared {
   
 
 .card-header {
+  text-align: center;
   align-items: center;
   color: var(--text-area_text);
   font-weight: bold;
@@ -769,8 +847,9 @@ form .form-input.form-input-squared {
   background-color: var(--bg_Section);
   font-size: .75rem;
   /* margin: .5rem 1rem 0; */
-  padding: .25rem;
+  padding: 0 .5rem;
   min-height: 100%;
+  text-align: center;
 }
 
 /* LAYOUT */
@@ -826,10 +905,22 @@ form .form-input.form-input-squared {
 /*----------------------------------------------------------------------------*/
 /* MEDIA TYPES */
 
+@media only screen and (min-width: 1140px) {
+
+  main{
+    margin: auto;
+  }
+  .login-section {
+    min-width: 641px;
+    max-width: 641px;
+  }
+}
+
 @media only screen and (min-width: 800px) {
   aside {
     padding: 1rem;
   }
+
   
   .login-card {
     width: 100%;
@@ -837,7 +928,7 @@ form .form-input.form-input-squared {
   }
 
   .post-new-post {
-    margin: 1rem 2rem 1rem 1rem;
+    margin: 1rem;
     padding: .5rem;
     flex: 0 1 100%;
     
@@ -859,14 +950,31 @@ form .form-input.form-input-squared {
   }
 }
 
+@media only screen and (max-width: 550px) {
+  header,
+  .card,
+  .card.section-title,  
+  .card-header{
+    width: 100%;
+    flex: 100%;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
-@media only screen and (max-width: 600px) {
   aside{
     padding-top: 1rem;
   }
+
   .card{
-    margin: 1rem .5rem;
+    margin: 1rem 0;
   }
+
+  section.card{
+    margin: 1rem 0;
+  }
+
   [data-id="nav-spacer"] {
     display: none;
   }
@@ -878,6 +986,17 @@ form .form-input.form-input-squared {
 }
 
 @media only screen and (max-width: 400px) {
+  main{
+      
+      margin: 1rem;
+      padding: 0;
+      
+    }
+    .landing{
+      display: flex;
+
+    }
+  }
   .brand-header h1{
     font-size: 1.5rem;
     padding-top: .5rem;  
@@ -886,19 +1005,8 @@ form .form-input.form-input-squared {
     padding-left: 1rem;
   }
 
-  header,
-  .card,
-  .card.section-title,  
-  .card-header,
-  main{
-    width: 100%;
-    flex: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
-  [data-id="nav-spacer"] {
-    display: none;
+  .nav-spacer {
+    display:none;
   }
   
   aside,
@@ -910,12 +1018,13 @@ form .form-input.form-input-squared {
     margin-top: 1rem;
   }
 
-  aside{
+  /* aside{
     display: none;
-  }
+  } */
 
   .login-card {
     width: 90%;
     max-width: 641px;
   }  
+  
 }

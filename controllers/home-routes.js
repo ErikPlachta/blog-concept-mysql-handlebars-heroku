@@ -70,7 +70,9 @@ router.get('/', async (req, res) => {
       res.render('homepage', {
         activeUserData,
         comments,
+        'comments-length': comments.length,
         posts,
+        'posts-length': posts.length,
         loggedIn: req.session.loggedIn,
         username: req.session.username,
         id: req.session.user_id
@@ -146,7 +148,9 @@ router.get('/profile', withAuth, async (req, res) => {
       user_id: req.session.user_id,
     },
     include: [
-      { model: Post, attributes: ['id'], },
+      { model: Post,
+        attributes: ['id']
+      },
     ],
   });
   //-- building comments
@@ -156,7 +160,9 @@ router.get('/profile', withAuth, async (req, res) => {
   res.render('profile', {
     users,
     comments,
+    'comments-length': comments.length,
     posts,
+    'posts-length': posts.length,
     loggedIn: req.session.loggedIn,
     username: req.session.username,
     id: req.session.user_id
@@ -202,6 +208,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
     res.render('post', { 
       'post': post,
       'comments': comments,
+      'comments-length': comments.length,
       loggedIn: req.session.loggedIn,
       username: req.session.username,
       id: req.session.user_id

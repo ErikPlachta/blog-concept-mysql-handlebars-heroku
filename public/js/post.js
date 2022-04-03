@@ -10,7 +10,6 @@ const newPostTemplate={
 
 //-- what a reply body needs to contain. Used in /post/:id
 const newReplyTemplate={
-  "user_id" : "", //-- user logged in
   "post_id" : "", //-- the parent post id
   "title" : "", //-- the users reply title
   "content" :"", //-- users reply message
@@ -39,7 +38,8 @@ const _deletePost = async post =>{
 
 //-- API CALL for if logged-in user owns comment and is viewing on post page, can delete comments
 const _deleteComment = async comment =>{
-  const commentId = comment.target.parentNode.parentNode.dataset.id;
+  const commentId = comment.target.parentNode.parentNode.parentNode.dataset.id;
+  // console.log(commentId)
   const response = await fetch(`../api/comments/${commentId}`, {
     method: 'DELETE',
     body: '',
@@ -59,7 +59,7 @@ const _canDelete = () => {
   //-- get all comments, see if logged in user owns, is yes, option to delete
   const allComments = document.querySelectorAll(".comment.card");
   [].forEach.call(allComments, function(comment){
-    if(comment.dataset.userid === document.querySelector("#profile").dataset.id){
+    if(comment.dataset.userid === document.querySelector("#profile").dataset.userid){
       comment.querySelector( ".delete-comment" ).style.display = "block";
       comment.querySelector( ".delete-comment" ).addEventListener("click",_deleteComment);
     }
@@ -71,7 +71,7 @@ const _canDelete = () => {
     const postDetails = document.querySelector(".post-details");
     
     
-    if(postDetails.dataset.userid === document.querySelector("#profile").dataset.id){
+    if(postDetails.dataset.userid === document.querySelector("#profile").dataset.userid){
       postDetails.querySelector( ".delete-post" ).style.display = "block";
       postDetails.querySelector( ".delete-post" ).addEventListener("click",_deletePost)
     }
@@ -91,23 +91,30 @@ const postNewPost = async (event) => {
     if(window.location.pathname.includes("/post/")){
       
       //-- BUILDING CONTENT TO POST
-      
-      newReplyTemplate.user_id = document.querySelector("#profile").dataset.id; //-- user logged in
       newReplyTemplate.post_id = document.querySelector(".post-details").dataset.id; //-- the parent post id
       newReplyTemplate.title = title;
       newReplyTemplate.content = body;
-      console.table(newReplyTemplate)
+      
+      //-- is user-id in content does not match content
+      // if(newReplyTemplate.user_id === document.querySelector("#profile").dataset.userid){  
+      // console.log("Reply to post...")
+      // console.table(newReplyTemplate)
+      // alert("worked!")
 
-      const response = await fetch('../api/comments', {
+      const response = await fetch('/../api/comments', {
         method: 'POST',
         body: (JSON.stringify(newReplyTemplate)),
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.ok) {
           document.location.replace(window.location.pathname);
-        } else {
+        //-- Otherwise failed to post
+          //TODO:: 04/03/2022 #EP || Must be offline, add offline management with Service Worker
+      } else {
           alert('failed to post.');
-        }
+      }
+      
+      //-- exit
       return null;
     }
 

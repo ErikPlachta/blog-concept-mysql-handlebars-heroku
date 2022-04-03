@@ -12,31 +12,31 @@
 <body>
   <a href="/">
     <header class="brand-header">
-      <img src="./images/logo-192x192png" alt='brand-logo' class="brand-logo" />
+      <img src="/images/logo-192x192png" alt='brand-logo' class="brand-logo" />
       <h1>Blog Concept</h1>
       <span>By Erik Plachta</span>
     </header>
   </a>
   <nav>
-    <a data-id="nav-spacer"></a>
-    <a data-id="nav-spacer"></a>
+    <a class="nav-spacer"></a>
+    <a class="nav-spacer"></a>
     <a data-id="nav" href="/">Home</a>
-    {{#if loggedIn}}<a data-id="nav" href="/profile" id="profile" data-id="{{id}}"><img src="{{url}}" alt="{{title}}">u/{{username}}</a>{{/if}}
+    {{#if loggedIn}}<a data-id="nav" href="/profile" id="profile" data-userid="{{id}}"><img src="{{url}}" alt="{{title}}">u/{{username}}</a>{{/if}}
     {{#if loggedIn}}<a data-id="nav" id="logout" href="#">Logout</a>
     {{else}}<a data-id="nav" href="/login">Login / Sign Up</a>{{/if}}
     {{!-- <a id="about" href="#">About</a> --}}
-    <a data-id="nav-spacer"></a>
-    <a data-id="nav-spacer"></a>
+    <a class="nav-spacer"></a>
+    <a class="nav-spacer"></a>
   </nav>
   <!-- Trigger/Open The Modal -->
 
   <main>
-    {{!-- loading left sidebar --}}
-    {{> activity-feed}}
     {{!-- Main area --}}
     <div class="landing">
       {{{body}}}
     </div>
+    {{!-- loading right sidebar --}}
+    {{> activity-feed}}
   </main>
   
   <!-- If the user is logged in, load the JS script for if clicked logout btn -->
