@@ -1,6 +1,5 @@
 {{!-- USED WHEN PROVIDING COMMENTS TO HOMEPAGE AND ON POSTS TOO --}}
 <section class="comment card" data-id="{{id}}" data-userid="{{user.id}}">
-
   {{!-- <a href="/users/{{user.id}}"> --}}
     <span title="{{user.username}}" class="card-feed-banner">
       <header class="comment-details-header">
@@ -17,9 +16,12 @@
     </span>
   {{!-- </a> --}}
     
+  {{!-- <span>
+    {{user.username}} said,
+  </span> --}}
   {{!-- content within comment --}}
   <span class="comment-content">
-    content
+    {{content}}
   </span>
   
   <div class="card-footer">

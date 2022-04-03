@@ -434,6 +434,10 @@ section.comment.card{
   /* display: inline-block; */
   padding: 0;
   width: 100%;
+  background-color: var(--bg_Section);
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 #comments{
@@ -486,8 +490,16 @@ section.comment.card{
 }
 
 .comment-content{
+  display: block;
   padding: 2rem 1rem;
-  display: inline-block;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  background-color: var(--bg_body);
+
 }
 
 
@@ -803,6 +815,7 @@ form .form-input.form-input-squared {
   
 
 .card-header {
+  text-align: center;
   align-items: center;
   color: var(--text-area_text);
   font-weight: bold;
@@ -837,6 +850,7 @@ form .form-input.form-input-squared {
   /* margin: .5rem 1rem 0; */
   padding: 0 .5rem;
   min-height: 100%;
+  text-align: center;
 }
 
 /* LAYOUT */
