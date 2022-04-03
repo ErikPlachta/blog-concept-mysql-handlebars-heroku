@@ -29,8 +29,8 @@ const get_TimePassed = ( date ) => {
 
 
 const shrinkContent = content => {
-  if (content.length > 250)
-    return content.substring(0,250) + '...';
+  if (content.length > 100)
+    return content.substring(0,100) + '...';
   return content;
 }
 

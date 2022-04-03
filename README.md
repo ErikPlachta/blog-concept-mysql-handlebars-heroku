@@ -22,13 +22,17 @@ on a Heroku server.
 - Users Post or Delete their own Replies to Comments
 - If a Comment with Replies is Deleted, all Replies are also Deleted no matter their owner
 
-### 👇🏼 **To Use the App, head the URL Below**
+## 👇🏼 **Try it Out**
+
+> This is a link to to the live app.
 
 [ErikPlachta/Blog-Concept-App](https://blog-app-cloudhosted-mvc-modul.herokuapp.com/)
 
 ---
 
-### Here is a Giphy of It's Basic Operations
+### A Demo Gif
+
+> This giphy demonstrates all features.
 
 <img src='./public/images/demo.gif' />
 
@@ -37,4 +41,3 @@ on a Heroku server.
 ## Created by [Erik Plachta](https://www.github.com/erikplachta)
 
 See [my portfolio here](https://erikplachta.com), to get in touch or learn more about my work.
-

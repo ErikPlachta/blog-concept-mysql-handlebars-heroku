@@ -142,7 +142,7 @@ h5 {
       background: var(--primary);
       color: var(--light);
       display: flex;
-      justify-content: space-between;
+      justify-content: left;
       padding: 1rem;
       vertical-align: bottom;
       height: 100%;
@@ -211,7 +211,7 @@ h5 {
 
 
 /*----------------------------------------------------------------------------*/
-/* POSTS INLINE FEED */
+/* POSTS INLINE FEED For Post Details and when viewing a Post Directly */
 
 .post {
   width: 90%;
@@ -240,6 +240,11 @@ h5 {
 
 /*----------------------------------------------------------------------------*/
 /* POSTS CREATION */
+
+/* Used for creation a new post specifically */
+#create-new-post-section{
+  display: none;
+}
 
 /* Container holding the new-comment on a post creation box */
 .post-new-comment {
@@ -619,13 +624,35 @@ form .form-input.form-input-squared {
   width: 100%;
 }
 
+.post-preview{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: baseline;
+  padding: 0;
+}
+
+/* The Link Around the Post Preview on the Homepage */
+/* .post-preview a{
+  background-color: var(--bg_body);
+} */
+
+
 .card-banner img,
 .card-feed-banner img {
   display: inline-block;
-  height: 20px;
+  height: 22px;
   margin-right: 4px;
   vertical-align: middle;
-  width: 20px;
+  width: 22px;
+  padding: .1rem;
+}
+
+.card-brand-logo{
+  background-color: var(--accent);
+  border-radius: 100%;
+  
 }
 
   .card.section-title{
@@ -635,19 +662,21 @@ form .form-input.form-input-squared {
     background-color: var(--primary);
     align-items: center;
     text-align: center;
+    border: none;
   }
 
-  .card.section-title h3{
-    width: 30%;
+  .card.section-title h3,
+  .card.section-title hr{
+    width: 40%;
     min-width: 280px;
     margin: auto;
-  }
-  .card.section-title hr{
-    width: 30%;
+    margin-bottom: .25rem;
   }
   
+  
 
-.card header {
+.card-header {
+  align-items: center;
   color: var(--text-area_text);
   font-weight: bold;
   /* text-transform: uppercase; */
@@ -666,15 +695,21 @@ form .form-input.form-input-squared {
 
 .card-content {
   text-align: left;
-  padding: .25rem 1rem;
+  padding: 1rem;
   position:relative;
+  line-height: 1.6;
+  background-color: var(--bg_body);
   /* border-bottom: 1px solid red; */
 }
 
+/* .card-banner, */
 .card-footer{
   flex: 100%;
+  background-color: var(--bg_Section);
   font-size: .75rem;
-  margin: .5rem 1rem;
+  /* margin: .5rem 1rem 0; */
+  padding: .25rem;
+  min-height: 100%;
 }
 
 /* LAYOUT */
@@ -686,7 +721,7 @@ form .form-input.form-input-squared {
 }
 
 /*----------------------------------------------------------------------------*/
-/* MODALS */
+/* MODALS to be used for post */
 
 .modal {
   display: none;
