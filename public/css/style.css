@@ -467,7 +467,8 @@ section.comment.card{
 .card-comment-header{
   transition: ease-in-out 200ms;
 }
-.card-comment-header:hover{
+
+.comment-details-header:hover{
   text-decoration: underline;
   -moz-text-decoration-color: var(--accent);
   text-decoration-color: var(--accent);

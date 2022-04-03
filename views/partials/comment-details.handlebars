@@ -1,22 +1,9 @@
 {{!-- USED WHEN PROVIDING COMMENTS TO HOMEPAGE AND ON POSTS TOO --}}
 <section class="comment card" data-id="{{id}}" data-userid="{{user.id}}">
-  {{!-- <a href="/post/{{id}}"> --}}
-    {{!-- <banner>Reply by u/{{user.username}} on {{hours_passed created_date}}</banner> --}}
-    <header class="comment-details-header">
-      {{#if resource.url}}
-        <img src="{{resource.url}}" alt="{{resource.title}}"> 
-        <h4>{{title}} by {{user.username}}</h4>
-      {{else}}
-          <img src="/images/blog_icon_nobg.png" alt="default profile image" class="card-brand-logo"> 
-          <h4>{{title}} by {{user.username}}</h4>
-      {{/if}}
-      • u/{{username}}
-      <span class="delete-comment"></span>
-    </header>
 
-  <a href="/post/{{id}}">
+  {{!-- <a href="/users/{{user.id}}"> --}}
     <span title="{{user.username}}" class="card-feed-banner">
-      <header class="card-header card-comment-header">
+      <header class="comment-details-header">
         <h4>
           {{#if user.resource.url}}
             <img src="{{user.resource.url}}" alt="{{user.resource.title}}"> 
@@ -25,9 +12,10 @@
           {{/if}}
           • u/{{user.username}} / <span class="comment-title">{{title}}</span>
         </h4>
+        <span class="delete-comment"></span>
       </header>
     </span>
-  </a>
+  {{!-- </a> --}}
     
   {{!-- content within comment --}}
   <span class="comment-content">

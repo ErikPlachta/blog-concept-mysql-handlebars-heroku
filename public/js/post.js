@@ -38,8 +38,8 @@ const _deletePost = async post =>{
 
 //-- API CALL for if logged-in user owns comment and is viewing on post page, can delete comments
 const _deleteComment = async comment =>{
-  const commentId = comment.target.parentNode.parentNode.dataset.id;
-  console.log(commentId)
+  const commentId = comment.target.parentNode.parentNode.parentNode.dataset.id;
+  // console.log(commentId)
   const response = await fetch(`../api/comments/${commentId}`, {
     method: 'DELETE',
     body: '',
