@@ -212,6 +212,7 @@ h5 {
 /* Main Content Header with Brand-name, etc */
 
 .brand-header{
+  display: flex;
   justify-content: center;
 }
 
@@ -219,10 +220,10 @@ img.brand-logo {
   background-color: var(--accent);
   border-radius: 100%;
   display: inline-block;
-  min-height: 32px;
-  max-height: 32px;
-  min-width: 32px;
-  max-width: 32px;
+  min-height: 40px;
+  max-height: 40px;
+  min-width: 40px;
+  max-width: 40px;
   margin-right: 1rem;
   vertical-align: middle;
   padding: .1rem;
