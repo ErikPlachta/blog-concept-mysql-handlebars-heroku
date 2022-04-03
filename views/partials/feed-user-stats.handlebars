@@ -26,17 +26,14 @@
         </ul>
       </span>
       {{!-- all about posts and comments --}}
-      <span>
+      {{!-- <span>
         <h5>Post Details</h5>  
         <ul>
-          <li>Name: {{format_date created_date}}</li>
-          <li>Account Created Date: {{format_date created_date}}</li>
-          <li>Last Dated: {{format_date modified_date}}</li>
-          <li>Account Age: {{get_TimePassed created_date}}</li>
-          <li>User ID: {{id}}</li>
+          <li>Number of Posts: {{posts-length}}</li>
+          <li>Number of Comments: {{comments-length}}</li>
         </ul>
-      </span>
-    </div>
+      </span>--}}
+    </div> 
     {{!-- footer --}}
     <span class="card-footer">User ID: {{id}}</span>
 </section>
