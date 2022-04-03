@@ -10,14 +10,15 @@
 </head>
 
 <body>
-  <header class="brand-header">
-    {{!-- <span> --}}
+  <a href="/">
+    <header class="brand-header">
       <img src="./images/logo-192x192png" alt='brand-logo' class="brand-logo" />
-      <h1>Erik Plachta's Concept Blog App</h1>
-    {{!-- </span> --}}
-  </header>
+      <h1>Blog Concept</h1>
+      <span>By Erik Plachta</span>
+    </header>
+  </a>
   <nav>
-    <a href="/">Homepage</a>
+    <a href="/">Home</a>
     {{#if loggedIn}}<a href="/profile" id="profile" data-id="{{id}}"><img src="{{url}}" alt="{{title}}">u/{{username}}</a>{{/if}}
     {{#if loggedIn}}<a id="logout" href="#">Logout</a>
     {{else}}<a href="/login">Login / Sign Up</a>{{/if}}

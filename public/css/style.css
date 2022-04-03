@@ -167,56 +167,36 @@ h5 {
       flex-grow: 1;
     }
 
-    nav {
-      
-      display: flex;
-      justify-content: center;
-      background-color: var(--secondary);
-      color: var(--light);
-      overflow: hidden;
-      transition: ease-in-out 200ms;
-    }
-
-    nav a {
-      flex: auto;
-      padding: 1rem 2rem;
-      text-decoration: none;
-      color: var(--light);
-      text-align: center;
-      /* transition-delay: .3s;
-      transition: color .3s;  */
-      border-bottom: 2px solid var(--accent-fade);
-      transition: ease-in-out 200ms;
-    }
-
-    /* makes sure about is on the far-right */
-    nav #about{
-      max-width: 5%;
-    }
-
-    nav a:hover {
-      /* color: var(--secondary); */
-      border-bottom: 2px solid  var(--accent);
-      text-decoration: none;
-      font-weight: 450;
-      /* transform: scale(1.01); */
-    }
-
     img {
       max-width: 100%;
       height: auto;
     }
+    
 
-
+  
 /*----------------------------------------------------------------------------*/
 /* Main Content Header with Brand-name, etc */
 
 .brand-header{
   display: flex;
   justify-content: center;
+  position: fixed;
+  width: 100%;
+  height: 2rem;
+  padding: .5rem 0 1rem;
+  box-shadow: var(--boxShadow_bottom_accent_Primary);
+  z-index: 9999;
+  transition: ease-in-out 200ms;
 }
 
-img.brand-logo {
+.brand-header span{
+  padding-left: 3rem;
+  display: inline-block;
+  margin-top: auto;
+  vertical-align: bottom;
+}
+
+.brand-header img.brand-logo {
   background-color: var(--accent);
   border-radius: 100%;
   display: inline-block;
@@ -227,6 +207,46 @@ img.brand-logo {
   margin-right: 1rem;
   vertical-align: middle;
   padding: .1rem;
+}
+
+.brand-header:hover {
+  text-shadow: 0 .1rem 1rem 1rem var(--accent);
+}
+
+
+nav {
+  margin-top: 3.5rem;
+  display: flex;
+  justify-content: center;
+  background-color: var(--secondary);
+  color: var(--light);
+  overflow: hidden;
+  transition: ease-in-out 200ms;
+}
+
+nav a {
+  flex: auto;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  color: var(--light);
+  text-align: center;
+  /* transition-delay: .3s;
+  transition: color .3s;  */
+  border-bottom: 2px solid var(--accent-fade);
+  transition: ease-in-out 200ms;
+}
+
+/* makes sure about is on the far-right */
+nav #about{
+  max-width: 5%;
+}
+
+nav a:hover {
+  /* color: var(--secondary); */
+  border-bottom: 2px solid  var(--accent);
+  text-decoration: none;
+  font-weight: 450;
+  /* transform: scale(1.01); */
 }
 
 
