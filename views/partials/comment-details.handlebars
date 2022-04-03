@@ -1,4 +1,4 @@
-{{!-- USED WHEN PROVIDING A PREVIEW OF A COMMENT --}}
+{{!-- USED WHEN PROVIDING COMMENTS TO HOMEPAGE AND ON POSTS TOO --}}
 <section class="comment card" data-id="{{id}}" data-userid="{{user.id}}">
   {{!-- <a href="/post/{{id}}"> --}}
     {{!-- <banner>Reply by u/{{user.username}} on {{hours_passed created_date}}</banner> --}}
@@ -7,6 +7,7 @@
       <span class="delete-comment"></span>
     </header>
     
+    {{!-- TODO:: REMOVE SHRINK --}}
     <span>{{{shrinkContent content}}}</span>
     
     <div class="card-footer">

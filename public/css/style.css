@@ -286,6 +286,7 @@ nav #about{
   padding: 30px 100px;
 }
 
+.comment-details-header,
 .post-details {
   position: relative;
   /* text-align: center; */
