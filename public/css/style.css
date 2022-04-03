@@ -409,16 +409,15 @@ span.post:hover {
 /* 
   POSTS COMMENTS
 */
+
+section.comment.card{
+  padding: 0;
+}
+
 .comment-details-header{
-  display: flex;
-  flex-direction: row;
-  
-}
-.comment-details-header span{
-  flex: 1;
-}
-.comment-details-header h4{
-  flex: 4;
+  /* display: inline-block; */
+  padding: 0;
+  width: 100%;
 }
 
 #comments{
@@ -432,7 +431,9 @@ span.post:hover {
 .delete-comment{
   display: none;
   cursor: pointer;
-  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .delete-post:hover,
@@ -444,15 +445,9 @@ span.post:hover {
 .delete-post:before,
 .delete-comment:before{
   content: "\274c"; 
-  float: right;
-  
 }
 
-.delete-post{
-  position: absolute;
-  right: 0;
-  top: 0;
-}
+
 
 .post-new-comment img {
   display: inline-block;

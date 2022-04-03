@@ -1,8 +1,8 @@
+{{!-- USED WHEN LOOKING AT SPECIFIC POST a https://pathane.com/post/:id  --}}
+
+
 {{!-- <style>   .activity-feed { display: block;  } .popular-posts,.popular-posts h4{ display:none !important; }  </style> --}}
 <style>aside{display: none;} div .card{margin: 1rem 4rem;} </style>
-
-
-{{!-- when you're looking at a specific  --}}
 
 <div class="landing">
   <section class="card">
@@ -22,6 +22,7 @@
 
   <section class="card" id="comments">
     <h3>Comments</h3>
+  </section>
     
     {{#if comments}}
       {{#each comments as |comment|}}
