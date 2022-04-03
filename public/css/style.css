@@ -457,7 +457,7 @@ span.post:hover {
 
 aside {
   /* display: none; */
-  padding: 0 1rem;
+  padding: 1rem;
   flex: 1;
   background-color: var(--primary);
   margin: 0;
@@ -840,6 +840,9 @@ form .form-input.form-input-squared {
 
 
 @media only screen and (max-width: 600px) {
+  aside{
+    padding-top: 1rem;
+  }
   .card{
     margin: 1rem .5rem;
   }
@@ -851,9 +854,39 @@ form .form-input.form-input-squared {
 }
 
 @media only screen and (max-width: 400px) {
-  .post-new-post {
+  .brand-header h1{
+    font-size: 1.5rem;
+    padding-top: .5rem;  
+  }
+  .brand-header span{
+    padding-left: 1rem;
+  }
+
+  header,
+  .card,
+  .card.section-title,  
+  .card-header,
+  main{
+    width: 100%;
+    flex: 100%;
+    padding: 0;
+    margin: 0;
     
   }
+  
+  aside,
+  .activity-feed,
+  section{
+    padding-top: 1rem;
+  }
+  .card {
+    margin-top: 1rem;
+  }
+
+  aside{
+    display: none;
+  }
+
   .login-card {
     width: 90%;
     max-width: 641px;
