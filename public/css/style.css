@@ -149,14 +149,12 @@ h5 {
       text-align: center;
       overflow: hidden;
     }
-    header h1 {
-      flex: 50%;
-    }
+    
     header h3 {
       flex: 10%;
       margin: auto;
-      transition: transform 200ms; /* Animation */
-      /* border: 1px solid red; */
+      transition: transform 200ms; 
+     
     }
     header h3:hover {
       /* cursor: pointer; */
@@ -208,6 +206,27 @@ h5 {
       max-width: 100%;
       height: auto;
     }
+
+
+/*----------------------------------------------------------------------------*/
+/* Main Content Header with Brand-name, etc */
+
+.brand-header{
+  justify-content: center;
+}
+
+img.brand-logo {
+  background-color: var(--accent);
+  border-radius: 100%;
+  display: inline-block;
+  min-height: 32px;
+  max-height: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  margin-right: 1rem;
+  vertical-align: middle;
+  padding: .1rem;
+}
 
 
 /*----------------------------------------------------------------------------*/
@@ -642,17 +661,17 @@ form .form-input.form-input-squared {
 .card-banner img,
 .card-feed-banner img {
   display: inline-block;
-  height: 22px;
+  height: 18px;
   margin-right: 4px;
   vertical-align: middle;
-  width: 22px;
-  padding: .1rem;
+  width: 18px;
+  padding: .05rem;
 }
 
-.card-brand-logo{
+
+.card-brand-logo {
   background-color: var(--accent);
   border-radius: 100%;
-  
 }
 
   .card.section-title{
