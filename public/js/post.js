@@ -22,7 +22,7 @@ const newReplyTemplate={
   //-- if delete, navigate home, delete all replies
 const _deletePost = async post =>{
 
-  const postId = post.target.parentNode.dataset.id;
+  const postId = post.target.parentNode.dataset.userid;
   const response = await fetch(`../api/posts/${postId}`, {
     method: 'DELETE',
     body: '',
@@ -39,6 +39,7 @@ const _deletePost = async post =>{
 //-- API CALL for if logged-in user owns comment and is viewing on post page, can delete comments
 const _deleteComment = async comment =>{
   const commentId = comment.target.parentNode.parentNode.dataset.id;
+  console.log(commentId)
   const response = await fetch(`../api/comments/${commentId}`, {
     method: 'DELETE',
     body: '',
@@ -58,7 +59,7 @@ const _canDelete = () => {
   //-- get all comments, see if logged in user owns, is yes, option to delete
   const allComments = document.querySelectorAll(".comment.card");
   [].forEach.call(allComments, function(comment){
-    if(comment.dataset.userid === document.querySelector("#profile").dataset.id){
+    if(comment.dataset.userid === document.querySelector("#profile").dataset.userid){
       comment.querySelector( ".delete-comment" ).style.display = "block";
       comment.querySelector( ".delete-comment" ).addEventListener("click",_deleteComment);
     }
