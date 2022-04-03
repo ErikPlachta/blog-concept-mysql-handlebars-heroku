@@ -20,10 +20,18 @@
 {{!-- Load a preview of all posts into homepage --}}
 <section>
   <div class="card section-title">
-    <h3>Post Feed</h3>  
-    <hr />
-    {{#each posts as |post|}}
-        {{> post-preview}}
-    {{/each}}
+    {{#if posts}}
+        <h3>{{posts-length}} Posts</h3> 
+        <hr />
+    {{else}}
+      <h3>No Posts to Display</h3>
+      <hr />
+    {{/if}}
+    
+    {{#if posts}}
+      {{#each posts as |post|}}
+          {{> post-preview}}
+      {{/each}}
+    {{/if}}
    </div>
 </section>

@@ -1,6 +1,8 @@
-<section class="card-feed">
+<section class="card-feed user-stats">
     <span title="{{username}}" class="card-feed-banner">
-      {{!-- <img src="{{resource.url}}" alt="{{resource.title}}">  --}}
+      {{#if resource.url}}
+        <img src="{{resource.url}}" alt="{{resource.title}}"> 
+      {{/if}}
       • u/{{username}}
     </span>
     <header class='card-content'>  

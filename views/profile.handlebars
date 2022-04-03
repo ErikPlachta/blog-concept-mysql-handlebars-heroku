@@ -1,12 +1,10 @@
 <style>  .user-stats, .activity-feed { display: block;  }  </style>
 
 {{#if loggedIn}}
-    <section>
-      <div class="card">
-        <h2>Your Profile</h2>
-        {{!--TODO:: 04/03/2022 #EP || Add more content to this placeholder concept --}}
-      </div>
-    </section>
+    {{#each users as |user| }}
+      {{> feed-user-stats}}
+    {{/each}}
+    {{!-- element to create posts --}}
     {{> post-create}}    
 {{else}}
   <section>

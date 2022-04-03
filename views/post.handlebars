@@ -9,6 +9,7 @@
   {{!-- BUILD THE PARENT POST ELEMENT --}}
   <section class="card" id="comments">
         <h3>Post</h3>
+        <hr />
   </section>
   <section class="card">
     <div class="post-details" data-id="{{post.id}}" data-userid="{{post.user.id}}">
@@ -39,11 +40,12 @@
         {{/each}}
     {{else}}
       No comments, yet.
+      <hr />
     {{/if}}
   </section>
 
   <section class="card" id="post-reply">
-    <h3>Post a Reply</h3>
+    <h3>Post a Comment</h3>
     {{> post-create }}
   </section>
 

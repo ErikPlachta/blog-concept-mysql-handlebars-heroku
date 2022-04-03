@@ -297,11 +297,6 @@ nav #about{
 /*----------------------------------------------------------------------------*/
 /* POSTS CREATION */
 
-/* Used for creation a new post specifically */
-#create-new-post-section{
-  /* display: none; */
-}
-
 /* Container holding the new-comment on a post creation box */
 .post-new-comment {
   margin: 1rem 3rem 1rem 2rem;
@@ -333,12 +328,19 @@ nav #about{
   background-color: var(--bg_Section);
   color: var(--text-area_text);
 
+  transition: ease-in-out 200ms;
+
   display: flex;
   flex-direction: row;
   vertical-align: middle;
   flex-flow: wrap;
   width: auto;
   overflow: hidden;
+}
+
+/* Used for creation a new post specifically */
+.post-new-post:hover{
+  border: var(--border-hover);
 }
 
 /* Each Section within post container excluding the button. */
@@ -373,7 +375,8 @@ nav #about{
   border: 1px solid #484848;
   border-radius: 0.3rem;
   background-color: var(--tertiary);
-  transition: ease-in-out .4s;
+  transition: ease-in-out .1s;
+  border: 2px solid transparent;
 }
 
 #post-new-post-text{
@@ -381,13 +384,18 @@ nav #about{
   resize: vertical;
 }
 
+#post-new-post-text:hover,
+#post-new-post-title:hover {
+  border: var(--border-hover);
+}
+
 /* Makes label text even brighter */
 #new-post-title-label:hover,
 #new-post-text-label:hover{
   filter: brightness(110%); 
   text-shadow: 0 0 .05rem rgba(255,255,255, .4);
-
 }
+
 
 /* When hovering makes title and body brighter */
 span.post:hover {
@@ -539,6 +547,18 @@ aside {
   /* Making sure loads beyond view space */
   min-height: calc(100vh - 48px)
 }
+
+
+/*----------------------------------------------------------------------------*/
+/* 
+  USER STATS / PROFILE ELEMENTS
+*/
+
+/* Section containing user details */
+.user-stats{
+  margin: 1rem;
+}
+
 
 /*----------------------------------------------------------------------------*/
 /* LOGINS */
@@ -782,7 +802,7 @@ form .form-input.form-input-squared {
   background-color: var(--bg_Section);
   font-size: .75rem;
   /* margin: .5rem 1rem 0; */
-  padding: .25rem;
+  padding: 0 .5rem;
   min-height: 100%;
 }
 
@@ -861,7 +881,7 @@ form .form-input.form-input-squared {
   }
 
   .post-new-post {
-    margin: 1rem 2rem 1rem 1rem;
+    margin: 1rem;
     padding: .5rem;
     flex: 0 1 100%;
     
