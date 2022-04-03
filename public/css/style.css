@@ -66,6 +66,7 @@
 
 html {
   scroll-behavior: smooth;
+  
 }
 
 *,
@@ -79,7 +80,7 @@ html {
 
 body {
   box-sizing: border-box;
-
+  background-color: var(--bg_body);
   font-family: Roboto, Arial, sans-serif;  
   /* Prevents cursor from changing from arrow unless explicit */
   cursor: default;
@@ -90,7 +91,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   justify-content: flex-start;
-  background-color: var(--quaternary);
+  
   font-size: .9rem;
   /* font: inherit; */
   /* vertical-align: baseline; */
@@ -138,39 +139,50 @@ h5 {
   LAYOUT CONTENT
 */
 
-    header {
-      background: var(--primary);
-      color: var(--light);
-      display: flex;
-      justify-content: left;
-      padding: 1rem;
-      vertical-align: bottom;
-      height: 100%;
-      text-align: center;
-      overflow: hidden;
-    }
-    
-    header h3 {
-      flex: 10%;
-      margin: auto;
-      transition: transform 200ms; 
-     
-    }
-    header h3:hover {
-      /* cursor: pointer; */
-      transform: scale(1.01); 
-    }
+header {
+  background: var(--primary);
+  color: var(--light);
+  display: flex;
+  justify-content: left;
+  padding: 1rem;
+  vertical-align: bottom;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+}
 
-    main {
-      display: flex;
-      flex-wrap: wrap;
-      flex-grow: 1;
-    }
+header h3 {
+  flex: 10%;
+  margin: auto;
+  transition: transform 200ms; 
+  
+}
+header h3:hover {
+  /* cursor: pointer; */
+  transform: scale(1.01); 
+}
 
-    img {
-      max-width: 100%;
-      height: auto;
-    }
+main {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  margin: auto;
+  
+  max-width: 1800px;
+}
+
+/* nav, */
+main {
+  
+  /* max-width: 1800px; */
+  
+  
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
     
 
   
@@ -186,14 +198,23 @@ h5 {
   padding: .5rem 0 1rem;
   box-shadow: var(--boxShadow_bottom_accent_Primary);
   z-index: 9999;
-  transition: ease-in-out 200ms;
+  transition: ease-in-out 400ms;
 }
+
 
 .brand-header span{
   padding-left: 3rem;
   display: inline-block;
   margin-top: auto;
   vertical-align: bottom;
+  text-decoration: underline;
+  /* -moz-text-decoration-color: var(--bg_Section);
+  text-decoration-color: var(--bg_Section); */
+  -moz-text-decoration-color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: .1rem;
+  text-underline-offset: 1px;
+  /* transition: all ease-in-out 400ms; */
 }
 
 .brand-header img.brand-logo {
@@ -210,7 +231,11 @@ h5 {
 }
 
 .brand-header:hover {
-  text-shadow: 0 .1rem 1rem 1rem var(--accent);
+  text-decoration: underline;
+  -moz-text-decoration-color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: .1rem;
+  text-underline-offset: 2px;
 }
 
 
@@ -232,8 +257,10 @@ nav a {
   text-align: center;
   /* transition-delay: .3s;
   transition: color .3s;  */
+  border-top: 2px solid var(--accent-fade);
   border-bottom: 2px solid var(--accent-fade);
-  transition: ease-in-out 200ms;
+  transition: all ease-in-out 200ms;
+  
 }
 
 /* makes sure about is on the far-right */
@@ -241,12 +268,10 @@ nav #about{
   max-width: 5%;
 }
 
-nav a:hover {
-  /* color: var(--secondary); */
-  border-bottom: 2px solid  var(--accent);
-  text-decoration: none;
-  font-weight: 450;
-  /* transform: scale(1.01); */
+[data-id="nav"]:hover {
+  text-decoration: underline;
+  font-weight: bolder;
+  
 }
 
 
@@ -654,6 +679,7 @@ form .form-input.form-input-squared {
   color: var(--text-area_text);
   
   transition: ease-in-out 200ms;
+  max-width: 800px;
 }
 
 .card:hover, .card-feed:hover {
