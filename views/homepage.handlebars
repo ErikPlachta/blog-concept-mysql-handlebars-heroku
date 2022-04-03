@@ -7,7 +7,8 @@
 
 {{!-- If logged in, add section containing a form to create new post --}}
 {{#if loggedIn}}
-<section>
+  <section id="create-new-post-section">
+    {{!-- TODO:: 04/02/2022 #EP || Make this a modal --}}
     <div class="card section-title">
       <h3>Create new Post</h3>
       {{> post-create}}
@@ -21,11 +22,10 @@
 {{!-- Load a preview of all posts into homepage --}}
 <section>
   <div class="card section-title">
-    <h3>Posts Feed</h3>
-    <hr>
- 
-  {{#each posts as |post|}}
-      {{> post-preview}}
-  {{/each}}
+    <h3>Post Feed</h3>  
+    <hr />
+    {{#each posts as |post|}}
+        {{> post-preview}}
+    {{/each}}
    </div>
 </section>
