@@ -28,7 +28,15 @@ router.get('/', async (req, res) => {
       }
   }
   catch (err) {
-    res.status(500).json({ error: err['errors'][0].message });
+    //-- try to extract specific error message
+    try{
+      res.status(500).json({ error: err['errors'][0].message }).end();
+    }
+
+    //-- otherwise send blanket response
+    catch{
+      res.status(504).end();
+    }
   }
 });
 
@@ -71,7 +79,7 @@ router.get('/:id', withAuth, async (req, res) => {
     }
   }
   catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).json(err);
   }
 });
@@ -79,10 +87,12 @@ router.get('/:id', withAuth, async (req, res) => {
 // Create new Comment
 router.post('/', withAuth, async (req, res) => {
   // console.log(req)
+  // console.log("//-- req.session:!!!!!!!!!!!!!!!!!!")
+  // console.log(req.session)
   try {
       const commentCreatedResponse = await Comment.create(
         {
-          user_id: req.body.user_id,
+          user_id: req.session.user_id,
           post_id: req.body.post_id,
           title: req.body.title,
           content: req.body.content,
@@ -94,7 +104,15 @@ router.post('/', withAuth, async (req, res) => {
       res.status(204).end()
   } 
   catch (err) {
-    res.status(500).json({ error: err['errors'][0].message });
+    //-- attempt to send precise response
+    try{
+      res.status(500).json({ error: err['errors'][0].message }).end();
+    }
+    //-- otherwise send blanket response
+    catch{
+      console.log(err)
+      res.status(502).json({ error: err }).end();
+    }
   }
 });
 
