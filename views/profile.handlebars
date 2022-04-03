@@ -1,10 +1,10 @@
 <style>  .user-stats, .activity-feed { display: block;  }  </style>
 
 {{#if loggedIn}}
-    {{> post-create}} 
     {{#each users as |user| }}
       {{> feed-user-stats }}
     {{/each}}
+    {{> post-create}} 
     {{!-- element to create posts --}}
 {{else}}
   <section>

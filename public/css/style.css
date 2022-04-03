@@ -297,6 +297,11 @@ nav #about{
 /*----------------------------------------------------------------------------*/
 /* POSTS CREATION */
 
+#post-reply{
+  background-color: transparent;
+  border: none;
+}
+
 /* Container holding the new-comment on a post creation box */
 .post-new-comment {
   margin: 1rem 3rem 1rem 2rem;
@@ -317,7 +322,7 @@ nav #about{
 
 /* Container holding the new-post creation box */
 .post-new-post {
-  margin: 1rem 2rem 1rem 1rem;
+  margin: 1rem;
   /* padding: 1rem 1rem; */
   
   padding: .5rem;
